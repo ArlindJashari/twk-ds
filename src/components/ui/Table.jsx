@@ -41,7 +41,8 @@ export function TableHead({ className, children }) {
   return (
     <th
       className={cn(
-        'px-12 py-10 text-[11px] font-medium uppercase tracking-wide text-faint',
+        'px-12 py-10 align-middle text-[11px] font-medium uppercase tracking-wide text-faint',
+        !/\btext-(start|end|right|left|center)\b/.test(className ?? '') && 'text-start',
         className,
       )}
     >
@@ -52,7 +53,7 @@ export function TableHead({ className, children }) {
 
 export function TableCell({ className, children }) {
   return (
-    <td className={cn('px-12 py-10 text-body', className)}>
+    <td className={cn('px-12 py-10 align-middle text-body', className)}>
       {children}
     </td>
   )

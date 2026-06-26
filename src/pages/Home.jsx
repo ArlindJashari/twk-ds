@@ -101,8 +101,8 @@ export default function Home() {
                       <TableHead>ID</TableHead>
                       <TableHead>Study</TableHead>
                       <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Participants</TableHead>
-                      <TableHead className="text-right">Updated</TableHead>
+                      <TableHead className="text-end">Participants</TableHead>
+                      <TableHead className="text-end">Updated</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -122,10 +122,10 @@ export default function Home() {
                             {study.status === 'progress' ? 'In progress' : study.status === 'done' ? 'Done' : 'Todo'}
                           </Badge>
                         </TableCell>
-                        <TableCell className="text-right tabular-nums text-faint">
+                        <TableCell className="text-end tabular-nums text-faint">
                           {study.participants}
                         </TableCell>
-                        <TableCell className="text-right tabular-nums text-faint">{study.date}</TableCell>
+                        <TableCell className="text-end tabular-nums text-faint">{study.date}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

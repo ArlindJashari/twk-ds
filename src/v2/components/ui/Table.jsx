@@ -31,7 +31,13 @@ export function TableRow({ className, interactive, ...props }) {
 
 export function TableHead({ className, children }) {
   return (
-    <th className={cn('h-10 px-4 text-start align-middle text-xs font-medium text-[hsl(var(--muted-foreground))]', className)}>
+    <th
+      className={cn(
+        'h-10 px-4 align-middle text-xs font-medium text-[hsl(var(--muted-foreground))]',
+        !/\btext-(start|end|right|left|center)\b/.test(className ?? '') && 'text-start',
+        className,
+      )}
+    >
       {children}
     </th>
   )
