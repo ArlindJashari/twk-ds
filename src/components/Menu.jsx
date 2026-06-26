@@ -2,22 +2,16 @@ import { cloneElement, useCallback, useEffect, useId, useLayoutEffect, useRef, u
 import { createPortal } from 'react-dom'
 import { CaretRight, SearchIcon } from './icons.jsx'
 import Kbd from './ui/Kbd.jsx'
+import { menuItemInset, menuItemInner } from './ui/primitives.js'
 
 const MENU_GAP = 4.5
 
 const panelVariants = {
-  default: 'min-w-[210px] rounded-lg p-4 shadow-pop',
+  default: 'min-w-[210px] rounded-lg p-0 pb-[6px] pt-[6px] shadow-pop',
   workspace:
     'w-[226px] rounded-panel border-[0.5px] border-line bg-surface p-0 pb-[6px] pt-[6px] shadow-[0_6px_18px_rgba(0,0,0,0.02),0_3px_9px_rgba(0,0,0,0.04)]',
   filter:
-    'w-[260px] rounded-lg border-[0.5px] border-line bg-content p-0 pb-4 pt-0 shadow-pop',
-}
-
-const itemVariants = {
-  default:
-    'gap-8 rounded-xs px-8 py-[6px] hover:bg-hover focus-visible:bg-hover',
-  workspace: '',
-  filter: 'gap-8 px-10 py-[6px] hover:bg-hover focus-visible:bg-hover',
+    'w-[260px] rounded-lg border-[0.5px] border-line bg-content p-0 pb-[6px] pt-0 shadow-pop',
 }
 
 function getMenuStyle(trigger, align) {
@@ -231,44 +225,26 @@ export function MenuItem({
     </>
   )
 
-  if (variant === 'workspace') {
-    const innerClassName = [
-      'relative flex h-[32px] w-full items-center gap-8 rounded-lg px-[8px] pe-[12px]',
-      'text-start text-[13px] font-normal leading-[19.5px] text-ink outline-none transition-colors',
-      'hover:bg-menu-hover focus-visible:bg-menu-hover',
-    ].join(' ')
-    const shell = href ? (
-      <a role="menuitem" href={href} className={innerClassName}>
-        {content}
-      </a>
-    ) : (
-      <button role="menuitem" type="button" onClick={onClick} className={innerClassName}>
-        {content}
-      </button>
-    )
-    return <div className="px-[6px]">{shell}</div>
-  }
-
-  const className = [
-    'flex w-full items-center text-start text-[13px] font-normal text-ink outline-none transition-colors',
-    itemVariants[variant],
-  ].join(' ')
-  if (href) {
-    return (
-      <a role="menuitem" href={href} className={className}>
-        {content}
-      </a>
-    )
-  }
-  return (
-    <button role="menuitem" type="button" onClick={onClick} className={className}>
+  const innerClassName = menuItemInner
+  const shell = href ? (
+    <a role="menuitem" href={href} className={innerClassName}>
+      {content}
+    </a>
+  ) : (
+    <button role="menuitem" type="button" onClick={onClick} className={innerClassName}>
       {content}
     </button>
   )
+
+  return <div className={menuItemInset}>{shell}</div>
 }
 
 export function MenuLabel({ children }) {
-  return <div className="px-8 py-[6px] text-[11px] font-medium uppercase tracking-wide text-faint">{children}</div>
+  return (
+    <div className={`${menuItemInset} py-[6px] text-[11px] font-medium uppercase tracking-wide text-faint`}>
+      <div className="px-[8px]">{children}</div>
+    </div>
+  )
 }
 
 export function MenuSeparator({ variant = 'default' }) {
@@ -279,5 +255,5 @@ export function MenuSeparator({ variant = 'default' }) {
       </div>
     )
   }
-  return <div className="my-4 h-px bg-line-subtle" role="separator" />
+  return <div className="my-[6px] h-px bg-line-subtle" role="separator" />
 }

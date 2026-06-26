@@ -50,16 +50,19 @@ export const inputBase =
   'w-full rounded-lg border border-line-subtle bg-field text-ink transition-colors placeholder:text-faint focus:border-accent focus:ring-2 focus:ring-accent/20 disabled:cursor-not-allowed disabled:opacity-50'
 
 export const menuPanel =
-  'min-w-[210px] rounded-lg bg-content p-4 shadow-pop'
+  'min-w-[210px] rounded-lg bg-content p-0 pb-[6px] pt-[6px] shadow-pop'
 
 export const menuPanelWorkspace =
   'w-[226px] rounded-panel border-[0.5px] border-line bg-surface p-0 pb-[6px] pt-[6px] shadow-[0_6px_18px_rgba(0,0,0,0.02),0_3px_9px_rgba(0,0,0,0.04)]'
 
-export const menuItem =
-  'flex w-full items-center gap-8 rounded-xs px-8 py-[6px] text-start text-[13px] font-normal text-ink transition-colors hover:bg-hover focus-visible:bg-hover'
+export const menuItemInset = 'px-[6px]'
 
-export const menuItemWorkspace =
-  'relative flex h-[32px] w-full items-center rounded-lg px-[8px] pe-[12px] text-start text-[13px] font-normal leading-[19.5px] text-ink transition-colors hover:bg-menu-hover focus-visible:bg-menu-hover'
+export const menuItemInner =
+  'relative flex h-[32px] w-full items-center gap-8 rounded-lg px-[8px] pe-[12px] text-start text-[13px] font-normal leading-[19.5px] text-ink outline-none transition-colors hover:bg-menu-hover focus-visible:bg-menu-hover'
+
+export const menuItem = menuItemInner
+
+export const menuItemWorkspace = menuItemInner
 
 export const modalOverlay = 'fixed inset-0 z-50 flex items-center justify-center bg-ink/30 p-16 backdrop-blur-[1px]'
 export const modalPanel = 'w-full max-w-[480px] overflow-hidden rounded-panel border-[0.5px] border-line bg-content shadow-modal'

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '../../lib/cn.js'
 import { useDismiss, useFocusTrap } from '../../lib/hooks.js'
-import { modalOverlay } from './primitives.js'
+import { menuItemInset, menuItemInner, modalOverlay } from './primitives.js'
 import { CommandInput } from './SearchInput.jsx'
 
 function mergeRefs(...refs) {
@@ -49,18 +49,21 @@ export default function CommandPalette({ open, onClose, items = [], placeholder 
           onChange={(event) => setQuery(event.target.value)}
           placeholder={placeholder}
         />
-        <div className="max-h-[280px] overflow-y-auto py-4">
+        <div className="max-h-[280px] overflow-y-auto pb-[6px] pt-[6px]">
           {filtered.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className="flex h-[36px] w-full items-center gap-8 px-12 text-start text-[13px] text-ink transition-colors hover:bg-hover"
-              onClick={() => { item.onSelect?.(); onClose?.() }}
-            >
-              {item.icon ? <span className="text-faint">{item.icon}</span> : null}
-              <span className="flex-1 truncate">{item.label}</span>
-              {item.shortcut ? <span className="text-[11px] text-faint">{item.shortcut}</span> : null}
-            </button>
+            <div key={item.id} className={menuItemInset}>
+              <button
+                type="button"
+                className={menuItemInner}
+                onClick={() => { item.onSelect?.(); onClose?.() }}
+              >
+                {item.icon ? <span className="shrink-0 text-faint">{item.icon}</span> : null}
+                <span className="min-w-0 flex-1 truncate">{item.label}</span>
+                {item.shortcut ? (
+                  <span className="ms-auto shrink-0 ps-8 text-[11px] text-faint">{item.shortcut}</span>
+                ) : null}
+              </button>
+            </div>
           ))}
         </div>
       </div>
