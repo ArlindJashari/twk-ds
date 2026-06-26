@@ -106,7 +106,7 @@ export const ImportIcon = createIcon(Files)
 export const PlusIcon = createIcon(Plus)
 export const HelpIcon = createIcon(CircleHelp)
 
-export const LinearHelpIcon = createFilledIcon(
+export const TawakkalnaHelpIcon = createFilledIcon(
   <path d="M7.569 9.75c-.332 0-.614-.27-.578-.6.021-.188.061-.372.136-.62q.158-.51.447-.82a3.4 3.4 0 0 1 .703-.577q.284-.182.507-.396.229-.219.358-.486a1.4 1.4 0 0 0 .13-.606 1.2 1.2 0 0 0-.171-.653 1.2 1.2 0 0 0-.466-.429 1.36 1.36 0 0 0-.647-.152q-.33 0-.628.148a1.23 1.23 0 0 0-.587.622c-.123.295-.367.555-.686.555h-.472c-.337 0-.616-.28-.55-.611q.103-.513.363-.905a2.55 2.55 0 0 1 1.08-.915A3.6 3.6 0 0 1 7.998 3q.888 0 1.563.32.68.319 1.057.91.382.586.382 1.392 0 .543-.172.972a2.4 2.4 0 0 1-.48.763 3.5 3.5 0 0 1-.74.595 3.2 3.2 0 0 0-.62.496 1.7 1.7 0 0 0-.353.605l-.034.106c-.1.316-.35.591-.682.591zM8.75 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />,
 )
 
@@ -148,7 +148,7 @@ export const FilterIcon = createIcon(ListFilter)
 export const SlidersIcon = createIcon(SlidersHorizontal)
 export const PanelSidebarIcon = createIcon(PanelRight)
 
-export const LinearSearchInputIcon = createFilledIcon(
+export const TawakkalnaSearchInputIcon = createFilledIcon(
   <path
     fillRule="evenodd"
     clipRule="evenodd"
@@ -156,7 +156,7 @@ export const LinearSearchInputIcon = createFilledIcon(
   />,
 )
 
-export const LinearToolbarFilterIcon = createFilledIcon(
+export const TawakkalnaToolbarFilterIcon = createFilledIcon(
   <path
     fillRule="evenodd"
     clipRule="evenodd"
@@ -164,7 +164,7 @@ export const LinearToolbarFilterIcon = createFilledIcon(
   />,
 )
 
-export const LinearToolbarDisplayIcon = createFilledIcon(
+export const TawakkalnaToolbarDisplayIcon = createFilledIcon(
   <>
     <path
       fillRule="evenodd"
@@ -179,7 +179,7 @@ export const LinearToolbarDisplayIcon = createFilledIcon(
   </>,
 )
 
-export const LinearToolbarSidebarIcon = createFilledIcon(
+export const TawakkalnaToolbarSidebarIcon = createFilledIcon(
   <>
     <path
       fillRule="evenodd"
@@ -190,14 +190,14 @@ export const LinearToolbarSidebarIcon = createFilledIcon(
   </>,
 )
 
-export const LinearCustomViewIcon = createFilledIcon(
+export const TawakkalnaCustomViewIcon = createFilledIcon(
   <>
     <path d="M6.932 2.214a2.77 2.77 0 0 1 2.282.066l5.066 2.467c.944.46.964 1.812.034 2.3L9.287 9.683a2.77 2.77 0 0 1-2.574 0L1.686 7.047c-.93-.488-.91-1.84.034-2.3L6.786 2.28zm1.62 1.457a1.26 1.26 0 0 0-.97-.057l-.133.057-4.61 2.243 4.576 2.398c.367.193.803.193 1.17 0l4.574-2.398z" />
     <path d="M13.905 10.077c.367-.173.82-.044 1.01.288s.048.74-.32.912L9.5 13.67a3.56 3.56 0 0 1-2.998 0l-5.097-2.392-.066-.034c-.318-.188-.432-.567-.253-.878s.588-.444.941-.317l.07.029 5.096 2.391.195.078c.461.156.978.13 1.420-.078z" />
   </>,
 )
 
-export const LinearAddViewIcon = createFilledIcon(
+export const TawakkalnaAddViewIcon = createFilledIcon(
   <>
     <path
       fillRule="evenodd"

@@ -249,9 +249,9 @@ function FileGlyph({ s = 14, c = TONE.directory }) {
   )
 }
 
-/* ── Product (Linear-style) UI primitives ──────────────────────────────── */
+/* ── Product (Tawakkalna-style) UI primitives ──────────────────────────────── */
 
-/** Segmented progress circle — Linear status icon. `p` = 0..1 filled. */
+/** Segmented progress circle — Tawakkalna status icon. `p` = 0..1 filled. */
 function StatusRing({ c, s = 13, p = 0.55 }) {
   const r = 5.2
   const cx = 8
@@ -271,7 +271,7 @@ function StatusRing({ c, s = 13, p = 0.55 }) {
   )
 }
 
-/** Linear priority bars. */
+/** Tawakkalna priority bars. */
 function PriorityBars({ s = 13, c = 'currentColor' }) {
   return (
     <svg width={s} height={s} viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -293,7 +293,7 @@ function Avatar({ c, initials = 'AJ', s = 16 }) {
   )
 }
 
-/** Linear property / label pill — subtle bg, leading icon or dot. */
+/** Tawakkalna property / label pill — subtle bg, leading icon or dot. */
 function Pill({ children, lead, c = 'var(--color-sub)', soft }) {
   return (
     <span
@@ -418,7 +418,7 @@ export function DirectoryIllustration() {
   const docs = ['firebase_events', 'feature_flags']
   return (
     <ToneScene accent={a}>
-      {/* Linear-style directory surface */}
+      {/* Tawakkalna-style directory surface */}
       <div className="absolute inset-x-[26px] top-[16px] overflow-hidden rounded-[10px] border border-line-subtle bg-surface shadow-pop transition-transform duration-500 ease-out will-change-transform animate-[intro-story-card_1s_ease-out_0.2s_1] group-hover:-translate-y-[2px] motion-reduce:animate-none">
         <div className="flex items-center gap-[6px] border-b border-line-subtle px-[11px] py-[8px]">
           <span className="grid size-[18px] shrink-0 place-items-center rounded-[6px]" style={{ background: `${a}1f` }}>

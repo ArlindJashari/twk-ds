@@ -1,4 +1,4 @@
-/** Linear-exact shared class strings — single source of truth. */
+/** Tawakkalna-exact shared class strings — single source of truth. */
 
 export const focusRing = 'outline-none focus-visible:ring-2 focus-visible:ring-accent'
 

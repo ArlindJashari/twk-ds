@@ -1,3 +1,3 @@
 # twk-ds
 
-Linear-style design system and UI components for TawakkalnaOS.
+Tawakkalna design system and UI components for TawakkalnaOS.

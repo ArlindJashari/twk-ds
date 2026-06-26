@@ -3,7 +3,7 @@ import DesignSystemLayout from '../components/DesignSystemLayout.jsx'
 import { DisplayPreferencesProvider, useLocale } from '../lib/displayPreferences.jsx'
 import { getDesignSystemCopy } from '../lib/designSystemI18n.js'
 import {
-  CaretDown, HomeIcon, LinearToolbarDisplayIcon, LinearToolbarFilterIcon, PlusIcon, SearchIcon, SparkleIcon, StudiesIcon,
+  CaretDown, HomeIcon, TawakkalnaToolbarDisplayIcon, TawakkalnaToolbarFilterIcon, PlusIcon, SearchIcon, SparkleIcon, StudiesIcon,
 } from '../components/icons.jsx'
 import {
   Alert, AlertDialog, Accordion, AiResponseCard, AspectRatio, Avatar, Badge, Breadcrumb, Button, Card, CardBody, CardDescription, CardFooter,
@@ -248,8 +248,8 @@ function DesignSystemContent({
 
             <ShowcaseSection id="icon-buttons" title={s.iconButtons.title} description={s.iconButtons.description}>
               <ShowcaseRow label={s.iconButtons.variants}>
-                <IconButton variant="filled" label={s.iconButtons.filter}><LinearToolbarFilterIcon /></IconButton>
-                <IconButton variant="filled" label={s.iconButtons.display}><LinearToolbarDisplayIcon /></IconButton>
+                <IconButton variant="filled" label={s.iconButtons.filter}><TawakkalnaToolbarFilterIcon /></IconButton>
+                <IconButton variant="filled" label={s.iconButtons.display}><TawakkalnaToolbarDisplayIcon /></IconButton>
                 <IconButton variant="accent" label={s.buttons.create}><PlusIcon size={14} strokeWidth={1.5} /></IconButton>
               </ShowcaseRow>
               <ShowcaseRow label={s.iconButtons.sizes}>
@@ -503,8 +503,8 @@ function DesignSystemContent({
                   )}
                   right={(
                     <>
-                      <IconButton variant="filled" label={s.iconButtons.filter}><LinearToolbarFilterIcon /></IconButton>
-                      <IconButton variant="filled" label={s.iconButtons.display}><LinearToolbarDisplayIcon /></IconButton>
+                      <IconButton variant="filled" label={s.iconButtons.filter}><TawakkalnaToolbarFilterIcon /></IconButton>
+                      <IconButton variant="filled" label={s.iconButtons.display}><TawakkalnaToolbarDisplayIcon /></IconButton>
                     </>
                   )}
                 />

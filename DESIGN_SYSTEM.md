@@ -1,12 +1,12 @@
 # TawakkalnaOS Design System
 
-> **For AI agents:** Read this file before building any UI. Match Linear.app visual language exactly. Import primitives from `src/components/ui`. Never invent colors, radii, or spacing outside `src/theme.css` tokens.
+> **For AI agents:** Read this file before building any UI. Match Tawakkalna visual language exactly. Import primitives from `src/components/ui`. Never invent colors, radii, or spacing outside `src/theme.css` tokens.
 
 ## Philosophy
 
-TawakkalnaOS follows **Linear's design language**: quiet surfaces, precise typography, pill controls, 28px interaction targets, hairline borders, and restrained accent color. The product shell (`AppShell`, `Sidebar`, `PageFrame`) already implements layout — new pages compose inside that shell using these tokens and components.
+TawakkalnaOS follows **Tawakkalna's design language**: quiet surfaces, precise typography, pill controls, 28px interaction targets, hairline borders, and restrained accent color. The product shell (`AppShell`, `Sidebar`, `PageFrame`) already implements layout — new pages compose inside that shell using these tokens and components.
 
-**Reference:** [Linear surfarch workspace](https://linear.app/surfarch) · Live showcase: `#/designsystem`
+**Reference:** Live showcase: `#/designsystem`
 
 ---
 
@@ -185,7 +185,7 @@ Row height ~44px feel via `py-10`. Hover: `interactive` prop.
 
 ### Issue rows (`IssueRow`)
 
-Linear issues list row — `src/components/ui/ListRow.jsx` + `primitives.js`.
+Tawakkalna issues list row — `src/components/ui/ListRow.jsx` + `primitives.js`.
 
 | Token | Value |
 |-------|-------|

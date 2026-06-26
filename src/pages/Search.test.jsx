@@ -5,7 +5,7 @@ import Search from '../pages/Search.jsx'
 const searchField = () => screen.getByRole('searchbox', { name: 'Search by describing your project…' })
 
 describe('Search page', () => {
-  it('shows Linear empty state copy', () => {
+  it('shows search empty state copy', () => {
     const { container } = render(<Search path="/search" />)
     expect(searchField()).toBeInTheDocument()
     expect(container.querySelector('header svg')).toBeInTheDocument()

@@ -1,6 +1,6 @@
 import { HistoryIcon, PaperPlaneIcon } from './icons.jsx'
 
-export default function AskLinearFooter() {
+export default function AskTawakkalnaFooter() {
   return (
     <div
       data-agent-toolbar-bounds

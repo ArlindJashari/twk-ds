@@ -1,6 +1,6 @@
 import {
-  LinearToolbarFilterIcon, LinearToolbarDisplayIcon, LinearToolbarSidebarIcon,
-  LinearCustomViewIcon, LinearAddViewIcon, PlusIcon,
+  TawakkalnaToolbarFilterIcon, TawakkalnaToolbarDisplayIcon, TawakkalnaToolbarSidebarIcon,
+  TawakkalnaCustomViewIcon, TawakkalnaAddViewIcon, PlusIcon,
 } from './icons.jsx'
 import { IconButton, Tab, Toolbar } from './ui/index.js'
 
@@ -17,9 +17,9 @@ export function ReviewsToolbar() {
       )}
       right={(
         <>
-          <IconButton variant="filled" label="Filter"><LinearToolbarFilterIcon /></IconButton>
-          <IconButton variant="filled" label="Display options"><LinearToolbarDisplayIcon /></IconButton>
-          <IconButton variant="filled" label="Layout"><LinearToolbarSidebarIcon /></IconButton>
+          <IconButton variant="filled" label="Filter"><TawakkalnaToolbarFilterIcon /></IconButton>
+          <IconButton variant="filled" label="Display options"><TawakkalnaToolbarDisplayIcon /></IconButton>
+          <IconButton variant="filled" label="Layout"><TawakkalnaToolbarSidebarIcon /></IconButton>
         </>
       )}
     />
@@ -35,14 +35,14 @@ export function IssuesToolbar() {
           <Tab href="#/issues/all">All issues</Tab>
           <Tab href="#/issues/active" active>Active</Tab>
           <Tab href="#/issues/backlog">Backlog</Tab>
-          <IconButton label="Add new view"><LinearAddViewIcon /></IconButton>
+          <IconButton label="Add new view"><TawakkalnaAddViewIcon /></IconButton>
         </>
       )}
       right={(
         <>
-          <IconButton variant="filled" label="Filter"><LinearToolbarFilterIcon /></IconButton>
-          <IconButton variant="filled" label="Display options"><LinearToolbarDisplayIcon /></IconButton>
-          <IconButton variant="filled" label="Open details"><LinearToolbarSidebarIcon /></IconButton>
+          <IconButton variant="filled" label="Filter"><TawakkalnaToolbarFilterIcon /></IconButton>
+          <IconButton variant="filled" label="Display options"><TawakkalnaToolbarDisplayIcon /></IconButton>
+          <IconButton variant="filled" label="Open details"><TawakkalnaToolbarSidebarIcon /></IconButton>
         </>
       )}
     />
@@ -70,8 +70,8 @@ export function SearchToolbar({ activeTab = 'all' }) {
       )}
       right={(
         <>
-          <IconButton variant="filled" label="Add filter"><LinearToolbarFilterIcon /></IconButton>
-          <IconButton variant="filled" label="Display options"><LinearToolbarDisplayIcon /></IconButton>
+          <IconButton variant="filled" label="Add filter"><TawakkalnaToolbarFilterIcon /></IconButton>
+          <IconButton variant="filled" label="Display options"><TawakkalnaToolbarDisplayIcon /></IconButton>
         </>
       )}
     />
@@ -84,9 +84,9 @@ export function StandardPageToolbar({ left = null }) {
       left={left}
       right={(
         <>
-          <IconButton variant="filled" label="Add filter"><LinearToolbarFilterIcon /></IconButton>
-          <IconButton variant="filled" label="Display options"><LinearToolbarDisplayIcon /></IconButton>
-          <IconButton variant="filled" label="Close sidebar"><LinearToolbarSidebarIcon /></IconButton>
+          <IconButton variant="filled" label="Add filter"><TawakkalnaToolbarFilterIcon /></IconButton>
+          <IconButton variant="filled" label="Display options"><TawakkalnaToolbarDisplayIcon /></IconButton>
+          <IconButton variant="filled" label="Close sidebar"><TawakkalnaToolbarSidebarIcon /></IconButton>
         </>
       )}
     />
@@ -101,18 +101,18 @@ export function ProjectsToolbar() {
           <Tab href="#/projects/all" active>All projects</Tab>
           <Tab href="#/projects/m" className="min-w-[54px]">
             <span className="flex items-center gap-6">
-              <LinearCustomViewIcon className="text-icon-view" />
+              <TawakkalnaCustomViewIcon className="text-icon-view" />
               m
             </span>
           </Tab>
-          <IconButton label="Add new view" className="ml-3"><LinearAddViewIcon /></IconButton>
+          <IconButton label="Add new view" className="ml-3"><TawakkalnaAddViewIcon /></IconButton>
         </>
       )}
       right={(
         <>
-          <IconButton variant="filled" label="Add filter"><LinearToolbarFilterIcon /></IconButton>
-          <IconButton variant="filled" label="Display options"><LinearToolbarDisplayIcon /></IconButton>
-          <IconButton variant="filled" label="Close sidebar"><LinearToolbarSidebarIcon /></IconButton>
+          <IconButton variant="filled" label="Add filter"><TawakkalnaToolbarFilterIcon /></IconButton>
+          <IconButton variant="filled" label="Display options"><TawakkalnaToolbarDisplayIcon /></IconButton>
+          <IconButton variant="filled" label="Close sidebar"><TawakkalnaToolbarSidebarIcon /></IconButton>
         </>
       )}
     />

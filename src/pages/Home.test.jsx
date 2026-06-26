@@ -35,7 +35,7 @@ describe('Home dashboard', () => {
     expect(screen.getByText(/Session completed for Checkout flow v2/i)).toBeInTheDocument()
   })
 
-  it('contains no forbidden Linear concepts', () => {
+  it('contains no forbidden legacy tracker concepts', () => {
     const { container } = render(<Home />)
     expect(container.textContent).not.toMatch(/Inbox|Issues|Reviews|Projects|Cycles|Initiatives/)
   })

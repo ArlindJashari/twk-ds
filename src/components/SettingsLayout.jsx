@@ -5,7 +5,7 @@ import {
   UpdatesIcon, SparkleIcon, InitiativesIcon, DocumentsIcon, CustomerRequestsIcon,
   ReleasesIcon, SearchIcon, HelpIcon, BackIcon,
 } from '../components/icons.jsx'
-import AskLinearFooter from './AskLinearFooter.jsx'
+import AskTawakkalnaFooter from './AskTawakkalnaFooter.jsx'
 
 const sections = [
   { label: 'Personal', items: [
@@ -88,7 +88,7 @@ export default function SettingsLayout({ currentPath, children }) {
             <div className="min-h-0 flex-1 overflow-y-auto">{children}</div>
           </main>
         </div>
-        <AskLinearFooter />
+        <AskTawakkalnaFooter />
       </div>
     </div>
   )

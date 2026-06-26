@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { allItems } from '../lib/nav.js'
 import SearchEmptyIllustration from '../components/SearchEmptyIllustration.jsx'
-import { LinearSearchInputIcon } from '../components/icons.jsx'
+import { TawakkalnaSearchInputIcon } from '../components/icons.jsx'
 import { SearchToolbar } from '../components/ViewToolbar.jsx'
 
 const TAB_BY_PATH = [
@@ -37,7 +37,7 @@ export default function Search({ path = '/search' }) {
       <header className="shrink-0">
         <div className="flex h-[44px] items-center border-b border-line px-8">
           <div className="flex min-w-0 flex-1 items-center pr-[25px]">
-            <LinearSearchInputIcon className="ml-[9px] shrink-0 text-pill-muted" />
+            <TawakkalnaSearchInputIcon className="ml-[9px] shrink-0 text-pill-muted" />
             <div className="relative ml-px min-w-0 flex-1">
               {!query && (
                 <span

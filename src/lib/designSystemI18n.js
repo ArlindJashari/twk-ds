@@ -2,7 +2,7 @@ const en = {
   layout: {
     backToApp: 'Back to app',
     title: 'Design system',
-    intro: 'Linear-inspired tokens and components for TawakkalnaOS. Use primitives from',
+    intro: 'Tawakkalna design tokens and components for TawakkalnaOS. Use primitives from',
     introSuffix: 'and follow',
     componentsNav: 'Components',
   },
@@ -185,7 +185,7 @@ const en = {
       issues: [
         ['SUR-4', 'Import your data'],
         ['SUR-3', 'Connect your tools'],
-        ['SUR-1', 'Get familiar with Linear'],
+        ['SUR-1', 'Get familiar with Tawakkalna'],
       ],
       date: 'Feb 3',
     },
@@ -336,7 +336,7 @@ const ar = {
   layout: {
     backToApp: 'العودة إلى التطبيق',
     title: 'نظام التصميم',
-    intro: 'رموز ومكوّنات مستوحاة من Linear لنظام توكلنا. استخدم المكوّنات من',
+    intro: 'رموز ومكوّنات توكلنا لنظام توكلنا. استخدم المكوّنات من',
     introSuffix: 'واتبع',
     componentsNav: 'المكوّنات',
   },
@@ -519,7 +519,7 @@ const ar = {
       issues: [
         ['SUR-4', 'استيراد بياناتك'],
         ['SUR-3', 'ربط أدواتك'],
-        ['SUR-1', 'التعرّف على Linear'],
+        ['SUR-1', 'التعرّف على توكلنا'],
       ],
       date: '٣ فبراير',
     },

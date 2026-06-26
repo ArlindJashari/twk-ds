@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Sidebar from './Sidebar.jsx'
 import ContentHeader from './ContentHeader.jsx'
-import AskLinearFooter from './AskLinearFooter.jsx'
+import AskTawakkalnaFooter from './AskTawakkalnaFooter.jsx'
 import { CloseIcon, SearchIcon, ComposeIcon } from './icons.jsx'
 import { UserMenuTriggerContent } from './UserMenu.jsx'
 import { useDismiss, useFocusTrap, useMediaQuery } from '../lib/hooks.js'
@@ -77,7 +77,7 @@ export default function AppShell({
             </div>
           </main>
         </div>
-        <AskLinearFooter />
+        <AskTawakkalnaFooter />
       </div>
     </div>
   )

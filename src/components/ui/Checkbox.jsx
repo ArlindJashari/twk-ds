@@ -47,7 +47,7 @@ function CheckboxBox({ size = 16, className, disabled, inputRef, ...props }) {
   )
 }
 
-/** Linear issue-row checkbox — custom 14px box, reveals on row hover. */
+/** Tawakkalna issue-row checkbox — custom 14px box, reveals on row hover. */
 export const IssueCheckbox = forwardRef(function IssueCheckbox(
   { checked, className, onChange, ...props },
   ref,
