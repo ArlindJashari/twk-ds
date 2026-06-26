@@ -6,21 +6,21 @@ import {
   CaretDown, HomeIcon, LinearToolbarDisplayIcon, LinearToolbarFilterIcon, PlusIcon, SearchIcon, SparkleIcon, StudiesIcon,
 } from '../components/icons.jsx'
 import {
-  Alert, Avatar, Badge, Button, Card, CardBody, CardDescription, CardFooter,
-  CardMedia, CardTitle, Checkbox, IssueCheckbox, ColorSwatch, Divider, DropdownMenu, EmptyState, Field,
-  FieldError, FieldGroup, FieldHint, GroupHeader, IconButton, Input, IssueRow, issueRowLead,
-  issueRowSlotCheckbox, Kbd, KbdCombo, Label, Link, ListRow, MenuItem, MenuLabel, MenuSeparator, Modal, ModalFooter, NavItem, Panel,
-  PanelBody, PanelHeader, PriorityIcon, Progress, Radio, SearchTrigger, Select, SelectionBar, ShowcaseRow,
-  ShowcaseSection, ShowcaseStack, Skeleton, SkeletonGroup, StatusIcon, Switch, Tab, TabList,
-  TabPanel, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tag, Text, Textarea,
-  Toast, ToastProvider, TokenGrid, Toolbar, useToast,
+  Alert, AlertDialog, Accordion, AiResponseCard, AspectRatio, Avatar, Badge, Breadcrumb, Button, Card, CardBody, CardDescription, CardFooter,
+  CardMedia, CardTitle, ChatBubble, Checkbox, Collapsible, CommandPalette, ContextMenu, IssueCheckbox, ColorSwatch, Divider, DropdownMenu, EmptyState, Field,
+  FieldError, FieldGroup, FieldHint, GroupHeader, HoverCard, IconButton, Input, IssueRow, issueRowLead,
+  issueRowSlotCheckbox, Kbd, KbdCombo, Label, Link, ListRow, MenuItem, MenuLabel, MenuSeparator, Modal, ModalFooter, ModuleCard, NavItem, Pagination, Panel,
+  PanelBody, PanelHeader, Popover, PriorityIcon, Progress, PromptBar, Radio, SearchTrigger, Select, SelectionBar, Sheet, ShowcaseRow,
+  ShowcaseSection, ShowcaseStack, Skeleton, SkeletonGroup, Slider, StatCard, StatusIcon, Switch, Tab, TabList,
+  TabPanel, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tag, Text, Textarea, ToggleGroup,
+  Toast, ToastProvider, TokenGrid, Toolbar, Tooltip, TypingIndicator, useToast,
 } from '../components/ui/index.js'
 
 const NAV_IDS = [
   'colors', 'typography', 'spacing', 'buttons', 'icon-buttons', 'forms', 'selection',
   'badges', 'avatars', 'cards', 'tables', 'list-rows', 'priority', 'tabs', 'search',
   'nav', 'menus', 'modals', 'toasts', 'panels', 'alerts', 'empty', 'loading', 'progress',
-  'links', 'dividers',
+  'links', 'slider', 'toggle', 'overlays', 'breadcrumb', 'accordion', 'command', 'stats', 'chat', 'dividers',
 ]
 
 function StudyPlaceholder() {
@@ -41,12 +41,26 @@ export default function DesignSystem() {
   const [tab, setTab] = useState('active')
   const [sw, setSw] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
+  const [sliderVal, setSliderVal] = useState(70)
+  const [toggleView, setToggleView] = useState('grid')
+  const [sheetOpen, setSheetOpen] = useState(false)
+  const [alertOpen, setAlertOpen] = useState(false)
+  const [cmdOpen, setCmdOpen] = useState(false)
+  const [page, setPage] = useState(1)
+  const [prompt, setPrompt] = useState('')
 
   return (
     <DisplayPreferencesProvider>
       <DesignSystemContent
         tab={tab} setTab={setTab} sw={sw} setSw={setSw}
         modalOpen={modalOpen} setModalOpen={setModalOpen}
+        sliderVal={sliderVal} setSliderVal={setSliderVal}
+        toggleView={toggleView} setToggleView={setToggleView}
+        sheetOpen={sheetOpen} setSheetOpen={setSheetOpen}
+        alertOpen={alertOpen} setAlertOpen={setAlertOpen}
+        cmdOpen={cmdOpen} setCmdOpen={setCmdOpen}
+        page={page} setPage={setPage}
+        prompt={prompt} setPrompt={setPrompt}
       />
     </DisplayPreferencesProvider>
   )
@@ -65,7 +79,12 @@ function ToastDemo({ copy }) {
   )
 }
 
-function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }) {
+function DesignSystemContent({
+  tab, setTab, sw, setSw, modalOpen, setModalOpen,
+  sliderVal, setSliderVal, toggleView, setToggleView,
+  sheetOpen, setSheetOpen, alertOpen, setAlertOpen,
+  cmdOpen, setCmdOpen, page, setPage, prompt, setPrompt,
+}) {
   const scrollRef = useRef(null)
   const locale = useLocale()
   const c = getDesignSystemCopy(locale)
@@ -616,6 +635,186 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
                 <KbdCombo keys={['G', 'S']} />
                 <Kbd>Esc</Kbd>
               </ShowcaseRow>
+            </ShowcaseSection>
+
+            <ShowcaseSection id="slider" title={s.slider.title}>
+              <ShowcaseRow>
+                <Slider
+                  value={sliderVal}
+                  onChange={(event) => setSliderVal(Number(event.target.value))}
+                  aria-label={s.slider.title}
+                />
+                <span className="text-[12px] tabular-nums text-faint">{sliderVal}</span>
+              </ShowcaseRow>
+            </ShowcaseSection>
+
+            <ShowcaseSection id="toggle" title={s.toggle.title}>
+              <ToggleGroup
+                value={toggleView}
+                onChange={setToggleView}
+                options={[
+                  { value: 'list', label: s.toggle.list },
+                  { value: 'grid', label: s.toggle.grid },
+                  { value: 'board', label: s.toggle.board },
+                ]}
+              />
+            </ShowcaseSection>
+
+            <ShowcaseSection id="overlays" title={s.overlays.title}>
+              <ShowcaseRow>
+                <Tooltip label={s.overlays.copy}>
+                  <IconButton variant="filled" label={s.overlays.copy}>
+                    <Kbd>C</Kbd>
+                  </IconButton>
+                </Tooltip>
+                <Popover
+                  label={s.overlays.popover}
+                  trigger={<Button variant="secondary">{s.overlays.openPopover}</Button>}
+                >
+                  <div className="w-[200px] p-8">
+                    <Text variant="label">{s.overlays.filters}</Text>
+                    <Input className="mt-8" placeholder="…" />
+                  </div>
+                </Popover>
+                <Button variant="secondary" onClick={() => setSheetOpen(true)}>{s.overlays.openSheet}</Button>
+                <Button variant="danger" onClick={() => setAlertOpen(true)}>{s.overlays.openAlert}</Button>
+              </ShowcaseRow>
+              <ShowcaseRow label={s.overlays.hoverCard}>
+                <HoverCard trigger="@workspace">
+                  <strong>Workspace</strong>
+                  <br />
+                  {s.overlays.filterBody}
+                </HoverCard>
+              </ShowcaseRow>
+              <Sheet open={sheetOpen} onClose={() => setSheetOpen(false)} title={s.overlays.filters} description={s.overlays.filterBody}>
+                <FieldGroup>
+                  <Field>
+                    <Label>{s.forms.type}</Label>
+                    <Select defaultValue="usability">
+                      <option value="usability">{s.forms.usabilityStudy}</option>
+                    </Select>
+                  </Field>
+                </FieldGroup>
+              </Sheet>
+              <AlertDialog
+                open={alertOpen}
+                onClose={() => setAlertOpen(false)}
+                onConfirm={() => setAlertOpen(false)}
+                title={s.overlays.deleteTitle}
+                description={s.overlays.deleteDesc}
+                cancelLabel={s.overlays.cancel}
+                confirmLabel={s.overlays.delete}
+                destructive
+              />
+            </ShowcaseSection>
+
+            <ShowcaseSection id="breadcrumb" title={s.breadcrumb.title}>
+              <ShowcaseStack>
+                <Breadcrumb items={[
+                  { label: s.breadcrumb.home, href: '#/' },
+                  { label: s.breadcrumb.workspace, href: '#/projects' },
+                  { label: s.breadcrumb.current },
+                ]}
+                />
+                <Pagination page={page} totalPages={5} onPageChange={setPage} />
+              </ShowcaseStack>
+            </ShowcaseSection>
+
+            <ShowcaseSection id="accordion" title={s.accordion.title}>
+              <div className="grid gap-12 lg:grid-cols-2">
+                <Accordion items={[
+                  { id: '1', title: s.accordion.q1, content: s.accordion.a1, defaultOpen: true },
+                  { id: '2', title: s.accordion.q2, content: s.accordion.a2 },
+                ]}
+                />
+                <Collapsible title={s.accordion.advanced} count={s.accordion.count}>
+                  <Input placeholder="top_p" readOnly defaultValue="0.9" />
+                  <Input placeholder="top_k" readOnly defaultValue="40" />
+                </Collapsible>
+              </div>
+            </ShowcaseSection>
+
+            <ShowcaseSection id="command" title={s.command.title}>
+              <ShowcaseRow>
+                <Button variant="secondary" onClick={() => setCmdOpen(true)}>
+                  {s.command.openCommand}
+                  <KbdCombo keys={['⌘', 'K']} />
+                </Button>
+                <ContextMenu
+                  className="h-[80px] w-[220px]"
+                  items={[
+                    { label: s.command.copy, shortcut: '⌘C' },
+                    { label: s.command.regenerate, shortcut: '⌘R' },
+                    { label: s.command.delete, destructive: true },
+                  ]}
+                >
+                  {s.command.contextHint}
+                </ContextMenu>
+              </ShowcaseRow>
+              <CommandPalette
+                open={cmdOpen}
+                onClose={() => setCmdOpen(false)}
+                placeholder={s.search.placeholder}
+                items={[
+                  { id: 'home', label: s.command.goHome, shortcut: 'G H' },
+                  { id: 'settings', label: s.command.settings, shortcut: 'G S' },
+                ]}
+              />
+            </ShowcaseSection>
+
+            <ShowcaseSection id="stats" title={s.stats.title}>
+              <div className="grid gap-12 lg:grid-cols-3">
+                <StatCard label={s.stats.requests} value="6,924" hint="▲ 12%" />
+                <StatCard label={s.stats.tokens} value="14.0M" hint="▲ 3%" />
+                <StatCard label={s.stats.latency} value="820ms" hint="▼ 40ms" />
+              </div>
+              <div className="mt-16 max-w-[400px]">
+                <ModuleCard
+                  title={s.stats.studies}
+                  description={s.stats.studiesDesc}
+                  href="#/usability/studies"
+                  icon={StudiesIcon}
+                  tone="usability"
+                  metrics={[
+                    { label: s.stats.metricSessions, value: '24' },
+                    { label: s.stats.metricAvg, value: '8.2' },
+                  ]}
+                />
+              </div>
+              <ShowcaseRow label={s.stats.aspectRatio}>
+                <AspectRatio>
+                  <div className="flex h-full items-center justify-center bg-well text-[12px] text-faint">16:9</div>
+                </AspectRatio>
+              </ShowcaseRow>
+            </ShowcaseSection>
+
+            <ShowcaseSection id="chat" title={s.chat.title}>
+              <ShowcaseStack>
+                <ChatBubble
+                  role="user"
+                  avatar={<Avatar size="sm" initials="AJ" />}
+                  meta={s.chat.metaUser}
+                >
+                  {s.chat.userMsg}
+                </ChatBubble>
+                <ChatBubble
+                  role="assistant"
+                  avatar={<Avatar size="sm" initials="AI" className="bg-accent" />}
+                  meta={s.chat.metaAi}
+                >
+                  {s.chat.aiMsg}
+                </ChatBubble>
+                <TypingIndicator />
+                <PromptBar
+                  value={prompt}
+                  onChange={(event) => setPrompt(event.target.value)}
+                  placeholder={s.chat.promptPlaceholder}
+                  onSubmit={() => setPrompt('')}
+                />
+                <AiResponseCard title={s.chat.aiTitle} model={s.chat.model} onCopy={() => {}}>
+                  {s.chat.aiBody}
+                </AiResponseCard>
+              </ShowcaseStack>
             </ShowcaseSection>
 
             <ShowcaseSection id="dividers" title={s.dividers.title}>
