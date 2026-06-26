@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Bash(npm -v)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm test *)",
+      "WebFetch(domain:linear.app)",
+      "Bash(npx eslint *)",
+      "Bash(~/.kimi-webbridge/bin/kimi-webbridge status *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(curl -s -X POST http://127.0.0.1:10086/command -H 'Content-Type: application/json' -d '{\"action\":\"navigate\",\"args\":{\"url\":\"https://linear.app/surfarch/projects/all\",\"newTab\":true,\"group_title\":\"Linear UI analyze\"},\"session\":\"linear-ui\"}')",
+      "Bash(curl -s -X POST http://127.0.0.1:10086/command -H 'Content-Type: application/json' -d '{\"action\":\"screenshot\",\"args\":{\"format\":\"jpeg\",\"quality\":70,\"path\":\"/tmp/linear_projects.jpg\"},\"session\":\"linear-ui\"}')",
+      "Bash(curl -s -X POST http://127.0.0.1:10086/command -H 'Content-Type: application/json' -d '{\"action\":\"navigate\",\"args\":{\"url\":\"https://linear.app/surfarch/issue/SUR-5/test\",\"newTab\":false},\"session\":\"linear-ui\"}')",
+      "Bash(curl -s -X POST http://127.0.0.1:10086/command -H 'Content-Type: application/json' -d '{\"action\":\"screenshot\",\"args\":{\"format\":\"jpeg\",\"quality\":72,\"path\":\"/tmp/linear_issue.jpg\"},\"session\":\"linear-ui\"}')"
+    ]
+  }
+}

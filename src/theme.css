@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+@theme {
+  --color-shell: #f3f3f4;
+  --color-sidebar: #f3f3f4;
+  --color-content: #fcfcfd;
+  --color-well: #f3f3f4;
+  --color-hover: #f3f4f5;
+  --color-active: #e5e5e6;
+  --color-nav: lch(38.376 1.25 282);
+  --color-nav-active: lch(9.594 0 282);
+  --color-nav-active-bg: lch(91.04 0.5 282);
+  --color-field: #f3f3f4;
+  --color-surface: #ffffff;
+  --color-shell-hover: #ebebec;
+
+  --color-line: #e5e5e5;
+  --color-line-subtle: rgba(0, 0, 0, 0.06);
+  --color-line-strong: rgba(0, 0, 0, 0.1);
+
+  --color-pill-active: #efeff0;
+  --color-pill-muted: #5d5d5f;
+  --color-pill-border: rgba(0, 0, 0, 0.08);
+  --color-tab-active: lch(94.483 0.5 282);
+  --color-tab-inactive: lch(98.94 0.5 282);
+  --color-tab-inactive-text: lch(39.576 1.25 282);
+  --color-issue-meta: lch(37.264 3.908 282.51);
+  --color-checkbox-border: lch(65.3 1.25 282);
+  --color-checkbox-checked: lch(53 52.26 286.91);
+  --color-row-selected: lch(91.16 5.817 282.51);
+  --color-icon-toolbar: #8c8c8e;
+  --color-icon-view: #adadb0;
+
+  --shadow-stroke: 0 0 0 0.5px #e5e5e5;
+  --shadow-stroke-faint: 0 0 0 0.5px rgba(0, 0, 0, 0.03);
+  --shadow-panel: 0 3px 6px -2px rgba(0, 0, 0, 0.02), 0 1px 1px rgba(0, 0, 0, 0.04);
+
+  --color-ink: #1b1b1b;
+  --color-body: #2e2e30;
+  --color-sub: #5a5a5c;
+  --color-faint: #6b6c6e;
+  --color-muted: #545a6d;
+  --color-label: #6b6c6e;
+
+  --color-team: #4cb782;
+  --color-workspace: #00746e;
+
+  --color-accent: #5e6ad2;
+  --color-accent-hover: #5662c6;
+  --color-accent-press: #4d59b8;
+  --color-onaccent: #ffffff;
+  --color-accent-soft: #e9eafb;
+  --color-user-avatar: lch(40 60 190);
+
+  /* Semantic status */
+  --color-success: #4cb782;
+  --color-success-soft: #e6f7ee;
+  --color-warning: #f2c94c;
+  --color-warning-soft: #fef9e7;
+  --color-danger: #e5484d;
+  --color-danger-soft: #fde8e8;
+  --color-info: #5e6ad2;
+  --color-info-soft: #e9eafb;
+
+  /* Priority (Linear) */
+  --color-priority-urgent: #f2994a;
+  --color-priority-high: #f2c94c;
+  --color-priority-medium: #5e6ad2;
+  --color-priority-low: #8c8c8e;
+  --color-priority-none: #adadb0;
+
+  /* Issue status */
+  --color-status-todo: #8c8c8e;
+  --color-status-progress: #f2c94c;
+  --color-status-done: #4cb782;
+  --color-status-cancelled: #adadb0;
+
+  /* Workspace module accents */
+  --color-module-usability: #5e6ad2;
+  --color-module-usability-soft: #e9eafb;
+  --color-module-stories: #d97757;
+  --color-module-stories-soft: #fdf0eb;
+  --color-module-directory: #4cb782;
+  --color-module-directory-soft: #e6f7ee;
+
+  --font-inter: InterVariable, "Inter var", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-berkeley: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --font-weight-normal: 400;
+  --font-weight-book: 450;
+  --font-weight-medium: 500;
+  --font-weight-ui: 510;
+  --font-weight-semibold: 590;
+
+  --spacing: 1px;
+
+  --radius-xs: 4px;
+  --radius-sm: 5px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-panel: 12px;
+  --radius-full: 9999px;
+
+  --shadow-pop: 0 6px 18px rgba(24, 24, 27, 0.1), 0 0 0 1px rgba(24, 24, 27, 0.05);
+  --shadow-selection-bar:
+    lch(0 0 0 / 0.02) 0 6px 18px,
+    lch(0 0 0 / 0.04) 0 3px 9px,
+    lch(0 0 0 / 0.04) 0 1px 1px;
+  --shadow-modal: 0 16px 52px rgba(24, 24, 27, 0.18), 0 0 0 1px rgba(24, 24, 27, 0.06);
+}
+
+:root {
+  font-family: var(--font-inter);
+  font-feature-settings: "cv01" on, "ss03" on;
+  color-scheme: light;
+}
+
+html, body, #root {
+  margin: 0;
+  min-height: 100%;
+  background: var(--color-shell);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-press);
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.82; }
+}
+
+.skeleton-shimmer {
+  background-color: var(--color-active);
+  animation: skeleton-pulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer {
+    animation: none;
+    opacity: 0.65;
+  }
+}
+
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes pop-check {
+  0% { transform: scale(0.2); opacity: 0; }
+  55% { transform: scale(1.18); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* twin of pop-check — distinct name so :hover restarts the animation */
+@keyframes pop-check-hover {
+  0% { transform: scale(0.2); opacity: 0; }
+  55% { transform: scale(1.18); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes intro-study-browser {
+  0%, 100% { transform: rotate(-3deg); }
+  45% { transform: translateY(-3px) rotate(-1.5deg); }
+}
+
+@keyframes intro-study-panel {
+  0%, 100% { transform: rotate(2.5deg); }
+  45% { transform: translateY(-7px) rotate(1deg); }
+}
+
+@keyframes intro-story-card {
+  0%, 100% { transform: translateY(0); }
+  45% { transform: translateY(-3px); }
+}
+
+@keyframes intro-chip {
+  0%, 12% { transform: rotate(-4deg); }
+  52%, 72% { transform: translateY(-36px) translateX(6px) rotate(0deg); }
+  100% { transform: rotate(-4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-caret { animation: none !important; }
+  .group:hover .anim-pop { animation: none !important; }
+}
