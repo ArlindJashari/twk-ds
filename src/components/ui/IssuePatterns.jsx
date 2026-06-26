@@ -119,7 +119,11 @@ function LayoutTemplateIcon(props) {
   )
 }
 
-export function IssueComposer({ open, onClose, copy }) {
+export function IssueComposer(props) {
+  return <CreateComposer {...props} />
+}
+
+export function CreateComposer({ open, onClose, copy }) {
   const titleRef = useRef(null)
 
   useEffect(() => {

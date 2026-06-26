@@ -3,11 +3,13 @@ import { todoIssues } from '../lib/data.js'
 import IssuesHeader from '../components/IssuesHeader.jsx'
 import { IssuesToolbar } from '../components/ViewToolbar.jsx'
 import { CaretDown, PlusIcon, UserAvatarIcon } from '../components/icons.jsx'
+import { useCreateComposer } from '../lib/CreateComposerContext.jsx'
 import {
   GroupHeader, IssueRow, PriorityIcon, SelectionBar, StatusIcon,
 } from '../components/ui/index.js'
 
 export default function Issues() {
+  const { openCreate } = useCreateComposer()
   const [selected, setSelected] = useState(() => new Set())
 
   const toggleIssue = useCallback((id) => {
@@ -36,7 +38,7 @@ export default function Issues() {
                 <StatusIcon status="todo" />
               </>
             )}
-            onAdd={() => {}}
+            onAdd={() => openCreate('issue')}
           />
           <div className="flex flex-col">
             {todoIssues.map((issue) => (

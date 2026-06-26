@@ -6,10 +6,12 @@ import Projects from './pages/Projects.jsx'
 import Search from './pages/Search.jsx'
 import PlaceholderPage from './pages/PlaceholderPage.jsx'
 import CreateTeam from './pages/CreateTeam.jsx'
+import Studies from './pages/Studies.jsx'
 import DesignSystem from './pages/DesignSystem.jsx'
 import DesignSystemRedirect from './pages/DesignSystemRedirect.jsx'
 import { useHashRoute } from './lib/hooks.js'
 import { titleForPath } from './lib/nav.js'
+import { CreateComposerProvider } from './lib/CreateComposerContext.jsx'
 
 function routeConfig(path) {
   if (path === '/') {
@@ -24,8 +26,11 @@ function routeConfig(path) {
   if (path === '/search' || path.startsWith('/search/')) {
     return { page: Search, hideHeader: true, pageProps: { path } }
   }
+  if (path === '/usability/studies' || path.startsWith('/usability/studies/')) {
+    return { page: Studies, title: 'Studies', headerAction: { label: 'New study', createType: 'study' } }
+  }
   if (path === '/projects' || path.startsWith('/projects/')) {
-    return { page: Projects, title: 'Projects', headerAction: { label: 'New project' } }
+    return { page: Projects, title: 'Projects', headerAction: { label: 'New project', createType: 'project' } }
   }
   if (path === '/issues' || path.startsWith('/issues/')) {
     return { page: Issues, title: 'Issues', hideHeader: true }
@@ -42,7 +47,7 @@ function routeConfig(path) {
   return { page: PlaceholderPage, title, pageProps: { path } }
 }
 
-export default function App() {
+function AppRoutes() {
   const { path } = useHashRoute()
   const config = routeConfig(path)
 
@@ -67,5 +72,13 @@ export default function App() {
     >
       <Page title={config.title} path={path} {...(config.pageProps ?? {})} />
     </AppShell>
+  )
+}
+
+export default function App() {
+  return (
+    <CreateComposerProvider>
+      <AppRoutes />
+    </CreateComposerProvider>
   )
 }

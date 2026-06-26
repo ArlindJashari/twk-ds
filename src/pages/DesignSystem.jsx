@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import DesignSystemLayout from '../components/DesignSystemLayout.jsx'
 import { DisplayPreferencesProvider, useLocale } from '../lib/displayPreferences.jsx'
 import { getDesignSystemCopy } from '../lib/designSystemI18n.js'
+import { getCreateComposerCopy } from '../lib/createComposer.js'
+import { useCreateComposer } from '../lib/CreateComposerContext.jsx'
 import {
   CaretDown, HomeIcon, LinkIcon, PersonasIcon, LibraryIcon, TemplatesIcon,
   StoriesIcon, FeaturesIcon, FirebaseIcon, ProjectsIcon,
@@ -11,7 +13,7 @@ import { quickLinks } from '../lib/dashboard.js'
 import {
   Alert, AlertDialog, Accordion, AiResponseCard, AspectRatio, Avatar, Badge, Breadcrumb, Button, Card, CardBody, CardDescription, CardFooter,
   CardMedia, CardTitle, ChatBubble, Checkbox, Collapsible, CommandPalette, ContextMenu, IssueCheckbox, ColorSwatch, Divider, DropdownMenu, EmptyState, Field,
-  FieldError, FieldGroup, FieldHint, FilterMenu, GroupHeader, HoverCard, IconButton, Input, IssueComposer, IssueOverflowMenu, IssueRow, issueRowLead,
+  FieldError, FieldGroup, FieldHint, FilterMenu, GroupHeader, HoverCard, IconButton, Input, IssueOverflowMenu, IssueRow, issueRowLead,
   issueRowSlotCheckbox, Kbd, KbdCombo, Label, Link, ListRow, MenuItem, MenuLabel, MenuSearch, MenuSeparator, Modal, ModalFooter, ModuleCard, NavItem, Pagination, Panel,
   PanelBody, PanelHeader, Popover, PriorityIcon, Progress, PromptBar, PropertyPill, Radio, SearchTrigger, Select, SelectionBar, Sheet, ShowcaseRow,
   ShowcaseSection, ShowcaseStack, Skeleton, SkeletonGroup, Slider, StatCard, StatusIcon, Switch, Tab, TabList,
@@ -60,7 +62,6 @@ export default function DesignSystem() {
   const [alertOpen, setAlertOpen] = useState(false)
   const [cmdOpen, setCmdOpen] = useState(false)
   const [page, setPage] = useState(1)
-  const [issueOpen, setIssueOpen] = useState(false)
   const [prompt, setPrompt] = useState('')
 
   return (
@@ -75,7 +76,6 @@ export default function DesignSystem() {
         cmdOpen={cmdOpen} setCmdOpen={setCmdOpen}
         page={page} setPage={setPage}
         prompt={prompt} setPrompt={setPrompt}
-        issueOpen={issueOpen} setIssueOpen={setIssueOpen}
       />
     </DisplayPreferencesProvider>
   )
@@ -99,10 +99,10 @@ function DesignSystemContent({
   sliderVal, setSliderVal, toggleView, setToggleView,
   sheetOpen, setSheetOpen, alertOpen, setAlertOpen,
   cmdOpen, setCmdOpen, page, setPage, prompt, setPrompt,
-  issueOpen, setIssueOpen,
 }) {
   const scrollRef = useRef(null)
   const locale = useLocale()
+  const { openCreate } = useCreateComposer()
   const c = getDesignSystemCopy(locale)
   const nav = NAV_IDS.map((id) => ({ id, label: c.nav[id] }))
   const s = c.sections
@@ -585,7 +585,7 @@ function DesignSystemContent({
 
             <ShowcaseSection id="issues" title={s.issues.title} description={s.issues.description}>
               <ShowcaseRow>
-                <Button variant="secondary" onClick={() => setIssueOpen(true)}>{s.issues.openComposer}</Button>
+                <Button variant="secondary" onClick={() => openCreate('issue', getCreateComposerCopy('issue', locale))}>{s.issues.openComposer}</Button>
                 <FilterMenu label={s.issues.openFilter} copy={s.issues} />
               </ShowcaseRow>
               <ShowcaseRow label={s.issues.propertyPills}>
@@ -594,7 +594,6 @@ function DesignSystemContent({
                 <PropertyPill icon={ProjectsIcon} label={s.issues.project} />
                 <IssueOverflowMenu label={s.issues.overflowMenu} copy={s.issues} />
               </ShowcaseRow>
-              <IssueComposer open={issueOpen} onClose={() => setIssueOpen(false)} copy={s.issues} />
             </ShowcaseSection>
 
             <ShowcaseSection id="modals" title={s.modals.title}>
@@ -645,7 +644,7 @@ function DesignSystemContent({
                   title={s.empty.emptyTitle}
                   description={s.empty.emptyDescription}
                   actionLabel={s.empty.actionLabel}
-                  actionHref="#/usability/studies"
+                  onAction={() => openCreate('study', getCreateComposerCopy('study', locale))}
                 />
               </div>
             </ShowcaseSection>

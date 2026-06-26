@@ -5,6 +5,7 @@ export default function ContentHeader({
   onOpenSidebar,
   actionLabel,
   actionIcon: ActionIcon = PlusIcon,
+  onAction,
 }) {
   return (
     <header className="flex h-[44px] shrink-0 items-center border-b border-line bg-content px-8">
@@ -21,7 +22,8 @@ export default function ContentHeader({
         <button
           type="button"
           aria-label={actionLabel}
-          className="grid size-[28px] place-items-center rounded-full border-[0.5px] border-transparent px-[2px] text-body outline-none transition-colors hover:bg-hover hover:text-ink"
+          onClick={onAction}
+          className="grid size-[28px] place-items-center rounded-full border-[0.5px] border-transparent text-body outline-none transition-colors hover:bg-hover hover:text-ink"
         >
           <ActionIcon size={14} strokeWidth={1.5} />
         </button>

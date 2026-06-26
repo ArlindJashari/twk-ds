@@ -7,7 +7,7 @@ export { default as Badge } from './Badge.jsx'
 export { default as Breadcrumb } from './Breadcrumb.jsx'
 export { default as Button } from './Button.jsx'
 export { AiResponseCard, ChatBubble, PromptBar, TypingIndicator } from './ChatPatterns.jsx'
-export { FilterMenu, IssueComposer, IssueOverflowMenu, PropertyPill } from './IssuePatterns.jsx'
+export { FilterMenu, CreateComposer, IssueComposer, IssueOverflowMenu, PropertyPill } from './IssuePatterns.jsx'
 export {
   Card, CardBody, CardDescription, CardFooter, CardMedia, CardTitle,
 } from './Card.jsx'

@@ -29,10 +29,13 @@ describe('App shell', () => {
     expect(screen.getByText('This view is not implemented yet.')).toBeInTheDocument()
   })
 
-  it('shows placeholder for usability studies', () => {
+  it('shows studies empty state', () => {
     window.location.hash = '#/usability/studies'
     render(<App />)
     expect(screen.getByRole('heading', { level: 1, name: 'Studies' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'No studies yet' })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Create study' }))
+    expect(screen.getByRole('dialog', { name: 'New study' })).toBeInTheDocument()
   })
 
   it('shows create team settings', () => {

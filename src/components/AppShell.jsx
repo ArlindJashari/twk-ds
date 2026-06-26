@@ -5,6 +5,7 @@ import AskTawakkalnaFooter from './AskTawakkalnaFooter.jsx'
 import { CloseIcon, SearchIcon, ComposeIcon } from './icons.jsx'
 import { UserMenuTriggerContent } from './UserMenu.jsx'
 import { useDismiss, useFocusTrap, useMediaQuery } from '../lib/hooks.js'
+import { useCreateComposer } from '../lib/CreateComposerContext.jsx'
 
 const SIDEBAR_W = 'w-[244px]'
 
@@ -16,6 +17,8 @@ export default function AppShell({
   const drawerRef = useDismiss(drawerOpen && !isDesktop, () => setDrawerOpen(false))
   const closeDrawerRef = useRef(null)
   useFocusTrap(drawerOpen && !isDesktop, drawerRef, closeDrawerRef)
+
+  const { openCreate } = useCreateComposer()
 
   const openSearch = useCallback(() => {
     setDrawerOpen(false)
@@ -50,7 +53,7 @@ export default function AppShell({
                 <UserMenuTriggerContent />
               </span>
               <button type="button" onClick={openSearch} aria-label="Search" className="grid size-[28px] place-items-center rounded-full text-body hover:bg-hover"><SearchIcon size={14} strokeWidth={1.5} /></button>
-              <button type="button" aria-label="New issue" className="grid size-[28px] place-items-center rounded-full bg-content text-body hover:bg-hover"><ComposeIcon size={14} strokeWidth={1.5} /></button>
+              <button type="button" onClick={() => openCreate('issue')} aria-label="New issue" className="grid size-[28px] place-items-center rounded-full bg-content text-body hover:bg-hover"><ComposeIcon size={14} strokeWidth={1.5} /></button>
               <button ref={closeDrawerRef} type="button" onClick={() => setDrawerOpen(false)} aria-label="Close navigation" className="grid size-[28px] place-items-center rounded-full text-body hover:bg-hover"><CloseIcon size={14} strokeWidth={1.5} /></button>
             </div>
             <Sidebar currentPath={currentPath} onNavigate={() => setDrawerOpen(false)} onSearch={openSearch} hideHeader />
@@ -69,6 +72,7 @@ export default function AppShell({
                 title={title}
                 actionLabel={headerAction?.label}
                 actionIcon={headerAction?.icon}
+                onAction={headerAction ? () => openCreate(headerAction.createType ?? 'issue') : undefined}
                 onOpenSidebar={() => setDrawerOpen(true)}
               />
             )}
