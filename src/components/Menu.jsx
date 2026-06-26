@@ -1,7 +1,9 @@
-import { cloneElement, useId, useRef, useState } from 'react'
+import { cloneElement, useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { CaretRight, SearchIcon } from './icons.jsx'
-import { useDismiss } from '../lib/hooks.js'
 import Kbd from './ui/Kbd.jsx'
+
+const MENU_GAP = 4.5
 
 const panelVariants = {
   default: 'min-w-[210px] rounded-lg p-4 shadow-pop',
@@ -18,6 +20,16 @@ const itemVariants = {
   filter: 'gap-8 px-10 py-[6px] hover:bg-hover focus-visible:bg-hover',
 }
 
+function getMenuStyle(trigger, align) {
+  if (!trigger) return null
+  const rect = trigger.getBoundingClientRect()
+  const top = rect.bottom + MENU_GAP
+  if (align === 'end') {
+    return { top, left: rect.right, transform: 'translateX(-100%)' }
+  }
+  return { top, left: rect.left }
+}
+
 export default function Menu({
   trigger,
   children,
@@ -26,9 +38,45 @@ export default function Menu({
   variant = 'default',
 }) {
   const [open, setOpen] = useState(false)
+  const [menuStyle, setMenuStyle] = useState(null)
   const id = useId()
-  const ref = useDismiss(open, () => setOpen(false))
+  const containerRef = useRef(null)
+  const panelRef = useRef(null)
   const triggerRef = useRef(null)
+
+  const updatePosition = useCallback(() => {
+    setMenuStyle(getMenuStyle(triggerRef.current, align))
+  }, [align])
+
+  useLayoutEffect(() => {
+    if (!open) return undefined
+    updatePosition()
+    const onScrollOrResize = () => updatePosition()
+    window.addEventListener('resize', onScrollOrResize)
+    window.addEventListener('scroll', onScrollOrResize, true)
+    return () => {
+      window.removeEventListener('resize', onScrollOrResize)
+      window.removeEventListener('scroll', onScrollOrResize, true)
+    }
+  }, [open, updatePosition])
+
+  useEffect(() => {
+    if (!open) return undefined
+    const onKey = (event) => {
+      if (event.key === 'Escape') setOpen(false)
+    }
+    const onPointer = (event) => {
+      const inTrigger = containerRef.current?.contains(event.target)
+      const inPanel = panelRef.current?.contains(event.target)
+      if (!inTrigger && !inPanel) setOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('mousedown', onPointer)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('mousedown', onPointer)
+    }
+  }, [open])
 
   const triggerElement = cloneElement(trigger, {
     ref: triggerRef,
@@ -49,7 +97,7 @@ export default function Menu({
         event.preventDefault()
         setOpen(true)
         requestAnimationFrame(() => {
-          ref.current?.querySelector('[role^="menuitem"]')?.focus()
+          panelRef.current?.querySelector('[role^="menuitem"]')?.focus()
         })
       }
     },
@@ -80,17 +128,18 @@ export default function Menu({
   }
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={containerRef} className="relative">
       {triggerElement}
-      {open && (
+      {open && menuStyle && createPortal(
         <div
+          ref={panelRef}
           id={id}
           role="menu"
           aria-label={label}
+          style={menuStyle}
           className={[
-            'absolute top-[calc(100%+4.5px)] z-40 bg-content',
+            'fixed z-50 bg-content',
             panelVariants[variant],
-            align === 'end' ? 'end-0' : 'start-0',
           ].join(' ')}
           onClick={(event) => {
             if (event.target.closest('[data-menu-persist]')) return
@@ -99,7 +148,8 @@ export default function Menu({
           onKeyDown={onMenuKeyDown}
         >
           {children}
-        </div>
+        </div>,
+        document.body,
       )}
     </div>
   )
