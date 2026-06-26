@@ -266,7 +266,8 @@ Right sidebar for project/entity detail views.
 | Sections | `DetailsSection` — collapsible, 36px header, `+` action |
 | Property rows | `DetailPropertyRow` — label left, icon+value right, 32px |
 | Date row | `DetailDateRow` — Start → Target |
-| Inline bar | `InlinePropertyBar` + `PropertyPill` under title |
+| Inline bar | `InlinePropertyBar` + `DetailPropertyPill` (ghost, 28px, px-6, no border) |
+| Free text | `DetailFreeField` + `ProjectDetailMain` — summary + description auto-grow |
 | Preset | `ProjectPropertiesPanel` — Properties / Milestones / Activity |
 
 ```jsx

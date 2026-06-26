@@ -8,7 +8,6 @@ import {
   CaretDown, HomeIcon, LinkIcon, PersonasIcon, LibraryIcon, TemplatesIcon,
   StoriesIcon, FeaturesIcon, FirebaseIcon, ProjectsIcon,
   TawakkalnaToolbarDisplayIcon, TawakkalnaToolbarFilterIcon, PlusIcon, SearchIcon, SparkleIcon, StudiesIcon,
-  CalendarIcon, ProfileIcon,
 } from '../components/icons.jsx'
 import { quickLinks } from '../lib/dashboard.js'
 import {
@@ -21,7 +20,7 @@ import {
   TabPanel, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tag, Text, Textarea, ToggleGroup,
   Toast, ToastProvider, TokenGrid, Toolbar, Tooltip, TypingIndicator, useToast, ViewPage,
   DisplayToolbarMenu, FilterToolbarMenu,
-  DetailLayout, DetailsSidebar, InlinePropertyBar, ProjectPropertiesPanel,
+  DetailLayout, DetailsSidebar, ProjectDetailMain, ProjectPropertiesPanel,
 } from '../components/ui/index.js'
 import { StandardPageToolbar } from '../components/ViewToolbar.jsx'
 
@@ -66,6 +65,32 @@ function StudyPlaceholder() {
           <div className="h-[4px] w-4/5 rounded-xs bg-line" />
         </div>
       </div>
+    </div>
+  )
+}
+
+function DetailsDemo({ copy }) {
+  const [summary, setSummary] = useState('')
+  const [description, setDescription] = useState('')
+
+  return (
+    <div className="overflow-hidden rounded-lg border border-line-subtle bg-content">
+      <DetailLayout
+        main={(
+          <ProjectDetailMain
+            copy={copy}
+            summary={summary}
+            onSummaryChange={setSummary}
+            description={description}
+            onDescriptionChange={setDescription}
+          />
+        )}
+        sidebar={(
+          <DetailsSidebar className="!flex w-full border-s-0 lg:w-[280px] lg:border-s">
+            <ProjectPropertiesPanel copy={copy} />
+          </DetailsSidebar>
+        )}
+      />
     </div>
   )
 }
@@ -668,28 +693,7 @@ function DesignSystemContent({
             </ShowcaseSection>
 
             <ShowcaseSection id="details" title={s.details.title} description={s.details.description}>
-              <div className="overflow-hidden rounded-lg border border-line-subtle bg-content">
-                <DetailLayout
-                  main={(
-                    <div className="space-y-16">
-                      <h3 className="text-[20px] font-ui text-ink">n</h3>
-                      <p className="text-[13px] text-faint">{s.details.addSummary ?? 'Add a short summary…'}</p>
-                      <InlinePropertyBar label={s.details.properties}>
-                        <PropertyPill icon={StatusIcon} label={s.details.completed} />
-                        <PropertyPill icon={PriorityIcon} label={s.details.noPriority} />
-                        <PropertyPill icon={ProfileIcon} label={s.details.lead} />
-                        <PropertyPill icon={CalendarIcon} label={s.details.targetDate} />
-                        <PropertyPill icon={ProjectsIcon} label={s.details.teamName} />
-                      </InlinePropertyBar>
-                    </div>
-                  )}
-                  sidebar={(
-                    <DetailsSidebar className="!flex w-full border-s-0 lg:w-[280px] lg:border-s">
-                      <ProjectPropertiesPanel copy={s.details} />
-                    </DetailsSidebar>
-                  )}
-                />
-              </div>
+              <DetailsDemo copy={s.details} />
             </ShowcaseSection>
 
             <ShowcaseSection id="modals" title={s.modals.title}>

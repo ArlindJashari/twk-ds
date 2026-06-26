@@ -12,8 +12,8 @@ export {
   DisplayOptionsMenu, DisplayToolbarMenu, FilterToolbarMenu, PropertyChip, ViewPage,
 } from './ViewPatterns.jsx'
 export {
-  DetailDateRow, DetailLayout, DetailPropertyRow, DetailsSection, DetailsSidebar,
-  InlinePropertyBar, ProjectPropertiesPanel,
+  DetailDateRow, DetailFieldBlock, DetailFreeField, DetailLayout, DetailPropertyPill, DetailPropertyRow,
+  DetailsSection, DetailsSidebar, InlinePropertyBar, ProjectDetailMain, ProjectMark, ProjectPropertiesPanel,
 } from './DetailPatterns.jsx'
 export {
   Card, CardBody, CardDescription, CardFooter, CardMedia, CardTitle,

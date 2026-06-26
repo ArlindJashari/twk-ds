@@ -1,0 +1,119 @@
+/* V2 — shadcn/ui green-primary design system (COMPONENTS.md) */
+
+.v2-root {
+  --v2-brand-green: 152 74% 39%;
+  --v2-brand-teal: 174 70% 18%;
+  --v2-background: 0 0% 100%;
+  --v2-foreground: 222 47% 11%;
+  --v2-card: 0 0% 100%;
+  --v2-card-foreground: 222 47% 11%;
+  --v2-popover: 0 0% 100%;
+  --v2-popover-foreground: 222 47% 11%;
+  --v2-primary: 150 82% 30%;
+  --v2-primary-foreground: 0 0% 100%;
+  --v2-secondary: 220 14% 96%;
+  --v2-secondary-foreground: 222 47% 11%;
+  --v2-muted: 220 14% 96%;
+  --v2-muted-foreground: 220 9% 46%;
+  --v2-accent: 220 14% 96%;
+  --v2-accent-foreground: 222 47% 11%;
+  --v2-destructive: 0 72.2% 50.6%;
+  --v2-destructive-foreground: 0 0% 100%;
+  --v2-success: 150 82% 30%;
+  --v2-warning: 32.1 94.6% 43.7%;
+  --v2-info: 174 70% 30%;
+  --v2-border: 220 13% 91%;
+  --v2-input: 220 13% 91%;
+  --v2-ring: 150 82% 30%;
+  --v2-shell: 220 14% 97%;
+  --v2-sidebar: 220 14% 97%;
+  --v2-nav: 220 9% 46%;
+  --v2-nav-active: 222 47% 11%;
+  --v2-nav-active-bg: 220 14% 93%;
+  --v2-radius: 0.5rem;
+  --v2-shadow-sm: 0 1px 2px 0 hsl(222 47% 11% / 0.05);
+  --v2-duration-fast: 150ms;
+  --v2-duration-base: 200ms;
+  --v2-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  background: hsl(var(--v2-background));
+  color: hsl(var(--v2-foreground));
+  font-family: Inter, InterVariable, ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "cv01" on, "ss03" on;
+  -webkit-font-smoothing: antialiased;
+  color-scheme: light;
+}
+
+.v2-root.dark {
+  --v2-background: 222 47% 8%;
+  --v2-foreground: 210 20% 96%;
+  --v2-card: 222 40% 11%;
+  --v2-card-foreground: 210 20% 96%;
+  --v2-popover: 222 40% 11%;
+  --v2-popover-foreground: 210 20% 96%;
+  --v2-primary: 150 64% 46%;
+  --v2-primary-foreground: 222 47% 8%;
+  --v2-secondary: 222 33% 18%;
+  --v2-secondary-foreground: 210 20% 96%;
+  --v2-muted: 222 30% 15%;
+  --v2-muted-foreground: 220 14% 66%;
+  --v2-accent: 222 33% 18%;
+  --v2-accent-foreground: 210 20% 96%;
+  --v2-destructive: 0 62.8% 50%;
+  --v2-border: 222 28% 20%;
+  --v2-input: 222 28% 20%;
+  --v2-ring: 150 64% 46%;
+  --v2-success: 150 64% 46%;
+  --v2-warning: 38 92% 55%;
+  --v2-info: 174 62% 50%;
+  --v2-shell: 222 47% 6%;
+  --v2-sidebar: 222 47% 6%;
+  --v2-nav: 220 14% 66%;
+  --v2-nav-active: 210 20% 96%;
+  --v2-nav-active-bg: 222 33% 18%;
+  color-scheme: dark;
+}
+
+.v2-root ::selection {
+  background: hsl(var(--v2-primary) / 0.2);
+}
+
+.v2-focus-ring {
+  outline: none;
+}
+
+.v2-focus-ring:focus-visible {
+  outline: 2px solid hsl(var(--v2-ring));
+  outline-offset: 2px;
+}
+
+.v2-root .slider-input {
+  height: 14px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.v2-root .slider-input::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    hsl(var(--v2-primary)) 0%,
+    hsl(var(--v2-primary)) var(--slider-fill, 0%),
+    hsl(var(--v2-muted)) var(--slider-fill, 0%),
+    hsl(var(--v2-muted)) 100%
+  );
+}
+
+.v2-root .slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -4px;
+  border: 2px solid hsl(var(--v2-primary));
+  border-radius: 9999px;
+  background: hsl(var(--v2-background));
+  cursor: pointer;
+}

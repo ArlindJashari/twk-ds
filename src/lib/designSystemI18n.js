@@ -401,6 +401,11 @@ const en = {
       createdProject: 'created the project',
       activityDate: 'Jun 23',
       targetDate: 'Target date',
+      resources: 'Resources',
+      addResource: 'Add document or link…',
+      descriptionLabel: 'Description',
+      descriptionPlaceholder: 'Write a description, a project brief, or collect ideas…',
+      addMilestone: 'Milestone',
     },
     modals: {
       title: 'Modals',
@@ -894,6 +899,11 @@ const ar = {
       createdProject: 'أنشأ المشروع',
       activityDate: '23 يونيو',
       targetDate: 'تاريخ الهدف',
+      resources: 'الموارد',
+      addResource: 'إضافة مستند أو رابط…',
+      descriptionLabel: 'الوصف',
+      descriptionPlaceholder: 'اكتب وصفًا أو ملخص مشروع أو اجمع الأفكار…',
+      addMilestone: 'معلم',
     },
     modals: {
       title: 'النوافذ',

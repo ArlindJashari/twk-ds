@@ -1,10 +1,150 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CaretDown, CalendarIcon, LabelsIcon, PlusIcon, ProfileIcon, ProjectsIcon, SlackIcon } from '../icons.jsx'
 import { cn } from '../../lib/cn.js'
 import { focusRing } from './primitives.js'
 import IconButton from './IconButton.jsx'
 import Link from './Link.jsx'
 import { PriorityIcon, StatusIcon } from './PriorityStatus.jsx'
+
+function DoneStatusIcon(props) {
+  return <StatusIcon status="done" {...props} />
+}
+
+function useAutoHeight(ref, value) {
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = `${el.scrollHeight}px`
+  }, [ref, value])
+}
+
+export function ProjectMark({ size = 48, icon: Icon = ProjectsIcon, className }) {
+  return (
+    <span
+      className={cn('grid shrink-0 place-items-center rounded-[10px] bg-well text-faint', className)}
+      style={{ width: size, height: size }}
+      aria-hidden
+    >
+      <Icon size={Math.round(size * 0.45)} strokeWidth={1.5} />
+    </span>
+  )
+}
+
+export function DetailFreeField({
+  value = '',
+  onChange,
+  placeholder,
+  rows = 1,
+  variant = 'summary',
+  className,
+  id,
+}) {
+  const ref = useRef(null)
+  useAutoHeight(ref, value)
+
+  return (
+    <textarea
+      ref={ref}
+      id={id}
+      value={value}
+      onChange={(event) => onChange?.(event.target.value)}
+      placeholder={placeholder}
+      rows={rows}
+      className={cn(
+        'w-full resize-none border-0 bg-transparent p-0 outline-none placeholder:text-faint',
+        variant === 'summary' ? 'text-[14px] leading-[1.45]' : 'text-[13px] leading-[1.6]',
+        value ? 'text-body' : '',
+        focusRing,
+        className,
+      )}
+    />
+  )
+}
+
+export function DetailPropertyPill({ icon: Icon, label, muted = false, onClick, className }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        'inline-flex h-[28px] shrink-0 items-center gap-6 rounded-full px-6 py-[3px] text-[13px] font-normal transition-colors',
+        focusRing,
+        muted ? 'text-faint hover:bg-hover hover:text-sub' : 'text-ink hover:bg-hover',
+        className,
+      )}
+    >
+      {Icon ? <Icon size={14} strokeWidth={1.5} className="shrink-0 text-faint" /> : null}
+      <span>{label}</span>
+    </button>
+  )
+}
+
+export function DetailFieldBlock({ label, children, className }) {
+  return (
+    <section className={cn('mt-28', className)}>
+      <h4 className="text-[13px] font-medium text-sub">{label}</h4>
+      <div className="mt-8">{children}</div>
+    </section>
+  )
+}
+
+export function ProjectDetailMain({
+  copy,
+  title = 'n',
+  summary = '',
+  onSummaryChange,
+  description = '',
+  onDescriptionChange,
+  icon: Icon = ProjectsIcon,
+  className,
+}) {
+  const c = copy ?? {}
+
+  return (
+    <div className={cn('max-w-[720px]', className)}>
+      <ProjectMark icon={Icon} />
+      <h1 className="mt-14 text-[28px] font-semibold tracking-[-0.022em] text-ink">{title}</h1>
+      <DetailFreeField
+        variant="summary"
+        value={summary}
+        onChange={onSummaryChange}
+        placeholder={c.addSummary ?? 'Add a short summary…'}
+        className="mt-10"
+      />
+      <InlinePropertyBar label={c.properties ?? 'Properties'} className="mt-24">
+        <DetailPropertyPill icon={DoneStatusIcon} label={c.completed ?? 'Completed'} />
+        <DetailPropertyPill icon={PriorityIcon} label={c.noPriority ?? 'No priority'} />
+        <DetailPropertyPill icon={ProfileIcon} label={c.lead ?? 'Lead'} muted />
+        <DetailPropertyPill icon={CalendarIcon} label={c.targetDate ?? 'Target date'} muted />
+        <DetailPropertyPill icon={ProjectsIcon} label={c.teamName ?? 'Surfarch'} />
+      </InlinePropertyBar>
+      <DetailFieldBlock label={c.resources ?? 'Resources'}>
+        <button
+          type="button"
+          className="text-[13px] text-faint transition-colors hover:text-ink"
+        >
+          + {c.addResource ?? 'Add document or link…'}
+        </button>
+      </DetailFieldBlock>
+      <DetailFieldBlock label={c.descriptionLabel ?? 'Description'}>
+        <DetailFreeField
+          variant="body"
+          value={description}
+          onChange={onDescriptionChange}
+          placeholder={c.descriptionPlaceholder ?? 'Write a description, a project brief, or collect ideas…'}
+          rows={3}
+        />
+      </DetailFieldBlock>
+      <button
+        type="button"
+        className="mt-28 inline-flex h-[28px] items-center rounded-full px-8 text-[13px] text-faint transition-colors hover:bg-hover hover:text-ink"
+      >
+        + {c.addMilestone ?? 'Milestone'}
+      </button>
+    </div>
+  )
+}
 
 export function DetailLayout({ main, sidebar, className }) {
   return (
@@ -124,9 +264,9 @@ export function DetailDateRow({ label = 'Dates', startLabel = 'Start', targetLab
 
 export function InlinePropertyBar({ label = 'Properties', children, className }) {
   return (
-    <div className={cn('flex flex-wrap items-center gap-8', className)}>
-      <span className="text-[12px] text-faint">{label}</span>
-      <div className="flex flex-wrap items-center gap-6">{children}</div>
+    <div className={cn('flex flex-wrap items-center gap-x-12 gap-y-6', className)}>
+      <span className="shrink-0 text-[13px] text-faint">{label}</span>
+      <div className="flex min-w-0 flex-wrap items-center gap-4">{children}</div>
     </div>
   )
 }
