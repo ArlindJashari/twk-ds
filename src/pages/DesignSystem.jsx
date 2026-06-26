@@ -3,25 +3,38 @@ import DesignSystemLayout from '../components/DesignSystemLayout.jsx'
 import { DisplayPreferencesProvider, useLocale } from '../lib/displayPreferences.jsx'
 import { getDesignSystemCopy } from '../lib/designSystemI18n.js'
 import {
-  CaretDown, HomeIcon, TawakkalnaToolbarDisplayIcon, TawakkalnaToolbarFilterIcon, PlusIcon, SearchIcon, SparkleIcon, StudiesIcon,
+  CaretDown, HomeIcon, LinkIcon, PersonasIcon, LibraryIcon, TemplatesIcon,
+  StoriesIcon, FeaturesIcon, FirebaseIcon, ProjectsIcon,
+  TawakkalnaToolbarDisplayIcon, TawakkalnaToolbarFilterIcon, PlusIcon, SearchIcon, SparkleIcon, StudiesIcon,
 } from '../components/icons.jsx'
+import { quickLinks } from '../lib/dashboard.js'
 import {
   Alert, AlertDialog, Accordion, AiResponseCard, AspectRatio, Avatar, Badge, Breadcrumb, Button, Card, CardBody, CardDescription, CardFooter,
   CardMedia, CardTitle, ChatBubble, Checkbox, Collapsible, CommandPalette, ContextMenu, IssueCheckbox, ColorSwatch, Divider, DropdownMenu, EmptyState, Field,
-  FieldError, FieldGroup, FieldHint, GroupHeader, HoverCard, IconButton, Input, IssueRow, issueRowLead,
-  issueRowSlotCheckbox, Kbd, KbdCombo, Label, Link, ListRow, MenuItem, MenuLabel, MenuSeparator, Modal, ModalFooter, ModuleCard, NavItem, Pagination, Panel,
-  PanelBody, PanelHeader, Popover, PriorityIcon, Progress, PromptBar, Radio, SearchTrigger, Select, SelectionBar, Sheet, ShowcaseRow,
+  FieldError, FieldGroup, FieldHint, FilterMenu, GroupHeader, HoverCard, IconButton, Input, IssueComposer, IssueOverflowMenu, IssueRow, issueRowLead,
+  issueRowSlotCheckbox, Kbd, KbdCombo, Label, Link, ListRow, MenuItem, MenuLabel, MenuSearch, MenuSeparator, Modal, ModalFooter, ModuleCard, NavItem, Pagination, Panel,
+  PanelBody, PanelHeader, Popover, PriorityIcon, Progress, PromptBar, PropertyPill, Radio, SearchTrigger, Select, SelectionBar, Sheet, ShowcaseRow,
   ShowcaseSection, ShowcaseStack, Skeleton, SkeletonGroup, Slider, StatCard, StatusIcon, Switch, Tab, TabList,
   TabPanel, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tag, Text, Textarea, ToggleGroup,
   Toast, ToastProvider, TokenGrid, Toolbar, Tooltip, TypingIndicator, useToast,
 } from '../components/ui/index.js'
 
 const NAV_IDS = [
-  'colors', 'typography', 'spacing', 'buttons', 'icon-buttons', 'forms', 'selection',
+  'quick-links', 'colors', 'typography', 'spacing', 'buttons', 'icon-buttons', 'forms', 'selection',
   'badges', 'avatars', 'cards', 'tables', 'list-rows', 'priority', 'tabs', 'search',
-  'nav', 'menus', 'modals', 'toasts', 'panels', 'alerts', 'empty', 'loading', 'progress',
+  'nav', 'menus', 'issues', 'modals', 'toasts', 'panels', 'alerts', 'empty', 'loading', 'progress',
   'links', 'slider', 'toggle', 'overlays', 'breadcrumb', 'accordion', 'command', 'stats', 'chat', 'dividers',
 ]
+
+const quickLinkIcons = {
+  Studies: StudiesIcon,
+  Personas: PersonasIcon,
+  Library: LibraryIcon,
+  Templates: TemplatesIcon,
+  'User stories': StoriesIcon,
+  Features: FeaturesIcon,
+  Firebase: FirebaseIcon,
+}
 
 function StudyPlaceholder() {
   return (
@@ -47,6 +60,7 @@ export default function DesignSystem() {
   const [alertOpen, setAlertOpen] = useState(false)
   const [cmdOpen, setCmdOpen] = useState(false)
   const [page, setPage] = useState(1)
+  const [issueOpen, setIssueOpen] = useState(false)
   const [prompt, setPrompt] = useState('')
 
   return (
@@ -61,6 +75,7 @@ export default function DesignSystem() {
         cmdOpen={cmdOpen} setCmdOpen={setCmdOpen}
         page={page} setPage={setPage}
         prompt={prompt} setPrompt={setPrompt}
+        issueOpen={issueOpen} setIssueOpen={setIssueOpen}
       />
     </DisplayPreferencesProvider>
   )
@@ -84,6 +99,7 @@ function DesignSystemContent({
   sliderVal, setSliderVal, toggleView, setToggleView,
   sheetOpen, setSheetOpen, alertOpen, setAlertOpen,
   cmdOpen, setCmdOpen, page, setPage, prompt, setPrompt,
+  issueOpen, setIssueOpen,
 }) {
   const scrollRef = useRef(null)
   const locale = useLocale()
@@ -139,6 +155,22 @@ function DesignSystemContent({
           </header>
 
           <div className="flex flex-col gap-32">
+            <ShowcaseSection id="quick-links" title={c.layout.quickLinks}>
+              <div className="flex flex-wrap gap-6">
+                {quickLinks.map((link) => {
+                  const Icon = quickLinkIcons[link.label]
+                  return (
+                    <Tag key={link.path} href={`#${link.path}`} icon={Icon}>
+                      {link.label}
+                    </Tag>
+                  )
+                })}
+                <Tag href="#/designsystem" icon={LinkIcon} variant="accent">
+                  {c.layout.title}
+                </Tag>
+              </div>
+            </ShowcaseSection>
+
             <ShowcaseSection id="colors" title={s.colors.title} description={s.colors.description}>
               <ShowcaseRow label={s.colors.surfaces}>
                 <TokenGrid cols={6}>
@@ -549,6 +581,20 @@ function DesignSystemContent({
                   <MenuItem variant="workspace">Surfarch</MenuItem>
                 </DropdownMenu>
               </ShowcaseRow>
+            </ShowcaseSection>
+
+            <ShowcaseSection id="issues" title={s.issues.title} description={s.issues.description}>
+              <ShowcaseRow>
+                <Button variant="secondary" onClick={() => setIssueOpen(true)}>{s.issues.openComposer}</Button>
+                <FilterMenu label={s.issues.openFilter} copy={s.issues} />
+              </ShowcaseRow>
+              <ShowcaseRow label={s.issues.propertyPills}>
+                <PropertyPill icon={StatusIcon} label={s.issues.todo} />
+                <PropertyPill icon={PriorityIcon} label={s.issues.priority} />
+                <PropertyPill icon={ProjectsIcon} label={s.issues.project} />
+                <IssueOverflowMenu label={s.issues.overflowMenu} copy={s.issues} />
+              </ShowcaseRow>
+              <IssueComposer open={issueOpen} onClose={() => setIssueOpen(false)} copy={s.issues} />
             </ShowcaseSection>
 
             <ShowcaseSection id="modals" title={s.modals.title}>

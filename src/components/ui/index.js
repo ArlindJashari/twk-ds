@@ -7,6 +7,7 @@ export { default as Badge } from './Badge.jsx'
 export { default as Breadcrumb } from './Breadcrumb.jsx'
 export { default as Button } from './Button.jsx'
 export { AiResponseCard, ChatBubble, PromptBar, TypingIndicator } from './ChatPatterns.jsx'
+export { FilterMenu, IssueComposer, IssueOverflowMenu, PropertyPill } from './IssuePatterns.jsx'
 export {
   Card, CardBody, CardDescription, CardFooter, CardMedia, CardTitle,
 } from './Card.jsx'
@@ -17,7 +18,7 @@ export { CommandInput, default as SearchTrigger } from './SearchInput.jsx'
 export { default as ContextMenu } from './ContextMenu.jsx'
 export { default as Divider } from './Divider.jsx'
 export { default as DisplayPreferencesBar } from './DisplayPreferencesBar.jsx'
-export { default as DropdownMenu, MenuItem, MenuLabel, MenuSeparator, MenuShortcut } from './DropdownMenu.jsx'
+export { default as DropdownMenu, MenuItem, MenuLabel, MenuSearch, MenuSeparator, MenuShortcut } from './DropdownMenu.jsx'
 export { default as EmptyState } from './EmptyState.jsx'
 export {
   Field, FieldError, FieldGroup, FieldHint, Label,

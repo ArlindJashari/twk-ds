@@ -1,17 +1,21 @@
 import { cloneElement, useId, useRef, useState } from 'react'
-import { CaretRight } from './icons.jsx'
+import { CaretRight, SearchIcon } from './icons.jsx'
 import { useDismiss } from '../lib/hooks.js'
+import Kbd from './ui/Kbd.jsx'
 
 const panelVariants = {
   default: 'min-w-[210px] rounded-lg p-4 shadow-pop',
   workspace:
     'w-[226px] rounded-panel border-[0.5px] border-line bg-surface p-0 pb-[6px] pt-[6px] shadow-[0_6px_18px_rgba(0,0,0,0.02),0_3px_9px_rgba(0,0,0,0.04)]',
+  filter:
+    'w-[260px] rounded-lg border-[0.5px] border-line bg-content p-0 pb-4 pt-0 shadow-pop',
 }
 
 const itemVariants = {
   default:
     'gap-8 rounded-xs px-8 py-[6px] hover:bg-hover focus-visible:bg-hover',
   workspace: '',
+  filter: 'gap-8 px-10 py-[6px] hover:bg-hover focus-visible:bg-hover',
 }
 
 export default function Menu({
@@ -88,7 +92,10 @@ export default function Menu({
             panelVariants[variant],
             align === 'end' ? 'end-0' : 'start-0',
           ].join(' ')}
-          onClick={() => setOpen(false)}
+          onClick={(event) => {
+            if (event.target.closest('[data-menu-persist]')) return
+            setOpen(false)
+          }}
           onKeyDown={onMenuKeyDown}
         >
           {children}
@@ -125,6 +132,25 @@ export function MenuShortcut({ keys, children }) {
   )
 }
 
+export function MenuSearch({ placeholder, shortcut }) {
+  return (
+    <div
+      data-menu-persist
+      className="flex items-center gap-8 border-b border-line-subtle px-10 py-8"
+      onClick={(event) => event.stopPropagation()}
+    >
+      <SearchIcon size={14} strokeWidth={1.5} className="shrink-0 text-faint" />
+      <input
+        type="text"
+        placeholder={placeholder}
+        className="min-w-0 flex-1 bg-transparent text-[13px] text-body outline-none placeholder:text-faint"
+        onClick={(event) => event.stopPropagation()}
+      />
+      {shortcut ? <Kbd className="shrink-0">{shortcut}</Kbd> : null}
+    </div>
+  )
+}
+
 export function MenuItem({
   children,
   onClick,
@@ -133,18 +159,23 @@ export function MenuItem({
   keys,
   submenu = false,
   variant = 'default',
+  icon: Icon,
 }) {
   const hasTrailing = Boolean(keys || shortcut || submenu)
   const trailing = hasTrailing ? (
     <span className="ms-auto flex shrink-0 items-center gap-8 ps-8">
       {keys ? <MenuShortcut keys={keys} /> : shortcut ? <MenuShortcut>{shortcut}</MenuShortcut> : null}
       {submenu ? (
-        <CaretRight size={12} className="shrink-0 text-[lch(40_1_282)] rtl:rotate-180" aria-hidden />
+        <CaretRight size={12} className="shrink-0 text-faint rtl:rotate-180" aria-hidden />
       ) : null}
     </span>
   ) : null
+  const leading = Icon ? (
+    <Icon size={14} strokeWidth={1.5} className="shrink-0 text-faint" />
+  ) : null
   const content = (
     <>
+      {leading}
       <span className="min-w-0 flex-1 truncate">{children}</span>
       {trailing}
     </>
@@ -152,7 +183,7 @@ export function MenuItem({
 
   if (variant === 'workspace') {
     const innerClassName = [
-      'relative flex h-[32px] w-full items-center rounded-lg px-[8px] pe-[12px]',
+      'relative flex h-[32px] w-full items-center gap-8 rounded-lg px-[8px] pe-[12px]',
       'text-start text-[13px] font-normal leading-[19.5px] text-ink outline-none transition-colors',
       'hover:bg-menu-hover focus-visible:bg-menu-hover',
     ].join(' ')
@@ -191,7 +222,7 @@ export function MenuLabel({ children }) {
 }
 
 export function MenuSeparator({ variant = 'default' }) {
-  if (variant === 'workspace') {
+  if (variant === 'workspace' || variant === 'filter') {
     return (
       <div className="py-[6px]" role="separator">
         <div className="h-px bg-line-subtle" />

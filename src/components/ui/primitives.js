@@ -11,7 +11,7 @@ export const pillMuted = 'bg-content text-pill-muted hover:bg-hover hover:text-i
 export const pillSurface = 'bg-content text-ink hover:bg-hover'
 
 export const iconBtn =
-  'grid shrink-0 place-items-center rounded-full border-[0.5px] border-transparent px-[2px] transition-colors'
+  'inline-flex shrink-0 items-center justify-center rounded-full border-[0.5px] border-transparent transition-colors'
 
 export const iconBtnSm = 'size-[24px]'
 export const iconBtnMd = 'size-[28px]'

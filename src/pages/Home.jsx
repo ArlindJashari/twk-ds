@@ -58,10 +58,6 @@ export default function Home() {
   return (
     <PageFrame>
       <div className="flex flex-col gap-28 px-24 py-28">
-        <header>
-          <Text variant="sub">Workspace overview across usability, stories, and directory.</Text>
-        </header>
-
         <section aria-labelledby="quick-links-title">
           <SectionHeading id="quick-links-title" icon={LinkIcon} title="Quick links" />
           <div className="flex flex-wrap gap-6">

@@ -47,6 +47,11 @@ import {
   List,
   LayoutGrid,
   ArrowDownNarrowWide,
+  Paperclip,
+  Calendar,
+  CalendarPlus,
+  FilePlus,
+  Maximize2,
 } from 'lucide-react'
 
 const STROKE = 1.5
@@ -58,7 +63,7 @@ function createIcon(IconComponent) {
         size={size}
         strokeWidth={strokeWidth}
         absoluteStrokeWidth
-        className={className}
+        className={['block shrink-0', className].filter(Boolean).join(' ')}
         aria-hidden
         {...props}
       />
@@ -147,6 +152,12 @@ export const StackIcon = createIcon(List)
 export const FilterIcon = createIcon(ListFilter)
 export const SlidersIcon = createIcon(SlidersHorizontal)
 export const PanelSidebarIcon = createIcon(PanelRight)
+
+export const PaperclipIcon = createIcon(Paperclip)
+export const CalendarIcon = createIcon(Calendar)
+export const CalendarPlusIcon = createIcon(CalendarPlus)
+export const FilePlusIcon = createIcon(FilePlus)
+export const MaximizeIcon = createIcon(Maximize2)
 
 export const TawakkalnaSearchInputIcon = createFilledIcon(
   <path

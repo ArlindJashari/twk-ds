@@ -40,7 +40,7 @@ export function TypingIndicator({ className }) {
 
 export function PromptBar({ value, onChange, onSubmit, placeholder, className }) {
   return (
-    <div className={cn('flex items-end gap-8 rounded-panel border border-line-subtle bg-content p-8 shadow-stroke-faint', className)}>
+    <div className={cn('flex items-center gap-8 rounded-panel border border-line-subtle bg-content p-8 shadow-stroke-faint', className)}>
       <IconButton variant="filled" label="Attach" size="sm">
         <PlusIcon size={14} strokeWidth={1.5} />
       </IconButton>
