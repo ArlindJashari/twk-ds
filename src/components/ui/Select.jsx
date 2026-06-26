@@ -8,14 +8,14 @@ const Select = forwardRef(function Select({ className, children, ...props }, ref
     <div className="relative">
       <select
         ref={ref}
-        className={cn(inputBase, focusRing, 'h-[32px] appearance-none pl-12 pr-28 text-[13px]', className)}
+        className={cn(inputBase, focusRing, 'h-[32px] appearance-none ps-12 pe-28 text-[13px]', className)}
         {...props}
       >
         {children}
       </select>
       <ChevronDown
         size={12}
-        className="pointer-events-none absolute right-10 top-1/2 -translate-y-1/2 text-faint"
+        className="pointer-events-none absolute end-10 top-1/2 -translate-y-1/2 text-faint"
         aria-hidden
       />
     </div>

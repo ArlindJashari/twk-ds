@@ -25,7 +25,7 @@ export function NavGroupLabel({ active, children, className }) {
   return (
     <span
       className={cn(
-        'flex h-[28px] items-center pl-[15px] pr-[9px] text-[12px] font-medium leading-none',
+        'flex h-[28px] items-center ps-[15px] pe-[9px] text-[12px] font-medium leading-none',
         active ? 'text-nav-active' : 'text-nav',
         className,
       )}

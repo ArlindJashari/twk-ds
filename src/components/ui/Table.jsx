@@ -3,7 +3,7 @@ import { cn } from '../../lib/cn.js'
 export function Table({ className, children }) {
   return (
     <div className={cn('w-full overflow-x-auto rounded-lg border border-line-subtle', className)}>
-      <table className="w-full border-collapse text-left text-[13px]">
+      <table className="w-full border-collapse text-start text-[13px]">
         {children}
       </table>
     </div>

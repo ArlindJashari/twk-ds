@@ -8,6 +8,7 @@ export {
 export { default as Checkbox, IssueCheckbox } from './Checkbox.jsx'
 export { CommandInput, default as SearchTrigger } from './SearchInput.jsx'
 export { default as Divider } from './Divider.jsx'
+export { default as DisplayPreferencesBar } from './DisplayPreferencesBar.jsx'
 export { default as DropdownMenu, MenuItem, MenuLabel, MenuSeparator, MenuShortcut } from './DropdownMenu.jsx'
 export { default as EmptyState } from './EmptyState.jsx'
 export {
@@ -15,6 +16,7 @@ export {
 } from './Field.jsx'
 export { default as IconButton } from './IconButton.jsx'
 export { default as Input } from './Input.jsx'
+export { issueRowLead, issueRowSlotCheckbox } from './primitives.js'
 export { GroupHeader, IssueRow, ListRow } from './ListRow.jsx'
 export { default as SelectionBar } from './SelectionBar.jsx'
 export { default as Kbd, KbdCombo } from './Kbd.jsx'

@@ -86,7 +86,7 @@ export default function Menu({
           className={[
             'absolute top-[calc(100%+4.5px)] z-40 bg-content',
             panelVariants[variant],
-            align === 'end' ? 'right-0' : 'left-0',
+            align === 'end' ? 'end-0' : 'start-0',
           ].join(' ')}
           onClick={() => setOpen(false)}
           onKeyDown={onMenuKeyDown}
@@ -119,7 +119,7 @@ export function MenuShortcut({ keys, children }) {
     )
   }
   return (
-    <span className="ml-12 flex shrink-0 items-center gap-[3px] text-[11px] font-normal leading-none text-[lch(40_1_282)]">
+    <span className="ms-12 flex shrink-0 items-center gap-[3px] text-[11px] font-normal leading-none text-[lch(40_1_282)]">
       {children}
     </span>
   )
@@ -136,10 +136,10 @@ export function MenuItem({
 }) {
   const hasTrailing = Boolean(keys || shortcut || submenu)
   const trailing = hasTrailing ? (
-    <span className="ml-auto flex shrink-0 items-center gap-8 pl-8">
+    <span className="ms-auto flex shrink-0 items-center gap-8 ps-8">
       {keys ? <MenuShortcut keys={keys} /> : shortcut ? <MenuShortcut>{shortcut}</MenuShortcut> : null}
       {submenu ? (
-        <CaretRight size={12} className="shrink-0 text-[lch(40_1_282)]" aria-hidden />
+        <CaretRight size={12} className="shrink-0 text-[lch(40_1_282)] rtl:rotate-180" aria-hidden />
       ) : null}
     </span>
   ) : null
@@ -152,9 +152,9 @@ export function MenuItem({
 
   if (variant === 'workspace') {
     const innerClassName = [
-      'relative flex h-[32px] w-full items-center rounded-lg px-[8px] pr-[12px]',
-      'text-left text-[13px] font-normal leading-[19.5px] text-ink outline-none transition-colors',
-      'hover:bg-[lch(96_0_282)] focus-visible:bg-[lch(96_0_282)]',
+      'relative flex h-[32px] w-full items-center rounded-lg px-[8px] pe-[12px]',
+      'text-start text-[13px] font-normal leading-[19.5px] text-ink outline-none transition-colors',
+      'hover:bg-menu-hover focus-visible:bg-menu-hover',
     ].join(' ')
     const shell = href ? (
       <a role="menuitem" href={href} className={innerClassName}>
@@ -169,7 +169,7 @@ export function MenuItem({
   }
 
   const className = [
-    'flex w-full items-center text-left text-[13px] font-normal text-ink outline-none transition-colors',
+    'flex w-full items-center text-start text-[13px] font-normal text-ink outline-none transition-colors',
     itemVariants[variant],
   ].join(' ')
   if (href) {

@@ -68,6 +68,7 @@ export function isActive(currentPath, target) {
 export function titleForPath(path) {
   if (path === '/') return 'Dashboard'
   if (path === '/designsystem') return 'Design system'
+  if (path === '/design-system') return 'Design system'
   if (path === '/settings/teams/new') return 'Create a new team'
   const exact = allItems.find((i) => i.path === path)
   if (exact) return exact.label

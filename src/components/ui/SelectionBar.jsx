@@ -36,7 +36,7 @@ export default function SelectionBar({ count = 0, onClear, onMoveToBacklog, onAc
       aria-live="polite"
     >
       <div className="pointer-events-auto flex h-[44px] items-center gap-8 rounded-full bg-surface px-8 shadow-selection-bar">
-        <span className="shrink-0 pl-12 pr-2 text-[12px] text-ink">
+        <span className="shrink-0 ps-12 pe-2 text-[12px] text-ink">
           {count}
           {' '}
           selected

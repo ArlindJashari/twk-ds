@@ -3,7 +3,7 @@ import { cn } from '../../lib/cn.js'
 import { focusRing } from './primitives.js'
 
 const thumb =
-  'pointer-events-none block size-[14px] translate-x-[2px] rounded-full bg-white shadow-stroke transition-transform'
+  'pointer-events-none absolute top-1/2 block size-[14px] -translate-y-1/2 rounded-full bg-white shadow-stroke transition-all start-[2px]'
 
 const Switch = forwardRef(function Switch({ className, checked, onClick, ...props }, ref) {
   return (
@@ -22,7 +22,7 @@ const Switch = forwardRef(function Switch({ className, checked, onClick, ...prop
       )}
       {...props}
     >
-      <span className={cn(thumb, checked && 'translate-x-[14px]')} aria-hidden />
+      <span className={cn(thumb, checked && 'start-[14px]')} aria-hidden />
     </button>
   )
 })

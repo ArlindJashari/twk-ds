@@ -7,7 +7,7 @@ export function Label({ className, children, htmlFor, required }) {
       className={cn('text-[13px] font-medium text-body', className)}
     >
       {children}
-      {required ? <span className="ml-2 text-danger">*</span> : null}
+      {required ? <span className="ms-2 text-danger">*</span> : null}
     </label>
   )
 }

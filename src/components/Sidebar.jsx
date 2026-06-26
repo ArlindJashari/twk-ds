@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
-  primaryNav, navGroups, midNav, isActive,
+  primaryNav, navGroups, midNav, devNav, isActive,
 } from '../lib/nav.js'
 import {
   SearchIcon, ComposeIcon, ChevronDown, ChevronRight, SidebarHelpIcon,
@@ -140,7 +140,7 @@ export default function Sidebar({ currentPath, onNavigate, onSearch, hideHeader 
         </nav>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[44px] px-[10px] py-[10px]">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-[44px] items-center justify-between gap-8 px-[10px] py-[10px]">
         <button
           type="button"
           aria-label="Open Help menu"
@@ -151,6 +151,14 @@ export default function Sidebar({ currentPath, onNavigate, onSearch, hideHeader 
             <SidebarHelpIcon />
           </span>
         </button>
+        <a
+          href={`#${devNav.path}`}
+          aria-current={isActive(currentPath, devNav.path) ? 'page' : undefined}
+          onClick={onNavigate}
+          className="pointer-events-auto inline-flex h-[24px] items-center rounded-lg px-8 text-[12px] font-medium text-nav outline-none transition-colors hover:bg-shell-hover hover:text-nav-active focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          {devNav.label}
+        </a>
       </div>
     </div>
   )

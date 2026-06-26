@@ -76,7 +76,7 @@ function createFilledIcon(children, viewBox = '0 0 16 16') {
         fill="currentColor"
         aria-hidden
         focusable="false"
-        className={['size-[14px] shrink-0', className].filter(Boolean).join(' ')}
+        className={['shrink-0', className].filter(Boolean).join(' ')}
         {...props}
       >
         {children}

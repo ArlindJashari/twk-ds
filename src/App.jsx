@@ -7,6 +7,7 @@ import Search from './pages/Search.jsx'
 import PlaceholderPage from './pages/PlaceholderPage.jsx'
 import CreateTeam from './pages/CreateTeam.jsx'
 import DesignSystem from './pages/DesignSystem.jsx'
+import DesignSystemRedirect from './pages/DesignSystemRedirect.jsx'
 import { useHashRoute } from './lib/hooks.js'
 import { titleForPath } from './lib/nav.js'
 
@@ -16,6 +17,9 @@ function routeConfig(path) {
   }
   if (path === '/designsystem') {
     return { designSystem: true, page: DesignSystem }
+  }
+  if (path === '/design-system') {
+    return { designSystem: true, page: DesignSystemRedirect }
   }
   if (path === '/search' || path.startsWith('/search/')) {
     return { page: Search, hideHeader: true, pageProps: { path } }

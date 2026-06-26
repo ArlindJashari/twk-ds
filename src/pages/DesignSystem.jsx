@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import DesignSystemLayout from '../components/DesignSystemLayout.jsx'
+import { DisplayPreferencesProvider } from '../lib/displayPreferences.jsx'
 import {
-  CaretDown, FilterIcon, HomeIcon, PlusIcon, SearchIcon, SlidersIcon, SparkleIcon, StudiesIcon,
+  CaretDown, HomeIcon, LinearToolbarDisplayIcon, LinearToolbarFilterIcon, PlusIcon, SearchIcon, SparkleIcon, StudiesIcon,
 } from '../components/icons.jsx'
 import {
   Alert, Avatar, Badge, Button, Card, CardBody, CardDescription, CardFooter,
   CardMedia, CardTitle, Checkbox, IssueCheckbox, ColorSwatch, Divider, DropdownMenu, EmptyState, Field,
-  FieldError, FieldGroup, FieldHint, GroupHeader, IconButton, Input, IssueRow, Kbd, KbdCombo,
-  Label, Link, MenuItem, MenuLabel, MenuSeparator, Modal, ModalFooter, NavItem, Panel,
+  FieldError, FieldGroup, FieldHint, GroupHeader, IconButton, Input, IssueRow, issueRowLead,
+  issueRowSlotCheckbox, Kbd, KbdCombo, Label, Link, ListRow, MenuItem, MenuLabel, MenuSeparator, Modal, ModalFooter, NavItem, Panel,
   PanelBody, PanelHeader, PriorityIcon, Progress, Radio, SearchTrigger, Select, SelectionBar, ShowcaseRow,
   ShowcaseSection, ShowcaseStack, Skeleton, SkeletonGroup, StatusIcon, Switch, Tab, TabList,
   TabPanel, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tag, Text, Textarea,
@@ -63,12 +64,12 @@ export default function DesignSystem() {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
-    <ToastProvider>
-    <DesignSystemContent
-      tab={tab} setTab={setTab} sw={sw} setSw={setSw}
-      modalOpen={modalOpen} setModalOpen={setModalOpen}
-    />
-    </ToastProvider>
+    <DisplayPreferencesProvider>
+      <DesignSystemContent
+        tab={tab} setTab={setTab} sw={sw} setSw={setSw}
+        modalOpen={modalOpen} setModalOpen={setModalOpen}
+      />
+    </DisplayPreferencesProvider>
   )
 }
 
@@ -84,15 +85,28 @@ function ToastDemo() {
   )
 }
 
-function scrollToSection(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-}
-
 function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }) {
+  const scrollRef = useRef(null)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  const scrollToSection = (id) => {
+    const scroller = scrollRef.current
+    const target = document.getElementById(id)
+    if (!scroller || !target) return
+    const top = scroller.scrollTop
+      + (target.getBoundingClientRect().top - scroller.getBoundingClientRect().top)
+      - 24
+    scroller.scrollTo({ top, behavior: 'smooth' })
+  }
+
   return (
     <DesignSystemLayout>
-      <div className="flex h-full min-h-0">
-        <aside className="hidden w-[200px] shrink-0 border-r border-line bg-well px-12 py-16 lg:block">
+      <ToastProvider>
+      <div className="flex min-h-0 flex-1 overflow-hidden">
+        <aside className="hidden w-[200px] shrink-0 overflow-y-auto border-e border-line bg-well px-12 py-16 lg:block">
           <p className="mb-12 px-8 text-[11px] font-medium uppercase tracking-wide text-faint">
             Components
           </p>
@@ -102,7 +116,7 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
                 key={item.id}
                 type="button"
                 onClick={() => scrollToSection(item.id)}
-                className="rounded-lg px-8 py-6 text-left text-[12px] font-medium text-sub transition-colors hover:bg-hover hover:text-ink"
+                className="rounded-lg px-8 py-6 text-start text-[12px] font-medium text-sub transition-colors hover:bg-hover hover:text-ink"
               >
                 {item.label}
               </button>
@@ -110,7 +124,7 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
           </nav>
         </aside>
 
-        <div className="min-w-0 flex-1 overflow-y-auto px-24 py-28">
+        <div ref={scrollRef} className="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-y-contain px-24 py-28">
           <header className="mb-32">
             <Text variant="title" as="h1" className="text-[20px]">Design system</Text>
             <Text variant="sub" className="mt-6 max-w-[560px]">
@@ -230,8 +244,8 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
 
             <ShowcaseSection id="icon-buttons" title="Icon buttons" description="28px circle — matches toolbar controls.">
               <ShowcaseRow label="Variants">
-                <IconButton label="Filter"><FilterIcon size={14} strokeWidth={1.5} /></IconButton>
-                <IconButton variant="filled" label="Display"><SlidersIcon size={14} strokeWidth={1.5} /></IconButton>
+                <IconButton variant="filled" label="Filter"><LinearToolbarFilterIcon /></IconButton>
+                <IconButton variant="filled" label="Display"><LinearToolbarDisplayIcon /></IconButton>
                 <IconButton variant="accent" label="Create"><PlusIcon size={14} strokeWidth={1.5} /></IconButton>
               </ShowcaseRow>
               <ShowcaseRow label="Sizes">
@@ -272,13 +286,23 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
 
             <ShowcaseSection id="selection" title="Selection controls">
               <ShowcaseRow label="Issue checkbox">
-                <div className="group flex h-[44px] w-[200px] items-center rounded-lg hover:bg-hover">
-                  <IssueCheckbox checked={false} aria-label="Unchecked" />
-                  <span className="text-[13px] text-sub">Hover row</span>
-                </div>
-                <div className="group flex h-[44px] w-[200px] items-center rounded-lg bg-row-selected">
-                  <IssueCheckbox checked aria-label="Checked" />
-                  <span className="text-[13px] text-ink">Selected</span>
+                <div className="w-[280px] overflow-hidden rounded-lg border border-line-subtle bg-content py-4">
+                  <ListRow>
+                    <div className={issueRowLead}>
+                      <span className={issueRowSlotCheckbox}>
+                        <IssueCheckbox checked={false} aria-label="Unchecked" />
+                      </span>
+                      <span className="text-[13px] text-sub">Hover row</span>
+                    </div>
+                  </ListRow>
+                  <ListRow selected>
+                    <div className={issueRowLead}>
+                      <span className={issueRowSlotCheckbox}>
+                        <IssueCheckbox checked aria-label="Checked" />
+                      </span>
+                      <span className="text-[13px] font-medium text-ink">Selected</span>
+                    </div>
+                  </ListRow>
                 </div>
               </ShowcaseRow>
               <div className="relative flex h-[80px] items-end justify-center rounded-lg border border-line-subtle bg-well pb-16">
@@ -371,7 +395,7 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
                     <TableHead>Name</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Owner</TableHead>
-                    <TableHead className="text-right">Updated</TableHead>
+                    <TableHead className="text-end">Updated</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -385,7 +409,7 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
                       <TableCell className="font-medium text-ink">{name}</TableCell>
                       <TableCell><Badge variant={status} size="sm">{status}</Badge></TableCell>
                       <TableCell><Avatar size="xs" initials={owner} /></TableCell>
-                      <TableCell className="text-right text-faint tabular-nums">{date}</TableCell>
+                      <TableCell className="text-end text-faint tabular-nums">{date}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -485,8 +509,8 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
                   )}
                   right={(
                     <>
-                      <IconButton label="Filter"><FilterIcon size={14} /></IconButton>
-                      <IconButton variant="filled" label="Display"><SlidersIcon size={14} /></IconButton>
+                      <IconButton variant="filled" label="Filter"><LinearToolbarFilterIcon /></IconButton>
+                      <IconButton variant="filled" label="Display"><LinearToolbarDisplayIcon /></IconButton>
                     </>
                   )}
                 />
@@ -629,6 +653,7 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
           </div>
         </div>
       </div>
+      </ToastProvider>
     </DesignSystemLayout>
   )
 }

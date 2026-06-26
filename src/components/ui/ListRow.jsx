@@ -49,7 +49,7 @@ export function IssueRow({
         )}
         <span className={issueRowId}>{id}</span>
         {status ? (
-          <span className={cn(issueRowSlotIcon, 'pl-[1px]')}>{status}</span>
+          <span className={cn(issueRowSlotIcon, 'ps-[1px]')}>{status}</span>
         ) : null}
         <span className={issueRowTitle}>{title}</span>
       </div>
@@ -66,7 +66,7 @@ export function IssueRow({
 export function GroupHeader({ label, count, leading, onAdd, className, children }) {
   return (
     <div className={cn(groupHeader, className)}>
-      <div className="flex min-w-0 flex-1 items-center gap-8 pl-[10px]">
+      <div className="flex min-w-0 flex-1 items-center gap-8 ps-[10px]">
         {children}
         {leading}
         <span className="text-[13px] font-medium text-body">{label}</span>

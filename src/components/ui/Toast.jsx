@@ -5,8 +5,8 @@ const ToastContext = createContext(null)
 
 const variants = {
   info: 'border-line-subtle bg-content text-body shadow-pop',
-  success: 'border-success/20 bg-success-soft text-[#2d8a5c]',
-  warning: 'border-warning/30 bg-warning-soft text-[#9a7b0a]',
+  success: 'border-success/20 bg-success-soft text-success-text',
+  warning: 'border-warning/30 bg-warning-soft text-warning-text',
   danger: 'border-danger/20 bg-danger-soft text-danger',
 }
 
@@ -45,7 +45,7 @@ export function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={value}>
       {children}
-      <div className="pointer-events-none fixed bottom-[52px] right-16 z-50 flex flex-col gap-8">
+      <div className="pointer-events-none fixed bottom-[52px] end-16 z-50 flex flex-col gap-8">
         {items.map((item) => (
           <div key={item.id} className="pointer-events-auto">
             <Toast variant={item.variant} title={item.title}>{item.message}</Toast>

@@ -1,7 +1,6 @@
 import {
-  FilterIcon, SlidersIcon,
   LinearToolbarFilterIcon, LinearToolbarDisplayIcon, LinearToolbarSidebarIcon,
-  LinearCustomViewIcon, LinearAddViewIcon,
+  LinearCustomViewIcon, LinearAddViewIcon, PlusIcon,
 } from './icons.jsx'
 import { IconButton, Tab, Toolbar } from './ui/index.js'
 
@@ -18,8 +17,8 @@ export function ReviewsToolbar() {
       )}
       right={(
         <>
-          <IconButton label="Filter"><FilterIcon size={14} strokeWidth={1.5} /></IconButton>
-          <IconButton variant="filled" label="Display options"><SlidersIcon size={14} strokeWidth={1.5} /></IconButton>
+          <IconButton variant="filled" label="Filter"><LinearToolbarFilterIcon /></IconButton>
+          <IconButton variant="filled" label="Display options"><LinearToolbarDisplayIcon /></IconButton>
           <IconButton variant="filled" label="Layout"><LinearToolbarSidebarIcon /></IconButton>
         </>
       )}
@@ -41,8 +40,8 @@ export function IssuesToolbar() {
       )}
       right={(
         <>
-          <IconButton variant="filled" label="Filter"><FilterIcon size={14} strokeWidth={1.5} /></IconButton>
-          <IconButton variant="filled" label="Display options"><SlidersIcon size={14} strokeWidth={1.5} /></IconButton>
+          <IconButton variant="filled" label="Filter"><LinearToolbarFilterIcon /></IconButton>
+          <IconButton variant="filled" label="Display options"><LinearToolbarDisplayIcon /></IconButton>
           <IconButton variant="filled" label="Open details"><LinearToolbarSidebarIcon /></IconButton>
         </>
       )}
@@ -132,9 +131,7 @@ export function TeamTabs() {
       )}
       right={(
         <Tab surface>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
-            <path d="M12 5v14M5 12h14" />
-          </svg>
+          <PlusIcon size={12} strokeWidth={1.5} />
           Add resources
         </Tab>
       )}
