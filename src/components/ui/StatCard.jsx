@@ -1,8 +1,23 @@
 import { cn } from '../../lib/cn.js'
 import { focusRing } from './primitives.js'
 
-export function StatCard({ label, value, hint, href, className }) {
+function resolveTrend(hint, trend) {
+  if (trend) return trend
+  if (typeof hint === 'string' && hint.startsWith('▲')) return 'up'
+  if (typeof hint === 'string' && hint.startsWith('▼')) return 'down'
+  if (typeof hint === 'string' && (hint.startsWith('→') || hint.startsWith('•'))) return 'neutral'
+  return null
+}
+
+const trendHintClass = {
+  up: 'text-success',
+  down: 'text-danger',
+  neutral: 'text-warning',
+}
+
+export function StatCard({ label, value, hint, trend, href, className }) {
   const Tag = href ? 'a' : 'div'
+  const trendKey = resolveTrend(hint, trend)
   return (
     <Tag
       href={href}
@@ -14,7 +29,11 @@ export function StatCard({ label, value, hint, href, className }) {
     >
       <span className="text-[11px] font-medium uppercase tracking-wide text-faint">{label}</span>
       <span className="mt-6 text-[24px] font-semibold tracking-[-0.02em] text-ink tabular-nums">{value}</span>
-      {hint ? <span className="mt-4 text-[12px] text-sub">{hint}</span> : null}
+      {hint ? (
+        <span className={cn('mt-4 text-[12px] font-medium tabular-nums', trendKey ? trendHintClass[trendKey] : 'text-sub')}>
+          {hint}
+        </span>
+      ) : null}
     </Tag>
   )
 }

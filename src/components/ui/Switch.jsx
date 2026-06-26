@@ -2,9 +2,6 @@ import { forwardRef } from 'react'
 import { cn } from '../../lib/cn.js'
 import { focusRing } from './primitives.js'
 
-const thumb =
-  'pointer-events-none absolute top-1/2 block size-[14px] -translate-y-1/2 rounded-full bg-white shadow-stroke transition-all start-[2px]'
-
 const Switch = forwardRef(function Switch({ className, checked, onClick, ...props }, ref) {
   return (
     <button
@@ -14,15 +11,22 @@ const Switch = forwardRef(function Switch({ className, checked, onClick, ...prop
       aria-checked={checked}
       onClick={onClick}
       className={cn(
-        'relative inline-flex h-[18px] w-[30px] shrink-0 cursor-pointer items-center rounded-full border border-line-subtle bg-field transition-colors',
+        'relative box-border inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border border-line-subtle p-0 transition-colors',
+        checked ? 'border-accent bg-accent' : 'bg-field',
         focusRing,
-        checked && 'border-accent bg-accent',
         'disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}
       {...props}
     >
-      <span className={cn(thumb, checked && 'start-[14px]')} aria-hidden />
+      <span
+        aria-hidden
+        className={cn(
+          'pointer-events-none absolute top-1/2 size-[16px] -translate-y-1/2 rounded-full bg-content shadow-stroke',
+          'transition-[inset-inline-start] duration-200 ease-out',
+          checked ? 'start-[calc(100%-18px)]' : 'start-[2px]',
+        )}
+      />
     </button>
   )
 })

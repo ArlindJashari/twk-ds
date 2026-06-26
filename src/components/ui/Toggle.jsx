@@ -1,5 +1,5 @@
 import { cn } from '../../lib/cn.js'
-import { focusRing } from './primitives.js'
+import { focusRing, pill } from './primitives.js'
 
 export function Toggle({ pressed, onPressedChange, className, children, ...props }) {
   return (
@@ -8,11 +8,12 @@ export function Toggle({ pressed, onPressedChange, className, children, ...props
       aria-pressed={pressed}
       onClick={() => onPressedChange?.(!pressed)}
       className={cn(
-        'inline-flex h-[28px] items-center justify-center rounded-lg border-[0.5px] px-10 text-[12px] font-medium transition-colors',
+        pill,
+        'min-w-[56px] justify-center border-transparent',
         focusRing,
         pressed
-          ? 'border-line-subtle bg-tab-active text-ink shadow-stroke-faint'
-          : 'border-transparent text-sub hover:bg-hover hover:text-ink',
+          ? 'bg-content text-ink shadow-stroke-faint'
+          : 'bg-transparent text-tab-inactive-text hover:bg-hover/60 hover:text-ink',
         className,
       )}
       {...props}
@@ -24,7 +25,13 @@ export function Toggle({ pressed, onPressedChange, className, children, ...props
 
 export function ToggleGroup({ value, onChange, options, className }) {
   return (
-    <div className={cn('inline-flex items-center gap-2 rounded-full bg-well p-2', className)} role="group">
+    <div
+      className={cn(
+        'inline-flex items-center gap-[3px] rounded-full border-[0.5px] border-line-subtle bg-well p-[3px]',
+        className,
+      )}
+      role="group"
+    >
       {options.map((option) => (
         <Toggle
           key={option.value}

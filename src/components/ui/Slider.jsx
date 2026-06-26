@@ -41,11 +41,7 @@ const Slider = forwardRef(function Slider({
       onInput={handleInput}
       style={{ '--slider-fill': `${pct}%`, ...style }}
       className={cn(
-        'slider-input h-[6px] w-full max-w-[280px] cursor-pointer appearance-none bg-transparent',
-        '[&::-webkit-slider-thumb]:size-[14px] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full',
-        '[&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-accent [&::-webkit-slider-thumb]:bg-content [&::-webkit-slider-thumb]:shadow-stroke',
-        '[&::-moz-range-thumb]:size-[14px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2',
-        '[&::-moz-range-thumb]:border-accent [&::-moz-range-thumb]:bg-content [&::-moz-range-thumb]:border-solid',
+        'slider-input w-full max-w-[280px] cursor-pointer appearance-none bg-transparent',
         focusRing,
         className,
       )}
