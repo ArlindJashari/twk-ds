@@ -4,7 +4,7 @@ export default function Kbd({ className, children }) {
   return (
     <kbd
       className={cn(
-        'inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-[4px] border border-line-subtle bg-well px-4 text-[11px] font-normal leading-none text-faint',
+        'inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-[4px] border border-line-subtle bg-well px-4 font-mono text-[11px] font-normal leading-none text-faint',
         className,
       )}
     >

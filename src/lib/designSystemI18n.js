@@ -56,7 +56,10 @@ const en = {
   sections: {
     colors: {
       title: 'Colors',
-      description: 'Semantic tokens from theme.css — never hardcode hex in components.',
+      description: 'Aligned with the shadcn reference palette (brand greens + slate neutrals). Never hardcode hex in components.',
+      brand: 'Brand (logo)',
+      greenRamp: 'Primary green ramp',
+      semantic: 'shadcn semantic',
       surfaces: 'Surfaces',
       text: 'Text',
       accentSemantic: 'Accent & semantic',
@@ -64,7 +67,7 @@ const en = {
     },
     typography: {
       title: 'Typography',
-      description: 'Inter Variable. Weights: 400 normal, 450 book, 500 medium, 510 ui, 590 semibold.',
+      description: 'Inter for UI, JetBrains Mono for code/IDs. Weights: 400 normal, 450 book, 500 medium, 510 ui, 590 semibold.',
       scale: 'Scale',
       page: 'Page header — 13px medium body',
       cardTitle: 'Card title — 15px ui',
@@ -73,7 +76,7 @@ const en = {
       secondary: 'Secondary — 13px sub color',
       caption: 'Caption — 12px faint',
       label: 'Label — 11px uppercase',
-      mono: 'SUR-42 · Berkeley Mono',
+      mono: 'SUR-42 · JetBrains Mono',
     },
     spacing: {
       title: 'Spacing & radii',
@@ -437,7 +440,10 @@ const ar = {
   sections: {
     colors: {
       title: 'الألوان',
-      description: 'رموز دلالية من theme.css — لا تستخدم قيم hex مباشرة في المكوّنات.',
+      description: 'متوافقة مع مرجع shadcn (أخضر العلامة + محايدات slate). لا تستخدم hex مباشرة في المكوّنات.',
+      brand: 'العلامة (الشعار)',
+      greenRamp: 'سلم الأخضر الأساسي',
+      semantic: 'دلالي shadcn',
       surfaces: 'الأسطح',
       text: 'النص',
       accentSemantic: 'اللون الأساسي والدلالي',
@@ -445,7 +451,7 @@ const ar = {
     },
     typography: {
       title: 'الطباعة',
-      description: 'Inter Variable. الأوزان: 400 عادي، 450 كتاب، 500 متوسط، 510 واجهة، 590 شبه عريض.',
+      description: 'Inter للواجهة، JetBrains Mono للأكواد والمعرّفات. الأوزان: 400 عادي، 450 كتاب، 500 متوسط، 510 واجهة، 590 شبه عريض.',
       scale: 'المقياس',
       page: 'عنوان الصفحة — 13px متوسط',
       cardTitle: 'عنوان البطاقة — 15px واجهة',
@@ -454,7 +460,7 @@ const ar = {
       secondary: 'النص الثانوي — 13px لون فرعي',
       caption: 'التسمية التوضيحية — 12px باهت',
       label: 'التسمية — 11px أحرف كبيرة',
-      mono: 'SUR-42 · Berkeley Mono',
+      mono: 'SUR-42 · JetBrains Mono',
     },
     spacing: {
       title: 'التباعد والزوايا',

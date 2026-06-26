@@ -23,6 +23,30 @@ TawakkalnaOS follows **Tawakkalna's design language**: quiet surfaces, precise t
 
 ## Tokens (`src/theme.css`)
 
+**Reference:** shadcn/ui green-primary palette (brand colors from logo, slate neutrals). Source of truth mirrors `Downloads/index.html` tokens.
+
+### Brand (logo)
+
+| Token | Hex | Use |
+|-------|-----|-----|
+| `brand-green` | `#1aaa5b` | Logo, team accent |
+| `brand-teal` | `#114b47` | Workspace, directory |
+| `brand-mist` | `#f0f1f2` | Shell chrome |
+| `brand-green-mid` | `#1b7a5f` | Logo mid-tone |
+| `green-50` … `green-950` | ramp | Soft fills, hover, dark surfaces |
+
+### shadcn semantic (light)
+
+| Token | Maps to | Use |
+|-------|---------|-----|
+| `primary` / `accent` | `#0e8b4d` | CTAs, focus rings, checkboxes |
+| `foreground` / `ink` | `#0f1729` | Headings, body |
+| `muted-foreground` / `sub` | `#6b7280` | Secondary text |
+| `border` / `line` | `#e5e7eb` | Dividers, inputs |
+| `destructive` / `danger` | `#dc2626` | Errors |
+| `warning` | `#d97706` | Caution |
+| `info` | `#178277` | Informational |
+
 ### Surfaces
 
 | Token | Use |
@@ -72,9 +96,9 @@ TawakkalnaOS follows **Tawakkalna's design language**: quiet surfaces, precise t
 
 ### Typography
 
-- **Font:** Inter Variable (`font-[inherit]` default)
+- **Sans:** Inter (`font-[inherit]` default) — matches reference `--font-sans`
+- **Mono:** JetBrains Mono via `font-mono` / `font-berkeley` (alias) for IDs (`STY-12`, `SUR-4`), shortcuts
 - **Weights:** `font-normal` (400), `font-[450]` book, `font-medium` (500), `font-ui` (510), `font-semibold` (590)
-- **Mono:** `font-berkeley` for IDs (`STY-12`, `SUR-4`), shortcuts
 - **Scale:**
   - Page header: `text-[13px] font-medium text-body`
   - Section title: `text-[13px] font-ui text-ink`
@@ -301,8 +325,8 @@ src/
 3. **Add Modal/Dialog** primitive next — use `shadow-modal`, `rounded-panel`, 32px header.
 4. **Add Toast** for async feedback (study saved, sync error).
 5. **Command palette** — elevate Search to global ⌘K overlay using existing search UI.
-6. **Dark mode** — defer; tokens are light-only today. Add `[data-theme=dark]` block when ready.
-7. **Storybook optional** — `#/designsystem` is the living catalog; keep it updated when adding primitives.
+6. **Dark mode** — `[data-theme=dark]` tokens aligned with reference `.dark` class (teal-tinted slate surfaces).
+7. **Reference parity** — `#/designsystem` covers all shadcn primitives from the HTML reference except Heroicons grid (we use Lucide) and full-page layout previews (stats + chat sections cover the patterns).
 
 ---
 

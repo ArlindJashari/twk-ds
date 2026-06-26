@@ -21,6 +21,20 @@ import {
   Toast, ToastProvider, TokenGrid, Toolbar, Tooltip, TypingIndicator, useToast,
 } from '../components/ui/index.js'
 
+const GREEN_RAMP = [
+  { step: 50, className: 'bg-green-50' },
+  { step: 100, className: 'bg-green-100' },
+  { step: 200, className: 'bg-green-200' },
+  { step: 300, className: 'bg-green-300' },
+  { step: 400, className: 'bg-green-400' },
+  { step: 500, className: 'bg-green-500' },
+  { step: 600, className: 'bg-green-600' },
+  { step: 700, className: 'bg-green-700' },
+  { step: 800, className: 'bg-green-800' },
+  { step: 900, className: 'bg-green-900' },
+  { step: 950, className: 'bg-green-950' },
+]
+
 const NAV_IDS = [
   'quick-links', 'colors', 'typography', 'spacing', 'buttons', 'icon-buttons', 'forms', 'selection',
   'badges', 'avatars', 'cards', 'tables', 'list-rows', 'priority', 'tabs', 'search',
@@ -172,6 +186,31 @@ function DesignSystemContent({
             </ShowcaseSection>
 
             <ShowcaseSection id="colors" title={s.colors.title} description={s.colors.description}>
+              <ShowcaseRow label={s.colors.brand}>
+                <TokenGrid cols={4}>
+                  <ColorSwatch name="brand-green" className="bg-brand-green" />
+                  <ColorSwatch name="brand-teal" className="bg-brand-teal" />
+                  <ColorSwatch name="brand-mist" className="bg-brand-mist" />
+                  <ColorSwatch name="brand-green-mid" className="bg-brand-green-mid" />
+                </TokenGrid>
+              </ShowcaseRow>
+              <ShowcaseRow label={s.colors.greenRamp}>
+                <div className="grid w-full grid-cols-3 gap-12 sm:grid-cols-6 lg:grid-cols-11">
+                  {GREEN_RAMP.map(({ step, className }) => (
+                    <ColorSwatch key={step} name={`green-${step}`} className={className} />
+                  ))}
+                </div>
+              </ShowcaseRow>
+              <ShowcaseRow label={s.colors.semantic}>
+                <TokenGrid cols={6}>
+                  <ColorSwatch name="primary" className="bg-primary" />
+                  <ColorSwatch name="destructive" className="bg-destructive" />
+                  <ColorSwatch name="success" className="bg-success" />
+                  <ColorSwatch name="warning" className="bg-warning" />
+                  <ColorSwatch name="info" className="bg-info" />
+                  <ColorSwatch name="foreground" className="bg-foreground" />
+                </TokenGrid>
+              </ShowcaseRow>
               <ShowcaseRow label={s.colors.surfaces}>
                 <TokenGrid cols={6}>
                   <ColorSwatch name="shell" className="bg-shell" />
@@ -196,8 +235,8 @@ function DesignSystemContent({
                   <ColorSwatch name="success" className="bg-success" />
                   <ColorSwatch name="warning" className="bg-warning" />
                   <ColorSwatch name="danger" className="bg-danger" />
+                  <ColorSwatch name="info" className="bg-info" />
                   <ColorSwatch name="team" className="bg-team" />
-                  <ColorSwatch name="workspace" className="bg-workspace" />
                 </TokenGrid>
               </ShowcaseRow>
               <ShowcaseRow label={s.colors.priority}>
