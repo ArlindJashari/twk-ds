@@ -12,6 +12,8 @@ const panelVariants = {
     'w-[226px] rounded-panel border-[0.5px] border-line bg-surface p-0 pb-[6px] pt-[6px] shadow-[0_6px_18px_rgba(0,0,0,0.02),0_3px_9px_rgba(0,0,0,0.04)]',
   filter:
     'w-[260px] rounded-lg border-[0.5px] border-line bg-content p-0 pb-[6px] pt-0 shadow-pop',
+  display:
+    'w-[300px] rounded-lg border-[0.5px] border-line bg-content p-0 shadow-pop',
 }
 
 function getMenuStyle(trigger, align) {

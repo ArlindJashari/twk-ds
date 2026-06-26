@@ -51,7 +51,16 @@ export function IssueOverflowMenu({ label, copy }) {
   )
 }
 
-export function FilterMenu({ label, copy }) {
+function LayoutTemplateIcon(props) {
+  return (
+    <svg width={props.size ?? 14} height={props.size ?? 14} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden {...props}>
+      <rect x="2.5" y="2.5" width="11" height="11" rx="1.5" />
+      <path d="M5.5 2.5v11M2.5 6.5h11" />
+    </svg>
+  )
+}
+
+export function FilterMenu({ label, copy, trigger }) {
   const groups = [
     [
       { icon: SparkleIcon, label: copy.aiFilter },
@@ -87,7 +96,7 @@ export function FilterMenu({ label, copy }) {
       label={label}
       variant="filter"
       align="start"
-      trigger={<Button variant="secondary">{copy.openFilter}</Button>}
+      trigger={trigger ?? <Button variant="secondary">{copy.openFilter}</Button>}
     >
       <MenuSearch placeholder={copy.addFilter} shortcut="F" />
       {groups.map((group, groupIndex) => (
@@ -107,15 +116,6 @@ export function FilterMenu({ label, copy }) {
         </div>
       ))}
     </DropdownMenu>
-  )
-}
-
-function LayoutTemplateIcon(props) {
-  return (
-    <svg width={props.size ?? 14} height={props.size ?? 14} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden {...props}>
-      <rect x="2.5" y="2.5" width="11" height="11" rx="1.5" />
-      <path d="M5.5 2.5v11M2.5 6.5h11" />
-    </svg>
   )
 }
 

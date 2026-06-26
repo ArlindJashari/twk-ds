@@ -15,11 +15,13 @@ import {
   CardMedia, CardTitle, ChatBubble, Checkbox, Collapsible, CommandPalette, ContextMenu, IssueCheckbox, ColorSwatch, Divider, DropdownMenu, EmptyState, Field,
   FieldError, FieldGroup, FieldHint, FilterMenu, GroupHeader, HoverCard, IconButton, Input, IssueOverflowMenu, IssueRow, issueRowLead,
   issueRowSlotCheckbox, Kbd, KbdCombo, Label, Link, ListRow, MenuItem, MenuLabel, MenuSearch, MenuSeparator, Modal, ModalFooter, ModuleCard, NavItem, Pagination, Panel,
-  PanelBody, PanelHeader, Popover, PriorityIcon, Progress, PromptBar, PropertyPill, Radio, SearchTrigger, Select, SelectionBar, Sheet, ShowcaseRow,
+  PanelBody, PanelHeader, Popover, PriorityIcon, Progress, PromptBar, PropertyChip, PropertyPill, Radio, SearchTrigger, Select, SelectionBar, Sheet, ShowcaseRow,
   ShowcaseSection, ShowcaseStack, Skeleton, SkeletonGroup, Slider, StatCard, StatusIcon, Switch, Tab, TabList,
   TabPanel, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tag, Text, Textarea, ToggleGroup,
-  Toast, ToastProvider, TokenGrid, Toolbar, Tooltip, TypingIndicator, useToast,
+  Toast, ToastProvider, TokenGrid, Toolbar, Tooltip, TypingIndicator, useToast, ViewPage,
+  DisplayToolbarMenu, FilterToolbarMenu,
 } from '../components/ui/index.js'
+import { StandardPageToolbar } from '../components/ViewToolbar.jsx'
 
 const GREEN_RAMP = [
   { step: 50, className: 'bg-green-50' },
@@ -38,7 +40,7 @@ const GREEN_RAMP = [
 const NAV_IDS = [
   'quick-links', 'colors', 'typography', 'spacing', 'buttons', 'icon-buttons', 'forms', 'selection',
   'badges', 'avatars', 'cards', 'tables', 'list-rows', 'priority', 'tabs', 'search',
-  'nav', 'menus', 'issues', 'modals', 'toasts', 'panels', 'alerts', 'empty', 'loading', 'progress',
+  'nav', 'menus', 'issues', 'views', 'modals', 'toasts', 'panels', 'alerts', 'empty', 'loading', 'progress',
   'links', 'slider', 'toggle', 'overlays', 'breadcrumb', 'accordion', 'command', 'stats', 'chat', 'dividers',
 ]
 
@@ -632,6 +634,32 @@ function DesignSystemContent({
                 <PropertyPill icon={PriorityIcon} label={s.issues.priority} />
                 <PropertyPill icon={ProjectsIcon} label={s.issues.project} />
                 <IssueOverflowMenu label={s.issues.overflowMenu} copy={s.issues} />
+              </ShowcaseRow>
+            </ShowcaseSection>
+
+            <ShowcaseSection id="views" title={s.viewPatterns.title} description={s.viewPatterns.description}>
+              <ShowcaseRow label={s.viewPatterns.viewPage}>
+                <div className="h-[320px] w-full max-w-[640px] overflow-hidden rounded-lg border border-line-subtle bg-content">
+                  <ViewPage
+                    variant="empty"
+                    toolbar={<StandardPageToolbar displayVariant="simple" />}
+                    emptyTitle={s.empty.emptyTitle}
+                    emptyDescription={s.empty.emptyDescription}
+                    emptyActionLabel={s.empty.actionLabel}
+                    onEmptyAction={() => openCreate('study', getCreateComposerCopy('study', locale))}
+                  />
+                </div>
+              </ShowcaseRow>
+              <ShowcaseRow label={s.viewPatterns.displaySimple}>
+                <DisplayToolbarMenu variant="simple" label={s.viewPatterns.displayLabel} copy={s.viewPatterns} />
+                <DisplayToolbarMenu variant="issues" label={s.viewPatterns.displayIssues} copy={s.viewPatterns} />
+                <DisplayToolbarMenu variant="projects" label={s.viewPatterns.displayProjects} copy={s.viewPatterns} />
+                <FilterToolbarMenu label={s.viewPatterns.filterLabel} issueCopy={s.issues} />
+              </ShowcaseRow>
+              <ShowcaseRow label={s.viewPatterns.displayProperties}>
+                <PropertyChip active>Status</PropertyChip>
+                <PropertyChip>Owner</PropertyChip>
+                <PropertyChip active>Sessions</PropertyChip>
               </ShowcaseRow>
             </ShowcaseSection>
 

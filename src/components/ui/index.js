@@ -9,6 +9,9 @@ export { default as Button } from './Button.jsx'
 export { AiResponseCard, ChatBubble, PromptBar, TypingIndicator } from './ChatPatterns.jsx'
 export { FilterMenu, CreateComposer, IssueComposer, IssueOverflowMenu, PropertyPill } from './IssuePatterns.jsx'
 export {
+  DisplayOptionsMenu, DisplayToolbarMenu, FilterToolbarMenu, PropertyChip, ViewPage,
+} from './ViewPatterns.jsx'
+export {
   Card, CardBody, CardDescription, CardFooter, CardMedia, CardTitle,
 } from './Card.jsx'
 export { default as Checkbox, IssueCheckbox } from './Checkbox.jsx'

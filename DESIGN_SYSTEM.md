@@ -240,6 +240,33 @@ Use existing `Menu` from `src/components/Menu.jsx`. Variants: `default`, `worksp
 
 `EmptyState` with title, description, optional CTA. Center in bordered `bg-content` panel.
 
+### View pages
+
+`ViewPage` — toolbar + scrollable body shell (`variant`: `empty` | `content` | `flush`).
+
+| Piece | Component |
+|-------|-----------|
+| Toolbar filter | `FilterToolbarMenu` → 260px filter menu + search |
+| Toolbar display | `DisplayToolbarMenu` / `DisplayOptionsMenu` → 300px panel |
+| Display variants | `issues`, `projects`, `simple` (studies) |
+| Property toggles | `PropertyChip` — 24px pills, active = `bg-ink` |
+| View modes | Segmented control — List / Board / Timeline |
+| Setting rows | Label + 28px `Select`, 12px gap between rows |
+| Panel padding | `p-12` inside display menu; chip gap `gap-4` |
+
+Use `StandardPageToolbar` from `ViewToolbar.jsx` — wires icon buttons to live menus.
+
+```jsx
+<ViewPage
+  variant="empty"
+  toolbar={<StandardPageToolbar displayVariant="simple" />}
+  emptyTitle="No studies yet"
+  emptyDescription="…"
+  emptyActionLabel="Create study"
+  onEmptyAction={openCreate}
+/>
+```
+
 ### Loading
 
 `Skeleton` + `SkeletonGroup`. Uses `.skeleton-shimmer` from theme.

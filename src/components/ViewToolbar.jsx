@@ -1,8 +1,23 @@
 import {
-  TawakkalnaToolbarFilterIcon, TawakkalnaToolbarDisplayIcon, TawakkalnaToolbarSidebarIcon,
+  TawakkalnaToolbarSidebarIcon,
   TawakkalnaCustomViewIcon, TawakkalnaAddViewIcon, PlusIcon,
 } from './icons.jsx'
 import { IconButton, Tab, Toolbar } from './ui/index.js'
+import { DisplayToolbarMenu, FilterToolbarMenu } from './ui/ViewPatterns.jsx'
+import { getDesignSystemCopy } from '../lib/designSystemI18n.js'
+
+const viewCopy = () => getDesignSystemCopy('en').sections.viewPatterns
+const issueCopy = () => getDesignSystemCopy('en').sections.issues
+
+function ToolbarFilters({ displayVariant = 'simple' }) {
+  const v = viewCopy()
+  return (
+    <>
+      <FilterToolbarMenu label={v.filterLabel} issueCopy={issueCopy()} />
+      <DisplayToolbarMenu variant={displayVariant} label={v.displayLabel} copy={v} />
+    </>
+  )
+}
 
 export function ReviewsToolbar() {
   return (
@@ -17,8 +32,7 @@ export function ReviewsToolbar() {
       )}
       right={(
         <>
-          <IconButton variant="filled" label="Filter"><TawakkalnaToolbarFilterIcon /></IconButton>
-          <IconButton variant="filled" label="Display options"><TawakkalnaToolbarDisplayIcon /></IconButton>
+          <ToolbarFilters displayVariant="issues" />
           <IconButton variant="filled" label="Layout"><TawakkalnaToolbarSidebarIcon /></IconButton>
         </>
       )}
@@ -40,8 +54,7 @@ export function IssuesToolbar() {
       )}
       right={(
         <>
-          <IconButton variant="filled" label="Filter"><TawakkalnaToolbarFilterIcon /></IconButton>
-          <IconButton variant="filled" label="Display options"><TawakkalnaToolbarDisplayIcon /></IconButton>
+          <ToolbarFilters displayVariant="issues" />
           <IconButton variant="filled" label="Open details"><TawakkalnaToolbarSidebarIcon /></IconButton>
         </>
       )}
@@ -70,22 +83,23 @@ export function SearchToolbar({ activeTab = 'all' }) {
       )}
       right={(
         <>
-          <IconButton variant="filled" label="Add filter"><TawakkalnaToolbarFilterIcon /></IconButton>
-          <IconButton variant="filled" label="Display options"><TawakkalnaToolbarDisplayIcon /></IconButton>
+          <FilterToolbarMenu label={viewCopy().filterLabel} issueCopy={issueCopy()} />
+          <DisplayToolbarMenu variant="issues" label={viewCopy().displayLabel} copy={viewCopy()} />
         </>
       )}
     />
   )
 }
 
-export function StandardPageToolbar({ left = null }) {
+export function StandardPageToolbar({ left = null, displayVariant = 'simple' }) {
+  const v = viewCopy()
   return (
     <Toolbar bordered={false}
       left={left}
       right={(
         <>
-          <IconButton variant="filled" label="Add filter"><TawakkalnaToolbarFilterIcon /></IconButton>
-          <IconButton variant="filled" label="Display options"><TawakkalnaToolbarDisplayIcon /></IconButton>
+          <FilterToolbarMenu label={v.filterLabel} issueCopy={issueCopy()} />
+          <DisplayToolbarMenu variant={displayVariant} label={v.displayLabel} copy={v} />
           <IconButton variant="filled" label="Close sidebar"><TawakkalnaToolbarSidebarIcon /></IconButton>
         </>
       )}
@@ -110,8 +124,7 @@ export function ProjectsToolbar() {
       )}
       right={(
         <>
-          <IconButton variant="filled" label="Add filter"><TawakkalnaToolbarFilterIcon /></IconButton>
-          <IconButton variant="filled" label="Display options"><TawakkalnaToolbarDisplayIcon /></IconButton>
+          <ToolbarFilters displayVariant="projects" />
           <IconButton variant="filled" label="Close sidebar"><TawakkalnaToolbarSidebarIcon /></IconButton>
         </>
       )}
