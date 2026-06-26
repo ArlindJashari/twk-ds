@@ -8,7 +8,7 @@ const variants = {
   ghost: 'bg-transparent text-body hover:bg-hover hover:text-ink',
   ink: 'bg-ink text-white hover:bg-body',
   danger: 'bg-danger text-white hover:bg-[#d93f44] active:bg-[#c9383d]',
-  soft: 'bg-accent-soft text-accent-press hover:bg-[#dfe0f8]',
+  soft: 'bg-accent-soft text-accent-press hover:bg-[#d4f4e3]',
   pill: 'border-[0.5px] border-transparent bg-content text-faint shadow-stroke-faint hover:bg-hover hover:text-body',
 }
 

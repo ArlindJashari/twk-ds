@@ -1,7 +1,7 @@
 const C = {
   workspace: '#00746e',
-  team: '#4cb782',
-  accent: '#5e6ad2',
+  team: '#1aaa5b',
+  accent: '#1aaa5b',
   gold: '#c9920a',
   coral: '#d4623c',
 }
