@@ -24,8 +24,10 @@ export const iconBtnAccent = 'bg-accent text-onaccent hover:bg-accent-hover'
 export const toolbar = 'flex h-[44px] shrink-0 items-center justify-between px-8'
 export const toolbarBordered = 'border-b border-line'
 
+export const issueRowInsetX = 'pl-[16px] pr-[16px]'
+
 export const listRow =
-  'group relative mx-8 flex h-[44px] items-center rounded-lg pl-[16px] pr-[2px] text-ink transition-colors before:pointer-events-none before:absolute before:inset-0 before:z-0 before:rounded-lg before:opacity-0 before:transition-opacity before:content-[""] hover:before:bg-hover hover:before:opacity-100 data-[selected=true]:before:bg-row-selected data-[selected=true]:before:opacity-100 [&>*]:relative [&>*]:z-[1]'
+  'group relative mx-8 flex h-[44px] items-center rounded-lg text-ink transition-colors before:pointer-events-none before:absolute before:inset-0 before:z-0 before:rounded-lg before:opacity-0 before:transition-opacity before:content-[""] hover:before:bg-hover hover:before:opacity-100 data-[selected=true]:before:bg-row-selected data-[selected=true]:before:opacity-100 [&>*]:relative [&>*]:z-[1]'
 
 export const issueRowLead = 'flex min-w-0 flex-1 items-center gap-8'
 export const issueRowSlotCheckbox = 'flex w-[18px] shrink-0 items-center justify-center'

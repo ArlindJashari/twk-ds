@@ -4,6 +4,7 @@ import {
   groupHeader,
   issueRowDate,
   issueRowId,
+  issueRowInsetX,
   issueRowLead,
   issueRowMeta,
   issueRowSlotCheckbox,
@@ -19,7 +20,7 @@ export function ListRow({ href, className, selected, children, ...props }) {
     <Tag
       href={href}
       data-selected={selected || undefined}
-      className={cn(listRow, focusRing, href && 'outline-none', className)}
+      className={cn(listRow, issueRowInsetX, focusRing, href && 'outline-none', className)}
       {...props}
     >
       {children}
@@ -32,7 +33,7 @@ export function IssueRow({
 }) {
   const isSelected = selected ?? checked
   return (
-    <ListRow href={href} selected={isSelected} className={cn('pr-8', className)}>
+    <ListRow href={href} selected={isSelected} className={className}>
       <div className={issueRowLead}>
         <span className={issueRowSlotCheckbox}>
           <IssueCheckbox

@@ -392,7 +392,7 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
               </Table>
             </ShowcaseSection>
 
-            <ShowcaseSection id="list-rows" title="List & issue rows" description="44px rows — exact Linear issues list pattern.">
+            <ShowcaseSection id="list-rows" title="List & issue rows" description="44px rows — 16px inner padding left/right, mx-8 highlight inset.">
               <div className="max-w-[640px] overflow-hidden rounded-lg border border-line-subtle bg-content pb-8">
                 <GroupHeader
                   label="Todo"

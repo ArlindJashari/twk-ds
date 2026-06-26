@@ -183,6 +183,22 @@ For lists of studies, features, users, stories:
 
 Row height ~44px feel via `py-10`. Hover: `interactive` prop.
 
+### Issue rows (`IssueRow`)
+
+Linear issues list row — `src/components/ui/ListRow.jsx` + `primitives.js`.
+
+| Token | Value |
+|-------|-------|
+| Height | `44px` |
+| Outer inset (card lists) | `mx-8` — highlight does not touch container edges |
+| Inner padding | `pl-[16px] pr-[16px]` — symmetric; date gap matches checkbox side |
+| Column gap | `8px` between checkbox, priority, id, status, title |
+| Checkbox slot | `18px` |
+| Icon slots | `16px` |
+| Date | `12px`, `font-[450]`, `whitespace-nowrap` |
+
+Hover/selected backgrounds use a `::before` layer inside the row bounds, not full card width.
+
 ### Cards
 
 `Card` + `CardMedia` + `CardBody` + `CardTitle` + `CardDescription` + `CardFooter`. Home action cards use `rounded-[14px]` — prefer `Card` for new work.
