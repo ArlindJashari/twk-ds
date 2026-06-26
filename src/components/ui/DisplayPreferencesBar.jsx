@@ -5,6 +5,7 @@ import { focusRing } from './primitives.js'
 function IconSegmentGroup({ label, value, options, onChange }) {
   return (
     <div className="flex items-center gap-6" role="group" aria-label={label}>
+      <span className="text-[11px] font-medium uppercase tracking-wide text-faint">{label}</span>
       <div className="flex items-center gap-2 rounded-full bg-well p-2">
         {options.map((option) => {
           const Icon = option.icon
@@ -18,7 +19,7 @@ function IconSegmentGroup({ label, value, options, onChange }) {
               title={option.label}
               onClick={() => onChange(option.value)}
               className={cn(
-                'grid size-[28px] place-items-center rounded-full transition-colors',
+                'inline-flex h-[28px] items-center gap-6 rounded-full px-10 text-[12px] font-medium transition-colors',
                 focusRing,
                 active
                   ? 'bg-tab-active text-ink shadow-stroke-faint'
@@ -26,6 +27,7 @@ function IconSegmentGroup({ label, value, options, onChange }) {
               )}
             >
               <Icon size={14} strokeWidth={1.5} aria-hidden />
+              <span>{option.shortLabel}</span>
             </button>
           )
         })}
@@ -34,25 +36,41 @@ function IconSegmentGroup({ label, value, options, onChange }) {
   )
 }
 
-export default function DisplayPreferencesBar({ theme, direction, onThemeChange, onDirectionChange, className }) {
+export default function DisplayPreferencesBar({
+  theme,
+  direction,
+  onThemeChange,
+  onDirectionChange,
+  labels,
+  className,
+}) {
+  const l = labels ?? {
+    theme: 'Theme',
+    direction: 'Direction',
+    light: 'Light',
+    dark: 'Dark',
+    ltr: 'LTR',
+    rtlArabic: 'RTL + Arabic',
+  }
+
   return (
     <div className={cn('ms-auto flex flex-wrap items-center gap-12', className)}>
       <IconSegmentGroup
-        label="Theme"
+        label={l.theme}
         value={theme}
         onChange={onThemeChange}
         options={[
-          { value: 'light', label: 'Light theme', icon: Sun },
-          { value: 'dark', label: 'Dark theme', icon: Moon },
+          { value: 'light', label: l.light, shortLabel: l.light, icon: Sun },
+          { value: 'dark', label: l.dark, shortLabel: l.dark, icon: Moon },
         ]}
       />
       <IconSegmentGroup
-        label="Direction"
+        label={l.direction}
         value={direction}
         onChange={onDirectionChange}
         options={[
-          { value: 'ltr', label: 'LTR', icon: AlignLeft },
-          { value: 'rtl', label: 'RTL + Arabic', icon: Languages },
+          { value: 'ltr', label: l.ltr, shortLabel: l.ltr, icon: AlignLeft },
+          { value: 'rtl', label: l.rtlArabic, shortLabel: l.rtlArabic, icon: Languages },
         ]}
       />
     </div>

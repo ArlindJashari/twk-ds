@@ -93,6 +93,29 @@ function NavGroupRow({ group, currentPath, onNavigate }) {
   )
 }
 
+function DevNavRow({ item, currentPath, onNavigate }) {
+  const active = isActive(currentPath, item.path)
+  const Icon = item.icon
+  return (
+    <a
+      href={`#${item.path}`}
+      aria-current={active ? 'page' : undefined}
+      onClick={onNavigate}
+      className={[
+        rowBase,
+        'mt-16 ps-10 pe-[9px] font-medium',
+        'border-[0.5px] border-line bg-content shadow-panel',
+        active
+          ? 'text-accent ring-2 ring-accent/15'
+          : 'text-ink hover:bg-hover hover:shadow-pop',
+      ].join(' ')}
+    >
+      <Icon size={14} strokeWidth={1.5} className="text-accent" />
+      <span className="flex-1 truncate">{item.label}</span>
+    </a>
+  )
+}
+
 export default function Sidebar({ currentPath, onNavigate, onSearch, hideHeader = false }) {
   const openHelp = (event) => {
     onNavigate?.(event)
@@ -136,11 +159,12 @@ export default function Sidebar({ currentPath, onNavigate, onSearch, hideHeader 
             <NavGroupRow group={navGroups[0]} currentPath={currentPath} onNavigate={onNavigate} />
             {midNav.map((item) => <NavRow key={item.path} item={item} currentPath={currentPath} onNavigate={onNavigate} />)}
             <NavGroupRow group={navGroups[1]} currentPath={currentPath} onNavigate={onNavigate} />
+            <DevNavRow item={devNav} currentPath={currentPath} onNavigate={onNavigate} />
           </div>
         </nav>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-[44px] items-center justify-between gap-8 px-[10px] py-[10px]">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[44px] px-[10px] py-[10px]">
         <button
           type="button"
           aria-label="Open Help menu"
@@ -151,14 +175,6 @@ export default function Sidebar({ currentPath, onNavigate, onSearch, hideHeader 
             <SidebarHelpIcon />
           </span>
         </button>
-        <a
-          href={`#${devNav.path}`}
-          aria-current={isActive(currentPath, devNav.path) ? 'page' : undefined}
-          onClick={onNavigate}
-          className="pointer-events-auto inline-flex h-[24px] items-center rounded-lg px-8 text-[12px] font-medium text-nav outline-none transition-colors hover:bg-shell-hover hover:text-nav-active focus-visible:ring-2 focus-visible:ring-accent"
-        >
-          {devNav.label}
-        </a>
       </div>
     </div>
   )

@@ -26,7 +26,17 @@ function ActionsIcon() {
   )
 }
 
-export default function SelectionBar({ count = 0, onClear, onMoveToBacklog, onActions, className }) {
+export default function SelectionBar({
+  count = 0,
+  onClear,
+  onMoveToBacklog,
+  onActions,
+  selectedLabel = 'selected',
+  moveToBacklogLabel = 'Move to Backlog',
+  actionsLabel = 'Actions',
+  clearLabel = 'Clear selected',
+  className,
+}) {
   if (!count) return null
 
   return (
@@ -39,21 +49,21 @@ export default function SelectionBar({ count = 0, onClear, onMoveToBacklog, onAc
         <span className="shrink-0 ps-12 pe-2 text-[12px] text-ink">
           {count}
           {' '}
-          selected
+          {selectedLabel}
         </span>
         <div className="flex items-center gap-8">
           <button type="button" className={cn(actionBtn, focusRing)} onClick={onMoveToBacklog}>
             <BacklogIcon />
-            Move to Backlog
+            {moveToBacklogLabel}
           </button>
           <button type="button" className={cn(actionBtn, focusRing)} onClick={onActions}>
             <ActionsIcon />
-            Actions
+            {actionsLabel}
           </button>
         </div>
         <button
           type="button"
-          aria-label="Clear selected"
+          aria-label={clearLabel}
           onClick={onClear}
           className={cn(
             'grid size-[28px] shrink-0 place-items-center rounded-full text-ink transition-colors hover:bg-hover',

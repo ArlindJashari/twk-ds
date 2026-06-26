@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import DesignSystemLayout from '../components/DesignSystemLayout.jsx'
-import { DisplayPreferencesProvider } from '../lib/displayPreferences.jsx'
+import { DisplayPreferencesProvider, useLocale } from '../lib/displayPreferences.jsx'
+import { getDesignSystemCopy } from '../lib/designSystemI18n.js'
 import {
   CaretDown, HomeIcon, LinearToolbarDisplayIcon, LinearToolbarFilterIcon, PlusIcon, SearchIcon, SparkleIcon, StudiesIcon,
 } from '../components/icons.jsx'
@@ -15,33 +16,11 @@ import {
   Toast, ToastProvider, TokenGrid, Toolbar, useToast,
 } from '../components/ui/index.js'
 
-const NAV = [
-  { id: 'colors', label: 'Colors' },
-  { id: 'typography', label: 'Typography' },
-  { id: 'spacing', label: 'Spacing' },
-  { id: 'buttons', label: 'Buttons' },
-  { id: 'icon-buttons', label: 'Icon buttons' },
-  { id: 'forms', label: 'Forms' },
-  { id: 'selection', label: 'Selection' },
-  { id: 'badges', label: 'Badges & tags' },
-  { id: 'avatars', label: 'Avatars' },
-  { id: 'cards', label: 'Cards' },
-  { id: 'tables', label: 'Tables' },
-  { id: 'list-rows', label: 'List & issues' },
-  { id: 'priority', label: 'Priority & status' },
-  { id: 'tabs', label: 'Tabs & toolbars' },
-  { id: 'search', label: 'Search' },
-  { id: 'nav', label: 'Navigation' },
-  { id: 'menus', label: 'Menus' },
-  { id: 'modals', label: 'Modals' },
-  { id: 'toasts', label: 'Toasts' },
-  { id: 'panels', label: 'Panels' },
-  { id: 'alerts', label: 'Alerts' },
-  { id: 'empty', label: 'Empty states' },
-  { id: 'loading', label: 'Loading' },
-  { id: 'progress', label: 'Progress' },
-  { id: 'links', label: 'Links & kbd' },
-  { id: 'dividers', label: 'Dividers' },
+const NAV_IDS = [
+  'colors', 'typography', 'spacing', 'buttons', 'icon-buttons', 'forms', 'selection',
+  'badges', 'avatars', 'cards', 'tables', 'list-rows', 'priority', 'tabs', 'search',
+  'nav', 'menus', 'modals', 'toasts', 'panels', 'alerts', 'empty', 'loading', 'progress',
+  'links', 'dividers',
 ]
 
 function StudyPlaceholder() {
@@ -73,20 +52,25 @@ export default function DesignSystem() {
   )
 }
 
-function ToastDemo() {
+function ToastDemo({ copy }) {
   const { toast } = useToast()
+  const t = copy.sections.toasts
   return (
     <ShowcaseRow>
-      <Button variant="secondary" onClick={() => toast({ variant: 'info', title: 'Saved', message: 'Study updated.' })}>Info</Button>
-      <Button variant="secondary" onClick={() => toast({ variant: 'success', title: 'Done', message: 'Session complete.' })}>Success</Button>
-      <Button variant="secondary" onClick={() => toast({ variant: 'warning', message: 'Low sample size.' })}>Warning</Button>
-      <Button variant="secondary" onClick={() => toast({ variant: 'danger', title: 'Error', message: 'Sync failed.' })}>Danger</Button>
+      <Button variant="secondary" onClick={() => toast({ variant: 'info', title: t.savedTitle, message: t.savedMessage })}>{t.info}</Button>
+      <Button variant="secondary" onClick={() => toast({ variant: 'success', title: t.doneTitle, message: t.doneMessage })}>{t.success}</Button>
+      <Button variant="secondary" onClick={() => toast({ variant: 'warning', message: t.warningMessage })}>{t.warning}</Button>
+      <Button variant="secondary" onClick={() => toast({ variant: 'danger', title: t.errorTitle, message: t.errorMessage })}>{t.danger}</Button>
     </ShowcaseRow>
   )
 }
 
 function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }) {
   const scrollRef = useRef(null)
+  const locale = useLocale()
+  const c = getDesignSystemCopy(locale)
+  const nav = NAV_IDS.map((id) => ({ id, label: c.nav[id] }))
+  const s = c.sections
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -108,10 +92,10 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
       <div className="flex min-h-0 flex-1 overflow-hidden">
         <aside className="hidden w-[200px] shrink-0 overflow-y-auto border-e border-line bg-well px-12 py-16 lg:block">
           <p className="mb-12 px-8 text-[11px] font-medium uppercase tracking-wide text-faint">
-            Components
+            {c.layout.componentsNav}
           </p>
           <nav className="flex flex-col gap-2">
-            {NAV.map((item) => (
+            {nav.map((item) => (
               <button
                 key={item.id}
                 type="button"
@@ -126,17 +110,18 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
 
         <div ref={scrollRef} className="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-y-contain px-24 py-28">
           <header className="mb-32">
-            <Text variant="title" as="h1" className="text-[20px]">Design system</Text>
+            <Text variant="title" as="h1" className="text-[20px]">{c.layout.title}</Text>
             <Text variant="sub" className="mt-6 max-w-[560px]">
-              Linear-inspired tokens and components for TawakkalnaOS. Use primitives from{' '}
+              {c.layout.intro}{' '}
               <code className="rounded-xs bg-well px-4 py-2 font-berkeley text-[12px]">src/components/ui</code>
-              {' '}and follow <code className="rounded-xs bg-well px-4 py-2 font-berkeley text-[12px]">DESIGN_SYSTEM.md</code>.
+              {' '}{c.layout.introSuffix}{' '}
+              <code className="rounded-xs bg-well px-4 py-2 font-berkeley text-[12px]">DESIGN_SYSTEM.md</code>.
             </Text>
           </header>
 
           <div className="flex flex-col gap-32">
-            <ShowcaseSection id="colors" title="Colors" description="Semantic tokens from theme.css — never hardcode hex in components.">
-              <ShowcaseRow label="Surfaces">
+            <ShowcaseSection id="colors" title={s.colors.title} description={s.colors.description}>
+              <ShowcaseRow label={s.colors.surfaces}>
                 <TokenGrid cols={6}>
                   <ColorSwatch name="shell" className="bg-shell" />
                   <ColorSwatch name="sidebar" className="bg-sidebar" />
@@ -146,7 +131,7 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
                   <ColorSwatch name="hover" className="bg-hover" />
                 </TokenGrid>
               </ShowcaseRow>
-              <ShowcaseRow label="Text">
+              <ShowcaseRow label={s.colors.text}>
                 <TokenGrid cols={4}>
                   <ColorSwatch name="ink" className="bg-ink" />
                   <ColorSwatch name="body" className="bg-body" />
@@ -154,7 +139,7 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
                   <ColorSwatch name="faint" className="bg-faint" />
                 </TokenGrid>
               </ShowcaseRow>
-              <ShowcaseRow label="Accent & semantic">
+              <ShowcaseRow label={s.colors.accentSemantic}>
                 <TokenGrid cols={6}>
                   <ColorSwatch name="accent" className="bg-accent" />
                   <ColorSwatch name="success" className="bg-success" />
@@ -164,7 +149,7 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
                   <ColorSwatch name="workspace" className="bg-workspace" />
                 </TokenGrid>
               </ShowcaseRow>
-              <ShowcaseRow label="Priority">
+              <ShowcaseRow label={s.colors.priority}>
                 <TokenGrid cols={5}>
                   <ColorSwatch name="urgent" className="bg-priority-urgent" />
                   <ColorSwatch name="high" className="bg-priority-high" />
@@ -175,21 +160,21 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
               </ShowcaseRow>
             </ShowcaseSection>
 
-            <ShowcaseSection id="typography" title="Typography" description="Inter Variable. Weights: 400 normal, 450 book, 500 medium, 510 ui, 590 semibold.">
-              <ShowcaseStack label="Scale">
-                <Text variant="page">Page header — 13px medium body</Text>
-                <Text variant="title">Card title — 15px ui</Text>
-                <Text variant="section">Section — 13px ui</Text>
-                <Text variant="body">Body — 13px regular</Text>
-                <Text variant="sub">Secondary — 13px sub color</Text>
-                <Text variant="caption">Caption — 12px faint</Text>
-                <Text variant="label">Label — 11px uppercase</Text>
-                <Text variant="mono">SUR-42 · Berkeley Mono</Text>
+            <ShowcaseSection id="typography" title={s.typography.title} description={s.typography.description}>
+              <ShowcaseStack label={s.typography.scale}>
+                <Text variant="page">{s.typography.page}</Text>
+                <Text variant="title">{s.typography.cardTitle}</Text>
+                <Text variant="section">{s.typography.section}</Text>
+                <Text variant="body">{s.typography.body}</Text>
+                <Text variant="sub">{s.typography.secondary}</Text>
+                <Text variant="caption">{s.typography.caption}</Text>
+                <Text variant="label">{s.typography.label}</Text>
+                <Text variant="mono">{s.typography.mono}</Text>
               </ShowcaseStack>
             </ShowcaseSection>
 
-            <ShowcaseSection id="spacing" title="Spacing & radii" description="1px spacing unit. px-8 = 8px. Prefer 4/6/8/12/16/24/28 grid.">
-              <ShowcaseRow label="Border radius">
+            <ShowcaseSection id="spacing" title={s.spacing.title} description={s.spacing.description}>
+              <ShowcaseRow label={s.spacing.radius}>
                 <div className="flex flex-wrap gap-12">
                   {[
                     ['xs', 'rounded-xs'],
@@ -207,7 +192,7 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
                   ))}
                 </div>
               </ShowcaseRow>
-              <ShowcaseRow label="Shadows">
+              <ShowcaseRow label={s.spacing.shadows}>
                 <div className="flex flex-wrap gap-16">
                   <div className="h-[48px] w-[120px] rounded-lg bg-surface shadow-stroke" />
                   <div className="h-[48px] w-[120px] rounded-lg bg-surface shadow-panel" />
@@ -217,147 +202,156 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
               </ShowcaseRow>
             </ShowcaseSection>
 
-            <ShowcaseSection id="buttons" title="Buttons">
-              <ShowcaseRow label="Variants">
-                <Button variant="primary">Primary</Button>
-                <Button variant="secondary">Secondary</Button>
-                <Button variant="ghost">Ghost</Button>
-                <Button variant="ink">Ink</Button>
-                <Button variant="soft">Soft</Button>
-                <Button variant="pill">Pill</Button>
-                <Button variant="danger">Danger</Button>
+            <ShowcaseSection id="buttons" title={s.buttons.title}>
+              <ShowcaseRow label={s.buttons.variants}>
+                <Button variant="primary">{s.buttons.primary}</Button>
+                <Button variant="secondary">{s.buttons.secondary}</Button>
+                <Button variant="ghost">{s.buttons.ghost}</Button>
+                <Button variant="ink">{s.buttons.ink}</Button>
+                <Button variant="soft">{s.buttons.soft}</Button>
+                <Button variant="pill">{s.buttons.pill}</Button>
+                <Button variant="danger">{s.buttons.danger}</Button>
               </ShowcaseRow>
-              <ShowcaseRow label="Sizes">
+              <ShowcaseRow label={s.buttons.sizes}>
                 <Button size="xs">XS</Button>
                 <Button size="sm">SM</Button>
                 <Button size="md">MD</Button>
                 <Button size="lg">LG</Button>
               </ShowcaseRow>
-              <ShowcaseRow label="With icon">
-                <Button variant="ink"><PlusIcon size={12} strokeWidth={2} />Create</Button>
-                <Button variant="secondary"><SparkleIcon size={12} />Generate</Button>
+              <ShowcaseRow label={s.buttons.withIcon}>
+                <Button variant="ink"><PlusIcon size={12} strokeWidth={2} />{s.buttons.create}</Button>
+                <Button variant="secondary"><SparkleIcon size={12} />{s.buttons.generate}</Button>
               </ShowcaseRow>
-              <ShowcaseRow label="States">
-                <Button disabled>Disabled</Button>
-              </ShowcaseRow>
-            </ShowcaseSection>
-
-            <ShowcaseSection id="icon-buttons" title="Icon buttons" description="28px circle — matches toolbar controls.">
-              <ShowcaseRow label="Variants">
-                <IconButton variant="filled" label="Filter"><LinearToolbarFilterIcon /></IconButton>
-                <IconButton variant="filled" label="Display"><LinearToolbarDisplayIcon /></IconButton>
-                <IconButton variant="accent" label="Create"><PlusIcon size={14} strokeWidth={1.5} /></IconButton>
-              </ShowcaseRow>
-              <ShowcaseRow label="Sizes">
-                <IconButton size="sm" label="Small"><SearchIcon size={12} /></IconButton>
-                <IconButton size="md" label="Medium"><SearchIcon size={14} /></IconButton>
-                <IconButton size="lg" label="Large"><SearchIcon size={16} /></IconButton>
+              <ShowcaseRow label={s.buttons.states}>
+                <Button disabled>{s.buttons.disabled}</Button>
               </ShowcaseRow>
             </ShowcaseSection>
 
-            <ShowcaseSection id="forms" title="Forms">
+            <ShowcaseSection id="icon-buttons" title={s.iconButtons.title} description={s.iconButtons.description}>
+              <ShowcaseRow label={s.iconButtons.variants}>
+                <IconButton variant="filled" label={s.iconButtons.filter}><LinearToolbarFilterIcon /></IconButton>
+                <IconButton variant="filled" label={s.iconButtons.display}><LinearToolbarDisplayIcon /></IconButton>
+                <IconButton variant="accent" label={s.buttons.create}><PlusIcon size={14} strokeWidth={1.5} /></IconButton>
+              </ShowcaseRow>
+              <ShowcaseRow label={s.iconButtons.sizes}>
+                <IconButton size="sm" label={s.iconButtons.small}><SearchIcon size={12} /></IconButton>
+                <IconButton size="md" label={s.iconButtons.medium}><SearchIcon size={14} /></IconButton>
+                <IconButton size="lg" label={s.iconButtons.large}><SearchIcon size={16} /></IconButton>
+              </ShowcaseRow>
+            </ShowcaseSection>
+
+            <ShowcaseSection id="forms" title={s.forms.title}>
               <div className="max-w-[400px]">
                 <FieldGroup>
                   <Field>
-                    <Label htmlFor="ds-name" required>Name</Label>
-                    <Input id="ds-name" placeholder="Study name" />
-                    <FieldHint>Visible to your team.</FieldHint>
+                    <Label htmlFor="ds-name" required>{s.forms.name}</Label>
+                    <Input id="ds-name" placeholder={s.forms.namePlaceholder} />
+                    <FieldHint>{s.forms.nameHint}</FieldHint>
                   </Field>
                   <Field>
-                    <Label htmlFor="ds-desc">Description</Label>
-                    <Textarea id="ds-desc" placeholder="What are you testing?" />
+                    <Label htmlFor="ds-desc">{s.forms.description}</Label>
+                    <Textarea id="ds-desc" placeholder={s.forms.descriptionPlaceholder} />
                   </Field>
                   <Field>
-                    <Label htmlFor="ds-type">Type</Label>
+                    <Label htmlFor="ds-type">{s.forms.type}</Label>
                     <Select id="ds-type" defaultValue="usability">
-                      <option value="usability">Usability study</option>
-                      <option value="story">User story</option>
-                      <option value="feature">Feature spec</option>
+                      <option value="usability">{s.forms.usabilityStudy}</option>
+                      <option value="story">{s.forms.userStory}</option>
+                      <option value="feature">{s.forms.featureSpec}</option>
                     </Select>
                   </Field>
                   <Field>
-                    <Label htmlFor="ds-err">With error</Label>
+                    <Label htmlFor="ds-err">{s.forms.withError}</Label>
                     <Input id="ds-err" aria-invalid defaultValue="bad@" />
-                    <FieldError>Enter a valid email.</FieldError>
+                    <FieldError>{s.forms.emailError}</FieldError>
                   </Field>
                 </FieldGroup>
               </div>
             </ShowcaseSection>
 
-            <ShowcaseSection id="selection" title="Selection controls">
-              <ShowcaseRow label="Issue checkbox">
+            <ShowcaseSection id="selection" title={s.selection.title}>
+              <ShowcaseRow label={s.selection.issueCheckbox}>
                 <div className="w-[280px] overflow-hidden rounded-lg border border-line-subtle bg-content py-4">
                   <ListRow>
                     <div className={issueRowLead}>
                       <span className={issueRowSlotCheckbox}>
                         <IssueCheckbox checked={false} aria-label="Unchecked" />
                       </span>
-                      <span className="text-[13px] text-sub">Hover row</span>
+                      <span className="text-[13px] text-sub">{s.selection.hoverRow}</span>
                     </div>
                   </ListRow>
                   <ListRow selected>
                     <div className={issueRowLead}>
                       <span className={issueRowSlotCheckbox}>
-                        <IssueCheckbox checked aria-label="Checked" />
+                        <IssueCheckbox checked aria-label={s.selection.checked} />
                       </span>
-                      <span className="text-[13px] font-medium text-ink">Selected</span>
+                      <span className="text-[13px] font-medium text-ink">{s.selection.selected}</span>
                     </div>
                   </ListRow>
                 </div>
               </ShowcaseRow>
               <div className="relative flex h-[80px] items-end justify-center rounded-lg border border-line-subtle bg-well pb-16">
-                <SelectionBar count={1} onClear={() => {}} onMoveToBacklog={() => {}} onActions={() => {}} className="static bottom-auto" />
+                <SelectionBar
+                  count={1}
+                  onClear={() => {}}
+                  onMoveToBacklog={() => {}}
+                  onActions={() => {}}
+                  selectedLabel={s.selection.selectedCount}
+                  moveToBacklogLabel={s.selection.moveToBacklog}
+                  actionsLabel={s.selection.actions}
+                  className="static bottom-auto"
+                />
               </div>
-              <ShowcaseRow label="Checkbox">
+              <ShowcaseRow label={s.selection.checkbox}>
                 <label className="flex items-center gap-8 text-[13px]">
-                  <Checkbox defaultChecked /> Checked
+                  <Checkbox defaultChecked /> {s.selection.checked}
                 </label>
                 <label className="flex items-center gap-8 text-[13px]">
-                  <Checkbox /> Unchecked
+                  <Checkbox /> {s.selection.unchecked}
                 </label>
                 <label className="flex items-center gap-8 text-[13px] text-faint">
-                  <Checkbox disabled /> Disabled
+                  <Checkbox disabled /> {s.buttons.disabled}
                 </label>
               </ShowcaseRow>
-              <ShowcaseRow label="Radio">
+              <ShowcaseRow label={s.selection.radio}>
                 <label className="flex items-center gap-8 text-[13px]">
-                  <Radio name="ds-radio" defaultChecked /> Option A
+                  <Radio name="ds-radio" defaultChecked /> {s.selection.optionA}
                 </label>
                 <label className="flex items-center gap-8 text-[13px]">
-                  <Radio name="ds-radio" /> Option B
+                  <Radio name="ds-radio" /> {s.selection.optionB}
                 </label>
               </ShowcaseRow>
-              <ShowcaseRow label="Switch">
-                <Switch checked={sw} onClick={() => setSw((v) => !v)} aria-label="Toggle" />
-                <Switch checked={false} aria-label="Off" />
+              <ShowcaseRow label={s.selection.switch}>
+                <Switch checked={sw} onClick={() => setSw((v) => !v)} aria-label={s.selection.switch} />
+                <Switch checked={false} aria-label={s.selection.unchecked} />
               </ShowcaseRow>
             </ShowcaseSection>
 
-            <ShowcaseSection id="badges" title="Badges & tags">
-              <ShowcaseRow label="Badges">
-                <Badge>Default</Badge>
-                <Badge variant="accent">Accent</Badge>
-                <Badge variant="success">Done</Badge>
-                <Badge variant="warning">In review</Badge>
-                <Badge variant="danger">Blocked</Badge>
+            <ShowcaseSection id="badges" title={s.badges.title}>
+              <ShowcaseRow label={s.badges.badges}>
+                <Badge>{s.badges.default}</Badge>
+                <Badge variant="accent">{s.badges.accent}</Badge>
+                <Badge variant="success">{s.badges.done}</Badge>
+                <Badge variant="warning">{s.badges.inReview}</Badge>
+                <Badge variant="danger">{s.badges.blocked}</Badge>
               </ShowcaseRow>
-              <ShowcaseRow label="Priority">
-                <Badge variant="urgent">Urgent</Badge>
-                <Badge variant="high">High</Badge>
-                <Badge variant="medium">Medium</Badge>
-                <Badge variant="low">Low</Badge>
-                <Badge variant="none">No priority</Badge>
+              <ShowcaseRow label={s.badges.priority}>
+                <Badge variant="urgent">{s.badges.urgent}</Badge>
+                <Badge variant="high">{s.badges.high}</Badge>
+                <Badge variant="medium">{s.badges.medium}</Badge>
+                <Badge variant="low">{s.badges.low}</Badge>
+                <Badge variant="none">{s.badges.noPriority}</Badge>
               </ShowcaseRow>
-              <ShowcaseRow label="Tags">
-                <Tag icon={StudiesIcon}>Studies</Tag>
-                <Tag variant="active">Active</Tag>
+              <ShowcaseRow label={s.badges.tags}>
+                <Tag icon={StudiesIcon}>{s.badges.studies}</Tag>
+                <Tag variant="active">{s.badges.active}</Tag>
                 <Tag variant="accent">AI</Tag>
-                <Tag variant="outline">Outline</Tag>
+                <Tag variant="outline">{s.badges.outline}</Tag>
               </ShowcaseRow>
             </ShowcaseSection>
 
-            <ShowcaseSection id="avatars" title="Avatars">
-              <ShowcaseRow label="Sizes">
+            <ShowcaseSection id="avatars" title={s.avatars.title}>
+              <ShowcaseRow label={s.avatars.sizes}>
                 <Avatar size="xs" initials="AJ" />
                 <Avatar size="sm" initials="AJ" />
                 <Avatar size="md" initials="AJ" />
@@ -365,45 +359,41 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
               </ShowcaseRow>
             </ShowcaseSection>
 
-            <ShowcaseSection id="cards" title="Cards">
+            <ShowcaseSection id="cards" title={s.cards.title}>
               <div className="grid gap-12 lg:grid-cols-2">
                 <Card variant="elevated">
                   <CardMedia className="h-[120px]"><StudyPlaceholder /></CardMedia>
                   <CardBody>
-                    <CardTitle>Usability study</CardTitle>
-                    <CardDescription>Run AI + human tests on prototypes.</CardDescription>
+                    <CardTitle>{s.cards.studyTitle}</CardTitle>
+                    <CardDescription>{s.cards.studyDescription}</CardDescription>
                     <CardFooter>
-                      <Button variant="ink" size="lg"><PlusIcon size={12} />Create</Button>
-                      <Button variant="secondary" size="lg">View all</Button>
+                      <Button variant="ink" size="lg"><PlusIcon size={12} />{s.buttons.create}</Button>
+                      <Button variant="secondary" size="lg">{s.cards.viewAll}</Button>
                     </CardFooter>
                   </CardBody>
                 </Card>
                 <Card variant="well">
                   <CardBody>
-                    <CardTitle>Flat card</CardTitle>
-                    <CardDescription>Well background variant for nested panels.</CardDescription>
+                    <CardTitle>{s.cards.flatTitle}</CardTitle>
+                    <CardDescription>{s.cards.flatDescription}</CardDescription>
                   </CardBody>
                 </Card>
               </div>
             </ShowcaseSection>
 
-            <ShowcaseSection id="tables" title="Tables" description="For directory, users, studies lists.">
+            <ShowcaseSection id="tables" title={s.tables.title} description={s.tables.description}>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>ID</TableHead>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Owner</TableHead>
-                    <TableHead className="text-end">Updated</TableHead>
+                    <TableHead>{s.tables.id}</TableHead>
+                    <TableHead>{s.tables.name}</TableHead>
+                    <TableHead>{s.tables.status}</TableHead>
+                    <TableHead>{s.tables.owner}</TableHead>
+                    <TableHead className="text-end">{s.tables.updated}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {[
-                    ['STY-12', 'Checkout flow v2', 'success', 'AJ', 'Mar 4'],
-                    ['STY-11', 'Onboarding prototype', 'warning', 'MK', 'Mar 2'],
-                    ['STY-10', 'Search redesign', 'accent', 'AD', 'Feb 28'],
-                  ].map(([id, name, status, owner, date]) => (
+                  {s.tables.rows.map(([id, name, status, owner, date]) => (
                     <TableRow key={id} interactive>
                       <TableCell className="font-berkeley text-faint">{id}</TableCell>
                       <TableCell className="font-medium text-ink">{name}</TableCell>
@@ -416,10 +406,10 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
               </Table>
             </ShowcaseSection>
 
-            <ShowcaseSection id="list-rows" title="List & issue rows" description="44px rows — 16px inner padding left/right, mx-8 highlight inset.">
+            <ShowcaseSection id="list-rows" title={s.listRows.title} description={s.listRows.description}>
               <div className="max-w-[640px] overflow-hidden rounded-lg border border-line-subtle bg-content pb-8">
                 <GroupHeader
-                  label="Todo"
+                  label={s.listRows.todo}
                   count={3}
                   leading={(
                     <>
@@ -430,187 +420,172 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
                   onAdd={() => {}}
                 />
                 <div className="flex flex-col">
-                  <IssueRow
-                    id="SUR-4"
-                    title="Import your data"
-                    date="Feb 3"
-                    href="#"
-                    priority={<PriorityIcon level="none" />}
-                    status={<StatusIcon status="todo" />}
-                    assignee={<Avatar size="xs" initials="AJ" />}
-                    checked
-                    selected
-                  />
-                  <IssueRow
-                    id="SUR-3"
-                    title="Connect your tools"
-                    date="Feb 3"
-                    href="#"
-                    priority={<PriorityIcon level="medium" />}
-                    status={<StatusIcon status="progress" />}
-                    assignee={<Avatar size="xs" initials="MK" />}
-                  />
-                  <IssueRow
-                    id="SUR-1"
-                    title="Get familiar with Linear"
-                    date="Feb 3"
-                    href="#"
-                    priority={<PriorityIcon level="high" />}
-                    status={<StatusIcon status="done" />}
-                    assignee={<Avatar size="xs" initials="AD" />}
-                  />
+                  {s.listRows.issues.map(([id, title], index) => (
+                    <IssueRow
+                      key={id}
+                      id={id}
+                      title={title}
+                      date={s.listRows.date}
+                      href="#"
+                      priority={<PriorityIcon level={['none', 'medium', 'high'][index]} />}
+                      status={<StatusIcon status={['todo', 'progress', 'done'][index]} />}
+                      assignee={<Avatar size="xs" initials={['AJ', 'MK', 'AD'][index]} />}
+                      checked={index === 0}
+                      selected={index === 0}
+                    />
+                  ))}
                 </div>
               </div>
             </ShowcaseSection>
 
-            <ShowcaseSection id="priority" title="Priority & status icons">
-              <ShowcaseRow label="Priority">
+            <ShowcaseSection id="priority" title={s.priority.title}>
+              <ShowcaseRow label={s.priority.priority}>
                 {['urgent', 'high', 'medium', 'low', 'none'].map((level) => (
                   <span key={level} className="flex items-center gap-6 text-[12px] text-sub">
                     <PriorityIcon level={level} />
-                    {level}
+                    {s.priority.levels[level]}
                   </span>
                 ))}
               </ShowcaseRow>
-              <ShowcaseRow label="Status">
+              <ShowcaseRow label={s.priority.status}>
                 {['todo', 'progress', 'done', 'cancelled'].map((status) => (
                   <span key={status} className="flex items-center gap-6 text-[12px] text-sub">
                     <StatusIcon status={status} />
-                    {status}
+                    {s.priority.statuses[status]}
                   </span>
                 ))}
               </ShowcaseRow>
-              <ShowcaseRow label="Status badges">
-                <Badge variant="todo" dot>Todo</Badge>
-                <Badge variant="progress" dot>In progress</Badge>
-                <Badge variant="done" dot>Done</Badge>
-                <Badge variant="cancelled" dot>Cancelled</Badge>
+              <ShowcaseRow label={s.priority.statusBadges}>
+                <Badge variant="todo" dot>{s.priority.todo}</Badge>
+                <Badge variant="progress" dot>{s.priority.inProgress}</Badge>
+                <Badge variant="done" dot>{s.priority.done}</Badge>
+                <Badge variant="cancelled" dot>{s.priority.cancelled}</Badge>
               </ShowcaseRow>
             </ShowcaseSection>
 
-            <ShowcaseSection id="tabs" title="Tabs & toolbars">
+            <ShowcaseSection id="tabs" title={s.tabs.title}>
               <TabList>
-                <Tab active={tab === 'all'} onClick={() => setTab('all')}>All issues</Tab>
-                <Tab active={tab === 'active'} onClick={() => setTab('active')}>Active</Tab>
-                <Tab active={tab === 'backlog'} onClick={() => setTab('backlog')}>Backlog</Tab>
-                <Tab muted>Archived</Tab>
+                <Tab active={tab === 'all'} onClick={() => setTab('all')}>{s.tabs.allIssues}</Tab>
+                <Tab active={tab === 'active'} onClick={() => setTab('active')}>{s.tabs.active}</Tab>
+                <Tab active={tab === 'backlog'} onClick={() => setTab('backlog')}>{s.tabs.backlog}</Tab>
+                <Tab muted>{s.tabs.archived}</Tab>
               </TabList>
               <TabPanel>
-                <p className="text-[13px] text-sub">Active tab: <strong className="text-ink">{tab}</strong></p>
+                <p className="text-[13px] text-sub">{s.tabs.activeTab} <strong className="text-ink">{tab}</strong></p>
               </TabPanel>
               <div className="mt-16 overflow-hidden rounded-lg border border-line-subtle">
                 <Toolbar
                   left={(
                     <>
-                      <Tab active>Assigned</Tab>
-                      <Tab>Created</Tab>
-                      <Tab>Activity</Tab>
+                      <Tab active>{s.tabs.assigned}</Tab>
+                      <Tab>{s.tabs.created}</Tab>
+                      <Tab>{s.tabs.activity}</Tab>
                     </>
                   )}
                   right={(
                     <>
-                      <IconButton variant="filled" label="Filter"><LinearToolbarFilterIcon /></IconButton>
-                      <IconButton variant="filled" label="Display"><LinearToolbarDisplayIcon /></IconButton>
+                      <IconButton variant="filled" label={s.iconButtons.filter}><LinearToolbarFilterIcon /></IconButton>
+                      <IconButton variant="filled" label={s.iconButtons.display}><LinearToolbarDisplayIcon /></IconButton>
                     </>
                   )}
                 />
-                <div className="bg-content p-16 text-[13px] text-faint">Toolbar content area</div>
+                <div className="bg-content p-16 text-[13px] text-faint">{s.tabs.toolbarContent}</div>
               </div>
             </ShowcaseSection>
 
-            <ShowcaseSection id="search" title="Search">
+            <ShowcaseSection id="search" title={s.search.title}>
               <ShowcaseStack>
-                <SearchTrigger placeholder="Search studies, sessions, themes…" onClick={() => { window.location.hash = '#/search' }} />
+                <SearchTrigger placeholder={s.search.placeholder} onClick={() => { window.location.hash = '#/search' }} />
               </ShowcaseStack>
             </ShowcaseSection>
 
-            <ShowcaseSection id="nav" title="Navigation items">
+            <ShowcaseSection id="nav" title={s.navSection.title}>
               <div className="w-[220px] rounded-lg border border-line-subtle bg-sidebar p-8">
-                <NavItem href="#/" active icon={HomeIcon}>Home</NavItem>
-                <NavItem href="#/usability/studies" icon={StudiesIcon}>Studies</NavItem>
-                <NavItem href="#/settings">Settings</NavItem>
+                <NavItem href="#/" active icon={HomeIcon}>{s.navSection.home}</NavItem>
+                <NavItem href="#/usability/studies" icon={StudiesIcon}>{s.navSection.studies}</NavItem>
+                <NavItem href="#/settings">{s.navSection.settings}</NavItem>
               </div>
             </ShowcaseSection>
 
-            <ShowcaseSection id="menus" title="Menus">
+            <ShowcaseSection id="menus" title={s.menus.title}>
               <ShowcaseRow>
                 <DropdownMenu
-                  label="Actions"
-                  trigger={<Button variant="secondary">Open menu</Button>}
+                  label={s.selection.actions}
+                  trigger={<Button variant="secondary">{s.menus.openMenu}</Button>}
                 >
-                  <MenuItem onClick={() => {}}>Edit study</MenuItem>
-                  <MenuItem onClick={() => {}} keys={['⌘', 'D']}>Duplicate</MenuItem>
+                  <MenuItem onClick={() => {}}>{s.menus.editStudy}</MenuItem>
+                  <MenuItem onClick={() => {}} keys={['⌘', 'D']}>{s.menus.duplicate}</MenuItem>
                   <MenuSeparator />
-                  <MenuItem onClick={() => {}}>Archive</MenuItem>
+                  <MenuItem onClick={() => {}}>{s.menus.archive}</MenuItem>
                 </DropdownMenu>
                 <DropdownMenu
                   variant="workspace"
                   label="Workspace"
-                  trigger={<Button variant="ghost">Workspace menu</Button>}
+                  trigger={<Button variant="ghost">{s.menus.workspaceMenu}</Button>}
                 >
-                  <MenuItem variant="workspace" href="#/">Home</MenuItem>
-                  <MenuItem variant="workspace" keys={['G', 'S']}>Settings</MenuItem>
+                  <MenuItem variant="workspace" href="#/">{s.navSection.home}</MenuItem>
+                  <MenuItem variant="workspace" keys={['G', 'S']}>{s.navSection.settings}</MenuItem>
                   <MenuSeparator variant="workspace" />
-                  <MenuLabel>Teams</MenuLabel>
+                  <MenuLabel>{s.menus.teams}</MenuLabel>
                   <MenuItem variant="workspace">Surfarch</MenuItem>
                 </DropdownMenu>
               </ShowcaseRow>
             </ShowcaseSection>
 
-            <ShowcaseSection id="modals" title="Modals">
+            <ShowcaseSection id="modals" title={s.modals.title}>
               <ShowcaseRow>
-                <Button variant="secondary" onClick={() => setModalOpen(true)}>Open modal</Button>
+                <Button variant="secondary" onClick={() => setModalOpen(true)}>{s.modals.openModal}</Button>
               </ShowcaseRow>
-              <Modal open={modalOpen} onClose={() => setModalOpen(false)} title="Create study">
+              <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={s.modals.createStudy}>
                 <FieldGroup>
                   <Field>
-                    <Label htmlFor="modal-name">Name</Label>
-                    <Input id="modal-name" placeholder="Checkout flow v2" />
+                    <Label htmlFor="modal-name">{s.modals.name}</Label>
+                    <Input id="modal-name" placeholder={s.modals.namePlaceholder} />
                   </Field>
                 </FieldGroup>
                 <ModalFooter>
-                  <Button variant="ghost" onClick={() => setModalOpen(false)}>Cancel</Button>
-                  <Button onClick={() => setModalOpen(false)}>Create</Button>
+                  <Button variant="ghost" onClick={() => setModalOpen(false)}>{s.modals.cancel}</Button>
+                  <Button onClick={() => setModalOpen(false)}>{s.modals.create}</Button>
                 </ModalFooter>
               </Modal>
             </ShowcaseSection>
 
-            <ShowcaseSection id="toasts" title="Toasts">
-              <ToastDemo />
+            <ShowcaseSection id="toasts" title={s.toasts.title}>
+              <ToastDemo copy={c} />
               <div className="mt-12 flex flex-wrap gap-8">
-                <Toast variant="info" title="Tip">Keyboard shortcuts save time.</Toast>
-                <Toast variant="success" title="Saved">Study updated.</Toast>
+                <Toast variant="info" title={s.toasts.tipTitle}>{s.toasts.tipMessage}</Toast>
+                <Toast variant="success" title={s.toasts.savedTitle}>{s.toasts.savedMessage}</Toast>
               </div>
             </ShowcaseSection>
 
-            <ShowcaseSection id="panels" title="Panels">
+            <ShowcaseSection id="panels" title={s.panels.title}>
               <Panel className="max-w-[400px]">
-                <PanelHeader title="Studies" />
-                <PanelBody className="p-16 text-[13px] text-sub">Panel content — matches main content shell.</PanelBody>
+                <PanelHeader title={s.panels.studies} />
+                <PanelBody className="p-16 text-[13px] text-sub">{s.panels.body}</PanelBody>
               </Panel>
             </ShowcaseSection>
 
-            <ShowcaseSection id="alerts" title="Alerts">
+            <ShowcaseSection id="alerts" title={s.alerts.title}>
               <ShowcaseStack>
-                <Alert variant="info" title="Tip">Use keyboard shortcuts to navigate faster.</Alert>
-                <Alert variant="success" title="Study complete">12 participants finished the session.</Alert>
-                <Alert variant="warning" title="Low sample">Fewer than 5 responses — results may vary.</Alert>
-                <Alert variant="danger" title="Sync failed">Could not reach Firebase. Retry in settings.</Alert>
+                <Alert variant="info" title={s.alerts.tipTitle}>{s.alerts.tip}</Alert>
+                <Alert variant="success" title={s.alerts.successTitle}>{s.alerts.success}</Alert>
+                <Alert variant="warning" title={s.alerts.warningTitle}>{s.alerts.warning}</Alert>
+                <Alert variant="danger" title={s.alerts.dangerTitle}>{s.alerts.danger}</Alert>
               </ShowcaseStack>
             </ShowcaseSection>
 
-            <ShowcaseSection id="empty" title="Empty states">
+            <ShowcaseSection id="empty" title={s.empty.title}>
               <div className="rounded-lg border border-line-subtle bg-content">
                 <EmptyState
-                  title="No studies yet"
-                  description="Create your first usability study or generate an example to explore the product."
-                  actionLabel="Create study"
+                  title={s.empty.emptyTitle}
+                  description={s.empty.emptyDescription}
+                  actionLabel={s.empty.actionLabel}
                   actionHref="#/usability/studies"
                 />
               </div>
             </ShowcaseSection>
 
-            <ShowcaseSection id="loading" title="Loading">
+            <ShowcaseSection id="loading" title={s.loading.title}>
               <SkeletonGroup>
                 <Skeleton className="w-[200px]" />
                 <Skeleton className="w-[320px]" />
@@ -622,7 +597,7 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
               </SkeletonGroup>
             </ShowcaseSection>
 
-            <ShowcaseSection id="progress" title="Progress">
+            <ShowcaseSection id="progress" title={s.progress.title}>
               <div className="max-w-[320px] space-y-12">
                 <Progress value={25} />
                 <Progress value={60} />
@@ -630,24 +605,24 @@ function DesignSystemContent({ tab, setTab, sw, setSw, modalOpen, setModalOpen }
               </div>
             </ShowcaseSection>
 
-            <ShowcaseSection id="links" title="Links & keyboard hints">
+            <ShowcaseSection id="links" title={s.links.title}>
               <ShowcaseRow>
-                <Link href="#/">Default link</Link>
-                <Link variant="accent" href="#/">Accent</Link>
-                <Link variant="subtle" href="#/">Subtle</Link>
+                <Link href="#/">{s.links.defaultLink}</Link>
+                <Link variant="accent" href="#/">{s.links.accent}</Link>
+                <Link variant="subtle" href="#/">{s.links.subtle}</Link>
               </ShowcaseRow>
-              <ShowcaseRow label="Shortcuts">
+              <ShowcaseRow label={s.links.shortcuts}>
                 <KbdCombo keys={['⌘', 'K']} />
                 <KbdCombo keys={['G', 'S']} />
                 <Kbd>Esc</Kbd>
               </ShowcaseRow>
             </ShowcaseSection>
 
-            <ShowcaseSection id="dividers" title="Dividers">
+            <ShowcaseSection id="dividers" title={s.dividers.title}>
               <div className="max-w-[320px]">
-                <p className="text-[13px] text-body">Above</p>
+                <p className="text-[13px] text-body">{s.dividers.above}</p>
                 <Divider />
-                <p className="text-[13px] text-body">Below</p>
+                <p className="text-[13px] text-body">{s.dividers.below}</p>
               </div>
             </ShowcaseSection>
           </div>

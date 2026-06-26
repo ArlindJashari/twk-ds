@@ -25,3 +25,13 @@ export function useDisplayPreferences() {
   }
   return ctx
 }
+
+export function useLocale() {
+  const { direction } = useDisplayPreferences()
+  return direction === 'rtl' ? 'ar' : 'en'
+}
+
+export function useIsArabic() {
+  const { direction } = useDisplayPreferences()
+  return direction === 'rtl'
+}
