@@ -1,16 +1,16 @@
 import { cn } from '../../../lib/cn.js'
 
 const variants = {
-  default: 'border-transparent bg-[hsl(var(--v2-primary))] text-[hsl(var(--v2-primary-foreground))]',
-  secondary: 'border-transparent bg-[hsl(var(--v2-secondary))] text-[hsl(var(--v2-secondary-foreground))]',
-  destructive: 'border-transparent bg-[hsl(var(--v2-destructive))] text-[hsl(var(--v2-destructive-foreground))]',
-  outline: 'border-[hsl(var(--v2-border))] text-[hsl(var(--v2-foreground))]',
-  success: 'border-transparent bg-[hsl(var(--v2-success)/0.15)] text-[hsl(var(--v2-success))]',
-  warning: 'border-transparent bg-[hsl(var(--v2-warning)/0.15)] text-[hsl(var(--v2-warning))]',
-  muted: 'border-transparent bg-[hsl(var(--v2-muted))] text-[hsl(var(--v2-muted-foreground))]',
-  todo: 'border-transparent bg-[hsl(var(--v2-muted))] text-[hsl(var(--v2-muted-foreground))]',
-  progress: 'border-transparent bg-[hsl(var(--v2-warning)/0.15)] text-[hsl(var(--v2-warning))]',
-  done: 'border-transparent bg-[hsl(var(--v2-success)/0.15)] text-[hsl(var(--v2-success))]',
+  default: 'border-transparent bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]',
+  secondary: 'border-transparent bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))]',
+  destructive: 'border-transparent bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))]',
+  outline: 'border-[hsl(var(--border))] text-[hsl(var(--foreground))]',
+  success: 'border-transparent bg-[hsl(var(--success)/0.15)] text-[hsl(var(--success))]',
+  warning: 'border-transparent bg-[hsl(var(--warning)/0.15)] text-[hsl(var(--warning))]',
+  muted: 'border-transparent bg-[hsl(var(--muted))] text-[hsl(var(--muted-foreground))]',
+  todo: 'border-transparent bg-[hsl(var(--muted))] text-[hsl(var(--muted-foreground))]',
+  progress: 'border-transparent bg-[hsl(var(--warning)/0.15)] text-[hsl(var(--warning))]',
+  done: 'border-transparent bg-[hsl(var(--success)/0.15)] text-[hsl(var(--success))]',
 }
 
 const base = 'inline-flex shrink-0 items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold leading-none'

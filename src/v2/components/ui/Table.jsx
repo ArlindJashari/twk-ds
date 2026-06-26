@@ -9,7 +9,7 @@ export function Table({ className, children }) {
 }
 
 export function TableHeader({ className, children }) {
-  return <thead className={cn('[&_tr]:border-b [&_tr]:border-[hsl(var(--v2-border))]', className)}>{children}</thead>
+  return <thead className={cn('[&_tr]:border-b [&_tr]:border-[hsl(var(--border))]', className)}>{children}</thead>
 }
 
 export function TableBody({ className, children }) {
@@ -20,8 +20,8 @@ export function TableRow({ className, interactive, ...props }) {
   return (
     <tr
       className={cn(
-        'border-b border-[hsl(var(--v2-border))] transition-colors',
-        interactive && 'hover:bg-[hsl(var(--v2-muted)/0.5)]',
+        'border-b border-[hsl(var(--border))] transition-colors',
+        interactive && 'hover:bg-[hsl(var(--muted)/0.5)]',
         className,
       )}
       {...props}
@@ -31,12 +31,12 @@ export function TableRow({ className, interactive, ...props }) {
 
 export function TableHead({ className, children }) {
   return (
-    <th className={cn('h-10 px-4 text-start align-middle text-xs font-medium text-[hsl(var(--v2-muted-foreground))]', className)}>
+    <th className={cn('h-10 px-4 text-start align-middle text-xs font-medium text-[hsl(var(--muted-foreground))]', className)}>
       {children}
     </th>
   )
 }
 
 export function TableCell({ className, children }) {
-  return <td className={cn('p-4 align-middle text-[hsl(var(--v2-foreground))]', className)}>{children}</td>
+  return <td className={cn('p-4 align-middle text-[hsl(var(--foreground))]', className)}>{children}</td>
 }

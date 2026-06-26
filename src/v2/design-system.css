@@ -1,0 +1,520 @@
+/* Auto-scoped from COMPONENTS.md reference index.html */
+
+      /* ════════════════════════════════════════════════════════════════════
+         TOKENS — sourced verbatim from design-system/tokens.css
+         shadcn theming: https://ui.shadcn.com/docs/theming
+         GREEN-PRIMARY — brand colors sampled from the product logo.
+         .dark class strategy on <html>; dark surfaces tinted with logo teal.
+      ════════════════════════════════════════════════════════════════════ */
+      .v2-root {
+        --brand-green:#1aaa5b; --brand-teal:#114b47; --brand-mist:#f0f1f2; --brand-green-mid:#1b7a5f;
+        --green-50:#e9f9f0; --green-100:#c9f1da; --green-200:#97e3bc; --green-300:#5fce98;
+        --green-400:#2eb877; --green-500:#14a564; --green-600:#0e8b4d; --green-700:#0c6f43;
+        --green-800:#0d5639; --green-900:#0d4434; --green-950:#06231c;
+
+        --background:0 0% 100%;
+        --foreground:222 47% 11%;
+        --card:0 0% 100%;
+        --card-foreground:222 47% 11%;
+        --popover:0 0% 100%;
+        --popover-foreground:222 47% 11%;
+        --primary:150 82% 30%;
+        --primary-foreground:0 0% 100%;
+        --secondary:220 14% 96%;
+        --secondary-foreground:222 47% 11%;
+        --muted:220 14% 96%;
+        --muted-foreground:220 9% 46%;
+        --accent:220 14% 96%;
+        --accent-foreground:222 47% 11%;
+        --destructive:0 72.2% 50.6%;
+        --destructive-foreground:0 0% 100%;
+        --success:150 82% 30%;
+        --success-foreground:0 0% 100%;
+        --warning:32.1 94.6% 43.7%;
+        --warning-foreground:0 0% 100%;
+        --info:174 70% 30%;
+        --info-foreground:0 0% 100%;
+        --border:220 13% 91%;
+        --input:220 13% 91%;
+        --ring:150 82% 30%;
+        --radius:0.5rem;
+
+        --font-sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+        --font-mono:"JetBrains Mono",ui-monospace,"SF Mono","Fira Code",Menlo,Monaco,Consolas,monospace;
+
+        --text-xs:.75rem; --text-sm:.875rem; --text-base:1rem; --text-lg:1.125rem;
+        --text-xl:1.25rem; --text-2xl:1.5rem; --text-3xl:1.875rem; --text-4xl:2.25rem;
+
+        --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem;
+        --space-5:1.25rem; --space-6:1.5rem; --space-8:2rem; --space-12:3rem;
+
+        --shadow-sm:0 1px 2px 0 hsl(var(--foreground)/.05);
+        --shadow:0 1px 3px 0 hsl(var(--foreground)/.1),0 1px 2px -1px hsl(var(--foreground)/.1);
+        --shadow-md:0 4px 6px -1px hsl(var(--foreground)/.1),0 2px 4px -2px hsl(var(--foreground)/.1);
+        --shadow-lg:0 10px 15px -3px hsl(var(--foreground)/.1),0 4px 6px -4px hsl(var(--foreground)/.1);
+
+        --duration-fast:150ms; --duration-base:200ms; --ease:cubic-bezier(.4,0,.2,1);
+      }
+      .v2-root.dark {
+        --background:222 47% 8%;
+        --foreground:210 20% 96%;
+        --card:222 40% 11%;
+        --card-foreground:210 20% 96%;
+        --popover:222 40% 11%;
+        --popover-foreground:210 20% 96%;
+        --primary:150 64% 46%;
+        --primary-foreground:222 47% 8%;
+        --secondary:222 33% 18%;
+        --secondary-foreground:210 20% 96%;
+        --muted:222 30% 15%;
+        --muted-foreground:220 14% 66%;
+        --accent:222 33% 18%;
+        --accent-foreground:210 20% 96%;
+        --destructive:0 62.8% 50%;
+        --destructive-foreground:0 0% 100%;
+        --success:150 64% 46%;
+        --success-foreground:222 47% 8%;
+        --warning:38 92% 55%;
+        --warning-foreground:222 47% 8%;
+        --info:174 62% 50%;
+        --info-foreground:222 47% 8%;
+        --border:222 28% 20%;
+        --input:222 28% 20%;
+        --ring:150 64% 46%;
+      }
+
+      /* ─── Base ─────────────────────────────────────────────────────────── */
+      *,*::before,*::after{box-sizing:border-box;border-color:hsl(var(--border));}
+      .v2-ds-scroll{scroll-behavior:smooth;scroll-padding-top:5rem;}
+      .v2-root{
+        margin:0;background:hsl(var(--background));color:hsl(var(--foreground));
+        font-family:var(--font-sans);font-size:var(--text-base);line-height:1.5;
+        -webkit-font-smoothing:antialiased;
+        transition:background var(--duration-base) var(--ease),color var(--duration-base) var(--ease);
+      }
+      h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:var(--tracking-tight,-0.02em);line-height:1.2;}
+      p{margin:0;}
+      code,kbd,pre{font-family:var(--font-mono);}
+      a{color:inherit;}
+      ::selection{background:hsl(var(--primary)/.2);}
+
+      /* ─── Layout shell ─────────────────────────────────────────────────── */
+      .topbar{
+        position:sticky;top:0;z-index:50;
+        background:hsl(var(--background)/.85);backdrop-filter:blur(8px);
+        border-bottom:1px solid hsl(var(--border));
+      }
+      .topbar-inner{
+        max-width:1400px;margin-inline:auto;padding:var(--space-3) var(--space-6);
+        display:flex;align-items:center;gap:var(--space-4);
+      }
+      .topbar .brand{display:flex;align-items:center;gap:var(--space-2);font-weight:700;}
+      .topbar .brand .mark{
+        width:28px;height:28px;display:grid;place-items:center;
+      }
+      .topbar .brand .mark svg,.logo-svg{width:100%;height:100%;display:block;}
+      .nav-links{display:none;gap:var(--space-1);margin-inline-start:var(--space-4);flex-wrap:wrap;}
+      @media(min-width:1024px){.nav-links{display:flex;}}
+      .nav-links a{
+        font-size:var(--text-sm);padding:6px 10px;border-radius:6px;text-decoration:none;
+        color:hsl(var(--muted-foreground));
+      }
+      .nav-links a:hover{background:hsl(var(--accent));color:hsl(var(--accent-foreground));}
+
+      .shell{max-width:1400px;margin-inline:auto;padding:0 var(--space-6) var(--space-12);}
+      .section{padding-block:var(--space-12) var(--space-8);border-top:1px solid hsl(var(--border));}
+      .section:first-of-type{border-top:0;}
+      .section-head{margin-bottom:var(--space-6);}
+      .eyebrow{
+        font-family:var(--font-mono);font-size:var(--text-xs);font-weight:500;
+        text-transform:uppercase;letter-spacing:.08em;color:hsl(var(--primary));
+      }
+      .section h2{font-size:var(--text-3xl);margin-top:var(--space-2);}
+      .section .desc{color:hsl(var(--muted-foreground));margin-top:var(--space-2);max-width:65ch;}
+      .doc-url{
+        display:inline-block;margin-top:var(--space-2);font-family:var(--font-mono);
+        font-size:var(--text-xs);color:hsl(var(--muted-foreground));text-decoration:none;
+      }
+      .doc-url:hover{color:hsl(var(--primary));text-decoration:underline;}
+
+      .subhead{font-size:var(--text-2xl);margin:var(--space-8) 0 var(--space-4);}
+
+      .demo{
+        border:1px solid hsl(var(--border));border-radius:var(--radius);
+        padding:var(--space-6);background:hsl(var(--card));
+        display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;
+      }
+      .demo.col{flex-direction:column;align-items:stretch;}
+      .code{
+        border:1px solid hsl(var(--border));border-top:0;
+        border-radius:0 0 var(--radius) var(--radius);
+        background:hsl(var(--muted));overflow:auto;
+      }
+      .code pre{margin:0;padding:var(--space-4) var(--space-5);
+        font-size:var(--text-xs);line-height:1.6;color:hsl(var(--foreground));}
+      .demo:has(+ .code){border-radius:var(--radius) var(--radius) 0 0;}
+      .grid{display:grid;gap:var(--space-4);}
+      .label-row{width:100%;font-size:var(--text-xs);color:hsl(var(--muted-foreground));
+        font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:-8px;}
+
+      /* ═══════════════ COMPONENT PRIMITIVES (mapped to shadcn tokens) ═══════════════ */
+
+      /* Button — https://ui.shadcn.com/docs/components/button */
+      .btn{
+        display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);
+        white-space:nowrap;border-radius:calc(var(--radius) - 2px);font-family:var(--font-sans);
+        font-size:var(--text-sm);font-weight:500;line-height:1;height:2.25rem;padding:0 var(--space-4);
+        border:1px solid transparent;cursor:pointer;background:transparent;color:inherit;
+        transition:background var(--duration-fast) var(--ease),color var(--duration-fast) var(--ease),
+          border-color var(--duration-fast) var(--ease),box-shadow var(--duration-fast) var(--ease);
+      }
+      .btn:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;}
+      .btn:disabled{opacity:.5;pointer-events:none;}
+      .btn svg{width:16px;height:16px;}
+      .btn-default{background:hsl(var(--primary));color:hsl(var(--primary-foreground));box-shadow:var(--shadow-sm);}
+      .btn-default:hover{background:hsl(var(--primary)/.9);}
+      .btn-destructive{background:hsl(var(--destructive));color:hsl(var(--destructive-foreground));box-shadow:var(--shadow-sm);}
+      .btn-destructive:hover{background:hsl(var(--destructive)/.9);}
+      .btn-outline{border-color:hsl(var(--input));background:hsl(var(--background));box-shadow:var(--shadow-sm);}
+      .btn-outline:hover{background:hsl(var(--accent));color:hsl(var(--accent-foreground));}
+      .btn-secondary{background:hsl(var(--secondary));color:hsl(var(--secondary-foreground));box-shadow:var(--shadow-sm);}
+      .btn-secondary:hover{background:hsl(var(--secondary)/.8);}
+      .btn-ghost:hover{background:hsl(var(--accent));color:hsl(var(--accent-foreground));}
+      .btn-link{color:hsl(var(--primary));text-underline-offset:4px;height:auto;padding:0;}
+      .btn-link:hover{text-decoration:underline;}
+      .btn-sm{height:2rem;padding:0 var(--space-3);font-size:var(--text-xs);}
+      .btn-lg{height:2.75rem;padding:0 var(--space-8);}
+      .btn-icon{width:2.25rem;height:2.25rem;padding:0;}
+
+      /* Badge — https://ui.shadcn.com/docs/components/badge */
+      .badge{
+        display:inline-flex;align-items:center;gap:4px;border-radius:9999px;
+        padding:2px 10px;font-size:var(--text-xs);font-weight:600;line-height:1.4;
+        border:1px solid transparent;
+      }
+      .badge-default{background:hsl(var(--primary));color:hsl(var(--primary-foreground));}
+      .badge-secondary{background:hsl(var(--secondary));color:hsl(var(--secondary-foreground));}
+      .badge-destructive{background:hsl(var(--destructive));color:hsl(var(--destructive-foreground));}
+      .badge-outline{border-color:hsl(var(--border));color:hsl(var(--foreground));}
+
+      /* Avatar — https://ui.shadcn.com/docs/components/avatar */
+      .avatar{width:40px;height:40px;border-radius:9999px;overflow:hidden;display:inline-grid;
+        place-items:center;background:hsl(var(--muted));color:hsl(var(--muted-foreground));
+        font-size:var(--text-sm);font-weight:600;flex-shrink:0;}
+      .avatar img{width:100%;height:100%;object-fit:cover;}
+
+      /* Separator — https://ui.shadcn.com/docs/components/separator */
+      .separator{background:hsl(var(--border));border:0;}
+      .separator-h{height:1px;width:100%;}
+      .separator-v{width:1px;height:1.5rem;align-self:stretch;}
+
+      /* Input / Textarea — https://ui.shadcn.com/docs/components/input */
+      .input,.textarea{
+        width:100%;border:1px solid hsl(var(--input));border-radius:calc(var(--radius) - 2px);
+        background:hsl(var(--background));color:hsl(var(--foreground));
+        font-family:inherit;font-size:var(--text-sm);padding:0 var(--space-3);height:2.25rem;
+        box-shadow:var(--shadow-sm);
+        transition:border-color var(--duration-fast) var(--ease),box-shadow var(--duration-fast) var(--ease);
+      }
+      .textarea{height:auto;min-height:5rem;padding:var(--space-2) var(--space-3);line-height:1.5;resize:vertical;}
+      .input::placeholder,.textarea::placeholder{color:hsl(var(--muted-foreground));}
+      .input:focus-visible,.textarea:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:1px;border-color:transparent;}
+      .input:disabled,.textarea:disabled{opacity:.5;cursor:not-allowed;}
+      .input-wrap{position:relative;display:flex;align-items:center;width:100%;}
+      .input-wrap svg{position:absolute;width:16px;height:16px;color:hsl(var(--muted-foreground));}
+      .input-wrap .lead{inset-inline-start:10px;} .input-wrap.has-lead .input{padding-inline-start:32px;}
+      .input-wrap .trail{inset-inline-end:10px;} .input-wrap.has-trail .input{padding-inline-end:32px;}
+
+      /* Label — https://ui.shadcn.com/docs/components/label */
+      .label{font-size:var(--text-sm);font-weight:500;line-height:1;display:inline-flex;gap:4px;}
+
+      /* Checkbox — https://ui.shadcn.com/docs/components/checkbox */
+      .checkbox{appearance:none;width:16px;height:16px;border:1px solid hsl(var(--primary));
+        border-radius:4px;display:inline-grid;place-items:center;cursor:pointer;background:hsl(var(--background));
+        transition:background var(--duration-fast) var(--ease);position:relative;flex-shrink:0;}
+      .checkbox:checked,.checkbox:indeterminate{background:hsl(var(--primary));}
+      .checkbox:checked::after{content:"";width:9px;height:5px;border:2px solid hsl(var(--primary-foreground));
+        border-top:0;border-right:0;transform:rotate(-45deg);margin-bottom:2px;}
+      .checkbox:indeterminate::after{content:"";width:8px;height:2px;background:hsl(var(--primary-foreground));}
+      .checkbox:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;}
+
+      /* Radio — https://ui.shadcn.com/docs/components/radio-group */
+      .radio{appearance:none;width:16px;height:16px;border:1px solid hsl(var(--primary));border-radius:9999px;
+        display:inline-grid;place-items:center;cursor:pointer;flex-shrink:0;}
+      .radio:checked::after{content:"";width:8px;height:8px;border-radius:9999px;background:hsl(var(--primary));}
+      .radio:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;}
+
+      /* Switch — https://ui.shadcn.com/docs/components/switch */
+      .switch{appearance:none;width:36px;height:20px;border-radius:9999px;background:hsl(var(--input));
+        position:relative;cursor:pointer;transition:background var(--duration-fast) var(--ease);flex-shrink:0;}
+      .switch:checked{background:hsl(var(--primary));}
+      .switch::after{content:"";position:absolute;top:2px;inset-inline-start:2px;width:16px;height:16px;border-radius:9999px;
+        background:hsl(var(--background));transition:transform var(--duration-fast) var(--ease);box-shadow:var(--shadow-sm);}
+      .switch:checked::after{transform:translateX(16px);}
+      .switch:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;}
+
+      /* Select — https://ui.shadcn.com/docs/components/select */
+      .select{height:2.25rem;border:1px solid hsl(var(--input));border-radius:calc(var(--radius) - 2px);
+        background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;font-size:var(--text-sm);
+        padding:0 var(--space-3);box-shadow:var(--shadow-sm);cursor:pointer;}
+      .select:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:1px;}
+
+      /* Slider — https://ui.shadcn.com/docs/components/slider */
+      .slider{appearance:none;width:100%;max-width:280px;height:6px;border-radius:9999px;background:hsl(var(--secondary));outline:none;}
+      .slider::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:9999px;
+        background:hsl(var(--background));border:2px solid hsl(var(--primary));cursor:pointer;box-shadow:var(--shadow-sm);}
+      .slider::-moz-range-thumb{width:18px;height:18px;border-radius:9999px;background:hsl(var(--background));
+        border:2px solid hsl(var(--primary));cursor:pointer;}
+      .slider:focus-visible::-webkit-slider-thumb{outline:2px solid hsl(var(--ring));outline-offset:2px;}
+
+      /* Toggle / Toggle group — https://ui.shadcn.com/docs/components/toggle */
+      .toggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:2.25rem;min-width:2.25rem;
+        padding:0 var(--space-3);border-radius:calc(var(--radius) - 2px);background:transparent;border:1px solid transparent;
+        cursor:pointer;color:inherit;font-size:var(--text-sm);font-weight:500;}
+      .toggle:hover{background:hsl(var(--muted));}
+      .toggle[aria-pressed="true"]{background:hsl(var(--accent));color:hsl(var(--accent-foreground));}
+      .toggle svg{width:16px;height:16px;}
+      .toggle-group{display:inline-flex;border:1px solid hsl(var(--input));border-radius:calc(var(--radius) - 2px);overflow:hidden;}
+      .toggle-group .toggle{border-radius:0;border:0;border-inline-end:1px solid hsl(var(--input));}
+      .toggle-group .toggle:last-child{border-inline-end:0;}
+
+      /* Card — https://ui.shadcn.com/docs/components/card */
+      .card{border:1px solid hsl(var(--border));border-radius:var(--radius);background:hsl(var(--card));
+        color:hsl(var(--card-foreground));box-shadow:var(--shadow-sm);}
+      .card-header{padding:var(--space-6);display:flex;flex-direction:column;gap:6px;}
+      .card-title{font-size:var(--text-xl);font-weight:600;}
+      .card-desc{font-size:var(--text-sm);color:hsl(var(--muted-foreground));}
+      .card-content{padding:0 var(--space-6) var(--space-6);}
+      .card-footer{padding:var(--space-6);padding-top:0;display:flex;gap:var(--space-3);align-items:center;}
+
+      /* Alert — https://ui.shadcn.com/docs/components/alert */
+      .alert{border:1px solid hsl(var(--border));border-radius:var(--radius);padding:var(--space-4);
+        display:flex;gap:var(--space-3);background:hsl(var(--card));}
+      .alert svg{width:18px;height:18px;flex-shrink:0;margin-top:2px;}
+      .alert-title{font-weight:600;font-size:var(--text-sm);margin-bottom:2px;}
+      .alert-desc{font-size:var(--text-sm);color:hsl(var(--muted-foreground));}
+      .alert-destructive{border-color:hsl(var(--destructive)/.5);color:hsl(var(--destructive));}
+      .alert-destructive .alert-desc{color:hsl(var(--destructive)/.85);}
+
+      /* Progress — https://ui.shadcn.com/docs/components/progress */
+      .progress{width:100%;max-width:320px;height:8px;border-radius:9999px;background:hsl(var(--secondary));overflow:hidden;}
+      .progress-bar{height:100%;background:hsl(var(--primary));border-radius:9999px;transition:width var(--duration-base) var(--ease);}
+
+      /* Skeleton — https://ui.shadcn.com/docs/components/skeleton */
+      .skeleton{background:hsl(var(--muted));border-radius:6px;position:relative;overflow:hidden;}
+      .skeleton::after{content:"";position:absolute;inset:0;transform:translateX(-100%);
+        background:linear-gradient(90deg,transparent,hsl(var(--foreground)/.06),transparent);
+        animation:shimmer 1.5s infinite;}
+      @keyframes shimmer{100%{transform:translateX(100%);}}
+
+      /* Tabs — https://ui.shadcn.com/docs/components/tabs */
+      .tabs-list{display:inline-flex;gap:4px;padding:4px;background:hsl(var(--muted));border-radius:calc(var(--radius) - 2px);}
+      .tab-trigger{border:0;background:transparent;color:hsl(var(--muted-foreground));font-family:inherit;
+        font-size:var(--text-sm);font-weight:500;padding:6px 12px;border-radius:calc(var(--radius) - 4px);cursor:pointer;}
+      .tab-trigger[aria-selected="true"]{background:hsl(var(--background));color:hsl(var(--foreground));box-shadow:var(--shadow-sm);}
+      .tab-trigger:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;}
+      .tab-panel{padding:var(--space-4) 2px;font-size:var(--text-sm);color:hsl(var(--muted-foreground));}
+      .tab-panel[hidden]{display:none;}
+
+      /* Breadcrumb — https://ui.shadcn.com/docs/components/breadcrumb */
+      .breadcrumb{display:flex;align-items:center;gap:8px;font-size:var(--text-sm);color:hsl(var(--muted-foreground));flex-wrap:wrap;}
+      .breadcrumb a{text-decoration:none;}.breadcrumb a:hover{color:hsl(var(--foreground));}
+      .breadcrumb .current{color:hsl(var(--foreground));font-weight:500;}
+
+      /* Pagination — https://ui.shadcn.com/docs/components/pagination */
+      .pagination{display:flex;align-items:center;gap:4px;}
+      .page-link{display:inline-grid;place-items:center;min-width:2.25rem;height:2.25rem;padding:0 8px;
+        border:1px solid transparent;border-radius:calc(var(--radius) - 2px);font-size:var(--text-sm);
+        text-decoration:none;cursor:pointer;background:transparent;color:inherit;font-family:inherit;}
+      .page-link:hover{background:hsl(var(--accent));color:hsl(var(--accent-foreground));}
+      .page-link[aria-current="page"]{border-color:hsl(var(--input));font-weight:600;}
+
+      /* Navigation menu — https://ui.shadcn.com/docs/components/navigation-menu */
+      .navmenu{display:flex;gap:4px;position:relative;}
+      .navmenu > li{position:relative;list-style:none;}
+      .navmenu-trigger{display:inline-flex;align-items:center;gap:4px;height:2.25rem;padding:0 12px;
+        border-radius:calc(var(--radius) - 2px);font-size:var(--text-sm);font-weight:500;background:transparent;
+        border:0;cursor:pointer;color:inherit;font-family:inherit;}
+      .navmenu-trigger:hover{background:hsl(var(--accent));color:hsl(var(--accent-foreground));}
+      .navmenu-content{position:absolute;top:100%;inset-inline-start:0;margin-top:6px;min-width:240px;padding:var(--space-2);
+        background:hsl(var(--popover));border:1px solid hsl(var(--border));border-radius:var(--radius);
+        box-shadow:var(--shadow-lg);display:none;z-index:30;}
+      .navmenu li:hover .navmenu-content,.navmenu-content:hover{display:block;}
+      .navmenu-content a{display:block;padding:8px 10px;border-radius:6px;text-decoration:none;font-size:var(--text-sm);}
+      .navmenu-content a:hover{background:hsl(var(--accent));color:hsl(var(--accent-foreground));}
+      .navmenu-content a small{display:block;color:hsl(var(--muted-foreground));font-weight:400;}
+
+      /* Dropdown / Context / Popover shared menu surface */
+      .menu{min-width:220px;padding:var(--space-1);background:hsl(var(--popover));color:hsl(var(--popover-foreground));
+        border:1px solid hsl(var(--border));border-radius:var(--radius);box-shadow:var(--shadow-lg);}
+      .menu-label{padding:6px 8px;font-size:var(--text-xs);color:hsl(var(--muted-foreground));font-weight:600;}
+      .menu-item{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:6px;font-size:var(--text-sm);cursor:pointer;}
+      .menu-item svg{width:16px;height:16px;}
+      .menu-item:hover{background:hsl(var(--accent));color:hsl(var(--accent-foreground));}
+      .menu-item .shortcut{margin-inline-start:auto;font-size:var(--text-xs);color:hsl(var(--muted-foreground));font-family:var(--font-mono);}
+      .menu-item.destructive{color:hsl(var(--destructive));}
+      .menu-sep{height:1px;background:hsl(var(--border));margin:4px 0;}
+
+      details.pop{position:relative;display:inline-block;}
+      details.pop > summary{list-style:none;cursor:pointer;}
+      details.pop > summary::-webkit-details-marker{display:none;}
+      details.pop[open] > .pop-panel{display:block;}
+      .pop-panel{display:none;position:absolute;top:calc(100% + 6px);inset-inline-start:0;z-index:40;}
+
+      /* Tooltip — https://ui.shadcn.com/docs/components/tooltip */
+      .tooltip{position:relative;display:inline-flex;}
+      .tooltip .tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) scale(.96);
+        background:hsl(var(--primary));color:hsl(var(--primary-foreground));font-size:var(--text-xs);
+        padding:5px 9px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;
+        transition:opacity var(--duration-fast) var(--ease),transform var(--duration-fast) var(--ease);box-shadow:var(--shadow);}
+      .tooltip:hover .tip,.tooltip:focus-within .tip{opacity:1;transform:translateX(-50%) scale(1);}
+
+      /* Accordion — https://ui.shadcn.com/docs/components/accordion */
+      .accordion{border-top:1px solid hsl(var(--border));}
+      .accordion details{border-bottom:1px solid hsl(var(--border));}
+      .accordion summary{display:flex;align-items:center;justify-content:space-between;gap:8px;
+        padding:var(--space-4) 2px;cursor:pointer;font-weight:500;font-size:var(--text-sm);list-style:none;}
+      .accordion summary::-webkit-details-marker{display:none;}
+      .accordion summary .chev{transition:transform var(--duration-fast) var(--ease);}
+      .accordion details[open] summary .chev{transform:rotate(180deg);}
+      .accordion .acc-body{padding:0 2px var(--space-4);font-size:var(--text-sm);color:hsl(var(--muted-foreground));}
+
+      .collapsible .col-body[hidden]{display:none;}
+
+      /* Table — https://ui.shadcn.com/docs/components/table */
+      .table-wrap{border:1px solid hsl(var(--border));border-radius:var(--radius);overflow:hidden;width:100%;}
+      table.tbl{width:100%;border-collapse:collapse;font-size:var(--text-sm);}
+      .tbl thead th{text-align:start;padding:10px 14px;color:hsl(var(--muted-foreground));font-weight:500;
+        border-bottom:1px solid hsl(var(--border));background:hsl(var(--muted)/.5);}
+      .tbl th button{background:none;border:0;font:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;}
+      .tbl tbody td{padding:10px 14px;border-bottom:1px solid hsl(var(--border));}
+      .tbl tbody tr:last-child td{border-bottom:0;}
+      .tbl tbody tr:nth-child(even){background:hsl(var(--muted)/.35);}
+      .tbl-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;
+        border-top:1px solid hsl(var(--border));font-size:var(--text-sm);color:hsl(var(--muted-foreground));}
+
+      /* Aspect ratio — https://ui.shadcn.com/docs/components/aspect-ratio */
+      .aspect{aspect-ratio:16/9;width:100%;max-width:360px;border-radius:var(--radius);overflow:hidden;background:hsl(var(--muted));}
+      .aspect img{width:100%;height:100%;object-fit:cover;}
+
+      /* Dialog / Alert dialog / Sheet — overlay */
+      dialog{padding:0;border:0;background:transparent;color:inherit;max-width:none;max-height:none;}
+      dialog::backdrop{background:hsl(222 47% 4%/.5);backdrop-filter:blur(2px);}
+      .dialog-card{background:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:var(--radius);
+        box-shadow:var(--shadow-lg);width:min(440px,92vw);padding:var(--space-6);display:flex;flex-direction:column;gap:var(--space-4);}
+      .dialog-title{font-size:var(--text-lg);font-weight:600;}
+      .dialog-desc{font-size:var(--text-sm);color:hsl(var(--muted-foreground));}
+      .dialog-footer{display:flex;gap:var(--space-3);justify-content:flex-end;}
+      dialog[data-sheet]{margin:0;height:100vh;}
+      dialog[data-sheet="right"]{margin-inline-start:auto;}
+      dialog[data-sheet] .dialog-card{height:100vh;width:min(360px,90vw);border-radius:0;}
+
+      /* Command palette — https://ui.shadcn.com/docs/components/command */
+      .cmd{width:min(540px,92vw);background:hsl(var(--popover));border:1px solid hsl(var(--border));
+        border-radius:var(--radius);box-shadow:var(--shadow-lg);overflow:hidden;}
+      .cmd-input{width:100%;border:0;border-bottom:1px solid hsl(var(--border));background:transparent;
+        color:inherit;font-family:inherit;font-size:var(--text-sm);padding:14px 16px;outline:none;}
+      .cmd-list{max-height:300px;overflow:auto;padding:var(--space-1);}
+      .cmd-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;font-size:var(--text-sm);cursor:pointer;}
+      .cmd-item svg{width:16px;height:16px;color:hsl(var(--muted-foreground));}
+      .cmd-item[aria-selected="true"],.cmd-item:hover{background:hsl(var(--accent));color:hsl(var(--accent-foreground));}
+      .cmd-empty{padding:24px;text-align:center;font-size:var(--text-sm);color:hsl(var(--muted-foreground));}
+
+      /* Toast / Sonner — https://ui.shadcn.com/docs/components/sonner */
+      .toaster{position:fixed;bottom:20px;inset-inline-end:20px;z-index:80;display:flex;flex-direction:column;gap:10px;}
+      .toast{display:flex;gap:10px;align-items:flex-start;min-width:300px;max-width:380px;padding:14px;
+        background:hsl(var(--popover));border:1px solid hsl(var(--border));border-radius:var(--radius);
+        box-shadow:var(--shadow-lg);animation:toastIn var(--duration-base) var(--ease);}
+      @keyframes toastIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+      .toast svg{width:18px;height:18px;flex-shrink:0;margin-top:1px;}
+      .toast .t-title{font-weight:600;font-size:var(--text-sm);}
+      .toast .t-desc{font-size:var(--text-xs);color:hsl(var(--muted-foreground));margin-top:2px;}
+      .toast.success svg{color:hsl(var(--success));}
+      .toast.error svg{color:hsl(var(--destructive));}
+      .toast.warning svg{color:hsl(var(--warning));}
+      .toast.info svg{color:hsl(var(--info));}
+
+      /* Icon grid */
+      .icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:var(--space-3);}
+      .icon-cell{display:flex;flex-direction:column;align-items:center;gap:8px;padding:var(--space-4);
+        border:1px solid hsl(var(--border));border-radius:var(--radius);font-size:var(--text-xs);
+        color:hsl(var(--muted-foreground));font-family:var(--font-mono);text-align:center;word-break:break-word;}
+      .icon-cell svg{width:22px;height:22px;color:hsl(var(--foreground));}
+
+      /* ─── AI patterns ─────────────────────────────────────────────────── */
+      .chat-bubble{display:flex;gap:10px;max-width:560px;}
+      .chat-bubble.me{margin-inline-start:auto;flex-direction:row-reverse;}
+      .bubble{padding:10px 14px;border-radius:14px;font-size:var(--text-sm);line-height:1.5;}
+      .chat-bubble.ai .bubble{background:hsl(var(--muted));border-bottom-left-radius:4px;}
+      .chat-bubble.me .bubble{background:hsl(var(--primary));color:hsl(var(--primary-foreground));border-bottom-right-radius:4px;}
+      .chat-meta{font-size:var(--text-xs);color:hsl(var(--muted-foreground));margin-top:4px;}
+      .chat-bubble.me .chat-meta{text-align:end;}
+
+      .typing{display:inline-flex;gap:4px;align-items:center;padding:12px 16px;background:hsl(var(--muted));border-radius:14px;border-bottom-left-radius:4px;}
+      .typing span{width:7px;height:7px;border-radius:9999px;background:hsl(var(--muted-foreground));animation:blink 1.4s infinite both;}
+      .typing span:nth-child(2){animation-delay:.2s;}.typing span:nth-child(3){animation-delay:.4s;}
+      @keyframes blink{0%,80%,100%{opacity:.3;transform:translateY(0);}40%{opacity:1;transform:translateY(-3px);}}
+
+      .prompt-bar{display:flex;align-items:flex-end;gap:8px;padding:8px;border:1px solid hsl(var(--input));
+        border-radius:var(--radius);background:hsl(var(--card));box-shadow:var(--shadow-sm);max-width:640px;}
+      .prompt-bar textarea{flex:1;border:0;background:transparent;resize:none;outline:none;color:inherit;
+        font-family:inherit;font-size:var(--text-sm);min-height:24px;max-height:120px;padding:8px;line-height:1.5;}
+
+      .ai-response{max-width:640px;}
+      .ai-response .card-content{font-size:var(--text-sm);line-height:1.6;display:flex;flex-direction:column;gap:8px;}
+      .ai-response code{background:hsl(var(--muted));padding:1px 5px;border-radius:4px;font-size:.85em;}
+      .ai-response pre{background:hsl(var(--muted));padding:12px;border-radius:8px;overflow:auto;font-size:var(--text-xs);}
+
+      /* ─── Layout preview frames ───────────────────────────────────────── */
+      .preview-frame{border:1px solid hsl(var(--border));border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);}
+      .lp{display:grid;height:460px;font-size:var(--text-sm);background:hsl(var(--background));}
+      .lp-chat{grid-template-columns:220px 1fr;}
+      .lp-side{background:hsl(var(--muted)/.4);border-inline-end:1px solid hsl(var(--border));padding:var(--space-4);display:flex;flex-direction:column;gap:6px;}
+      .lp-side .si{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;color:hsl(var(--muted-foreground));}
+      .lp-side .si.active{background:hsl(var(--accent));color:hsl(var(--accent-foreground));font-weight:500;}
+      .lp-side .si svg{width:16px;height:16px;}
+      .lp-main{display:flex;flex-direction:column;}
+      .lp-topbar{height:52px;border-bottom:1px solid hsl(var(--border));display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-4);}
+      .lp-chatarea{flex:1;overflow:auto;padding:var(--space-4);display:flex;flex-direction:column;gap:14px;}
+      .lp-promptzone{border-top:1px solid hsl(var(--border));padding:var(--space-3) var(--space-4);}
+
+      .lp-dash{grid-template-rows:52px 1fr;grid-template-columns:220px 1fr;grid-template-areas:"side top" "side body";}
+      .lp-dash .lp-side{grid-area:side;}.lp-dash .lp-topbar{grid-area:top;}
+      .lp-body{grid-area:body;overflow:auto;padding:var(--space-5);}
+      .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);margin-bottom:var(--space-4);}
+      .metric{border:1px solid hsl(var(--border));border-radius:var(--radius);padding:var(--space-4);background:hsl(var(--card));}
+      .metric .m-label{font-size:var(--text-xs);color:hsl(var(--muted-foreground));}
+      .metric .m-val{font-size:var(--text-2xl);font-weight:700;margin-top:4px;}
+      .metric .m-delta{font-size:var(--text-xs);color:hsl(var(--success));margin-top:2px;}
+
+      /* Token swatches */
+      .swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--space-3);}
+      .swatch{border:1px solid hsl(var(--border));border-radius:var(--radius);overflow:hidden;font-size:var(--text-xs);}
+      .swatch .chip{height:56px;}
+      .swatch .meta{padding:8px 10px;font-family:var(--font-mono);}
+      .swatch .meta b{display:block;font-weight:600;}
+      .swatch .meta span{color:hsl(var(--muted-foreground));}
+
+      .type-row{display:flex;align-items:baseline;gap:var(--space-4);padding:var(--space-3) 0;border-bottom:1px solid hsl(var(--border));}
+      .type-row .tk{font-family:var(--font-mono);font-size:var(--text-xs);color:hsl(var(--muted-foreground));width:90px;flex-shrink:0;}
+
+      .space-row{display:flex;align-items:center;gap:var(--space-4);padding:6px 0;}
+      .space-row .bar{height:16px;background:hsl(var(--primary));border-radius:3px;}
+      .space-row .tk{font-family:var(--font-mono);font-size:var(--text-xs);color:hsl(var(--muted-foreground));width:130px;}
+
+      .radius-row{display:flex;gap:var(--space-4);flex-wrap:wrap;}
+      .radius-demo{width:90px;height:64px;background:hsl(var(--accent));border:1px solid hsl(var(--primary)/.4);
+        display:grid;place-items:end center;padding-bottom:6px;font-family:var(--font-mono);font-size:var(--text-xs);color:hsl(var(--accent-foreground));}
+
+      .cols-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);}
+      @media(max-width:720px){.cols-2,.metric-grid{grid-template-columns:1fr;}.lp-chat,.lp-dash{grid-template-columns:1fr;}.lp-side{display:none;}.lp-dash{grid-template-areas:"top" "body";grid-template-columns:1fr;}}
+
+      .theme-toggle{margin-inline-start:auto;}
+      .row{display:flex;gap:var(--space-3);align-items:center;flex-wrap:wrap;}
+      .col{display:flex;flex-direction:column;gap:var(--space-2);}
+      .body-meta{color:hsl(var(--muted-foreground));}
+
+      /* ─── RTL (dir="rtl" on <html>) — logical props above handle most; these cover the rest ─── */
+      .v2-root[dir="rtl"] .switch:checked::after{transform:translateX(-16px);}
+      .v2-root[dir="rtl"] body{text-align:right;}
+    

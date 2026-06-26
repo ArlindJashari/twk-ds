@@ -13,13 +13,13 @@ function rowTone(active) {
   return [
     navRow,
     active
-      ? 'bg-[hsl(var(--v2-nav-active-bg))] text-[hsl(var(--v2-nav-active))]'
-      : 'text-[hsl(var(--v2-nav))] hover:bg-[hsl(var(--v2-accent))] hover:text-[hsl(var(--v2-nav-active))]',
+      ? 'bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))]'
+      : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]',
   ].join(' ')
 }
 
 function iconTone(active) {
-  return active ? 'text-[hsl(var(--v2-primary))]' : 'text-[hsl(var(--v2-nav))] group-hover:text-[hsl(var(--v2-nav-active))]'
+  return active ? 'text-[hsl(var(--primary))]' : 'text-[hsl(var(--muted-foreground))] group-hover:text-[hsl(var(--accent-foreground))]'
 }
 
 function NavRow({ item, currentPath, onNavigate }) {
@@ -62,7 +62,7 @@ function NavGroupRow({ group, currentPath, onNavigate }) {
           type="button"
           onClick={(e) => { e.preventDefault(); e.stopPropagation(); setOpen((v) => !v) }}
           aria-label={`${open ? 'Collapse' : 'Expand'} ${group.label}`}
-          className="ms-auto grid size-3 place-items-center rounded text-[hsl(var(--v2-nav))] hover:text-[hsl(var(--v2-nav-active))]"
+          className="ms-auto grid size-3 place-items-center rounded text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--accent-foreground))]"
         >
           {open ? <ChevronDown size={10} strokeWidth={1.75} /> : <ChevronRight size={10} strokeWidth={1.75} />}
         </button>
@@ -89,13 +89,13 @@ function DevNavRow({ item, currentPath, onNavigate }) {
       onClick={onNavigate}
       className={[
         navRow,
-        'mt-4 border border-[hsl(var(--v2-border))] bg-[hsl(var(--v2-card))] shadow-[var(--v2-shadow-sm)]',
+        'mt-4 border border-[hsl(var(--border))] bg-[hsl(var(--card))] shadow-[var(--shadow-sm)]',
         active
-          ? 'text-[hsl(var(--v2-primary))] ring-2 ring-[hsl(var(--v2-primary)/0.15)]'
-          : 'text-[hsl(var(--v2-foreground))] hover:bg-[hsl(var(--v2-accent))]',
+          ? 'text-[hsl(var(--primary))] ring-2 ring-[hsl(var(--primary)/0.15)]'
+          : 'text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))]',
       ].join(' ')}
     >
-      <Icon size={14} strokeWidth={1.5} className="text-[hsl(var(--v2-primary))]" />
+      <Icon size={14} strokeWidth={1.5} className="text-[hsl(var(--primary))]" />
       <span className="flex-1 truncate">{item.label}</span>
     </a>
   )
@@ -108,7 +108,7 @@ export default function Sidebar({ currentPath, onNavigate, onSearch, hideHeader 
   }
 
   return (
-    <div className="relative flex h-full flex-col bg-[hsl(var(--v2-sidebar))]">
+    <div className="relative flex h-full flex-col bg-[hsl(var(--muted))]">
       {!hideHeader && (
         <div className="flex h-[52px] shrink-0 flex-col px-3 pt-2">
           <div className="flex h-11 items-center">
@@ -120,7 +120,7 @@ export default function Sidebar({ currentPath, onNavigate, onSearch, hideHeader 
                 aria-label="Search"
                 title="Search (⌘K)"
                 onClick={onSearch}
-                className={`grid size-8 place-items-center rounded-md text-[hsl(var(--v2-muted-foreground))] transition-colors hover:bg-[hsl(var(--v2-accent))] ${focusRing}`}
+                className={`grid size-8 place-items-center rounded-md text-[hsl(var(--muted-foreground))] transition-colors hover:bg-[hsl(var(--accent))] ${focusRing}`}
               >
                 <SearchIcon size={14} strokeWidth={1.5} />
               </button>
@@ -128,7 +128,7 @@ export default function Sidebar({ currentPath, onNavigate, onSearch, hideHeader 
                 type="button"
                 aria-label="New issue"
                 title="New issue"
-                className={`grid size-8 place-items-center rounded-md border border-[hsl(var(--v2-border))] bg-[hsl(var(--v2-card))] text-[hsl(var(--v2-muted-foreground))] shadow-[var(--v2-shadow-sm)] transition-colors hover:bg-[hsl(var(--v2-accent))] ${focusRing}`}
+                className={`grid size-8 place-items-center rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--card))] text-[hsl(var(--muted-foreground))] shadow-[var(--shadow-sm)] transition-colors hover:bg-[hsl(var(--accent))] ${focusRing}`}
               >
                 <ComposeIcon size={14} strokeWidth={1.5} />
               </button>
@@ -154,7 +154,7 @@ export default function Sidebar({ currentPath, onNavigate, onSearch, hideHeader 
           type="button"
           aria-label="Open Help menu"
           onClick={openHelp}
-          className={`pointer-events-auto grid size-6 place-items-center rounded-full text-[hsl(var(--v2-muted-foreground))] transition-colors hover:bg-[hsl(var(--v2-accent))] ${focusRing}`}
+          className={`pointer-events-auto grid size-6 place-items-center rounded-full text-[hsl(var(--muted-foreground))] transition-colors hover:bg-[hsl(var(--accent))] ${focusRing}`}
         >
           <span aria-hidden="true" className="flex size-3.5 items-center justify-center overflow-hidden [&_svg]:size-3.5">
             <SidebarHelpIcon />

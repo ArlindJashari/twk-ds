@@ -18,6 +18,7 @@ export default function ContentHeader({
         <MenuIcon size={16} strokeWidth={1.5} />
       </button>
       <h1 className="min-w-0 flex-1 truncate pl-10 text-[13px] font-medium text-body">{title}</h1>
+      <a href="#/v2" className="mr-8 hidden h-[24px] items-center rounded-full border-[0.5px] border-line bg-content px-10 text-[12px] font-medium text-body shadow-panel outline-none transition-colors hover:bg-hover hover:text-ink focus-visible:ring-2 focus-visible:ring-accent sm:inline-flex">Version 2</a>
       {actionLabel && (
         <button
           type="button"

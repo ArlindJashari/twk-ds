@@ -12,6 +12,8 @@ import DesignSystemRedirect from './pages/DesignSystemRedirect.jsx'
 import { useHashRoute } from './lib/hooks.js'
 import { titleForPath } from './lib/nav.js'
 import { CreateComposerProvider } from './lib/CreateComposerContext.jsx'
+import { isV2Path } from './v2/lib/paths.js'
+import V2Routes from './v2/routes.jsx'
 
 function routeConfig(path) {
   if (path === '/') {
@@ -49,6 +51,11 @@ function routeConfig(path) {
 
 function AppRoutes() {
   const { path } = useHashRoute()
+
+  if (isV2Path(path)) {
+    return <V2Routes path={path} />
+  }
+
   const config = routeConfig(path)
 
   if (config.settings) {

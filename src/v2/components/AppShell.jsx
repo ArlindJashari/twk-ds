@@ -40,22 +40,22 @@ export default function AppShell({
   }, [openSearch])
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[hsl(var(--v2-shell))] text-[hsl(var(--v2-foreground))]">
+    <div className="flex h-screen overflow-hidden bg-[hsl(var(--secondary))] text-[hsl(var(--foreground))]">
       <aside className={`relative hidden shrink-0 lg:block ${SIDEBAR_W}`}>
         <Sidebar currentPath={currentPath} onNavigate={() => {}} onSearch={openSearch} />
       </aside>
 
       {drawerOpen && !isDesktop && (
         <div className="fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true" aria-label="Navigation">
-          <div className="absolute inset-0 bg-[hsl(var(--v2-foreground)/0.3)] backdrop-blur-[1px]" aria-hidden="true" />
+          <div className="absolute inset-0 bg-[hsl(var(--foreground)/0.3)] backdrop-blur-[1px]" aria-hidden="true" />
           <aside ref={drawerRef} className={`absolute inset-y-0 start-0 shadow-lg ${SIDEBAR_W}`}>
             <div className="flex h-[52px] items-center gap-4 px-3">
               <span className="flex min-w-0 flex-1 items-center gap-2 px-1">
                 <UserMenuTriggerContent />
               </span>
-              <button type="button" onClick={openSearch} aria-label="Search" className="grid size-7 place-items-center rounded-md hover:bg-[hsl(var(--v2-accent))]"><SearchIcon size={14} strokeWidth={1.5} /></button>
-              <button type="button" onClick={() => openCreate('issue')} aria-label="New issue" className="grid size-7 place-items-center rounded-md border border-[hsl(var(--v2-border))] bg-[hsl(var(--v2-card))] hover:bg-[hsl(var(--v2-accent))]"><ComposeIcon size={14} strokeWidth={1.5} /></button>
-              <button ref={closeDrawerRef} type="button" onClick={() => setDrawerOpen(false)} aria-label="Close navigation" className="grid size-7 place-items-center rounded-md hover:bg-[hsl(var(--v2-accent))]"><CloseIcon size={14} strokeWidth={1.5} /></button>
+              <button type="button" onClick={openSearch} aria-label="Search" className="grid size-7 place-items-center rounded-md hover:bg-[hsl(var(--accent))]"><SearchIcon size={14} strokeWidth={1.5} /></button>
+              <button type="button" onClick={() => openCreate('issue')} aria-label="New issue" className="grid size-7 place-items-center rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--card))] hover:bg-[hsl(var(--accent))]"><ComposeIcon size={14} strokeWidth={1.5} /></button>
+              <button ref={closeDrawerRef} type="button" onClick={() => setDrawerOpen(false)} aria-label="Close navigation" className="grid size-7 place-items-center rounded-md hover:bg-[hsl(var(--accent))]"><CloseIcon size={14} strokeWidth={1.5} /></button>
             </div>
             <Sidebar currentPath={currentPath} onNavigate={() => setDrawerOpen(false)} onSearch={openSearch} hideHeader />
           </aside>
@@ -67,7 +67,7 @@ export default function AppShell({
         aria-hidden={drawerOpen && !isDesktop ? true : undefined}
       >
         <div className="flex min-h-0 flex-1 flex-col">
-          <main className="relative flex min-h-0 flex-1 flex-col overflow-hidden border border-[hsl(var(--v2-border))] bg-[hsl(var(--v2-background))] shadow-[var(--v2-shadow-sm)] lg:mt-2 lg:me-2 lg:mb-2 lg:rounded-[var(--v2-radius)]">
+          <main className="relative flex min-h-0 flex-1 flex-col overflow-hidden border border-[hsl(var(--border))] bg-[hsl(var(--background))] shadow-[var(--shadow-sm)] lg:mt-2 lg:me-2 lg:mb-2 lg:rounded-[var(--radius)]">
             {!hideHeader && (
               <ContentHeader
                 title={title}

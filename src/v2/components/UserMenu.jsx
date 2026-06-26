@@ -4,7 +4,7 @@ import { user, userMenuItems } from '../../lib/nav.js'
 import { v2Href } from '../lib/paths.js'
 
 const triggerClassName =
-  'flex h-8 min-w-0 shrink-0 items-center gap-2 rounded-md px-2 text-start text-[hsl(var(--v2-foreground))] outline-none transition-colors hover:bg-[hsl(var(--v2-accent))] v2-focus-ring'
+  'flex h-8 min-w-0 shrink-0 items-center gap-2 rounded-md px-2 text-start text-[hsl(var(--foreground))] outline-none transition-colors hover:bg-[hsl(var(--accent))] v2-focus-ring'
 
 export default function UserMenu() {
   return (
@@ -16,7 +16,7 @@ export default function UserMenu() {
         <button type="button" aria-label={`${user.name} account menu`} className={triggerClassName}>
           <UserAvatar size={20} initials={user.initials} />
           <span className="truncate text-[13px] font-medium leading-none">{user.name}</span>
-          <ChevronDown size={8} strokeWidth={1.75} className="shrink-0 text-[hsl(var(--v2-muted-foreground))]" />
+          <ChevronDown size={8} strokeWidth={1.75} className="shrink-0 text-[hsl(var(--muted-foreground))]" />
         </button>
       )}
     >

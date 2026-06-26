@@ -3,12 +3,12 @@ import { cn } from '../../../lib/cn.js'
 import { btnBase } from './primitives.js'
 
 const variants = {
-  default: 'bg-[hsl(var(--v2-primary))] text-[hsl(var(--v2-primary-foreground))] shadow-[var(--v2-shadow-sm)] hover:bg-[hsl(var(--v2-primary)/0.9)]',
-  secondary: 'border border-[hsl(var(--v2-input))] bg-[hsl(var(--v2-secondary))] text-[hsl(var(--v2-secondary-foreground))] shadow-[var(--v2-shadow-sm)] hover:bg-[hsl(var(--v2-secondary)/0.8)]',
-  destructive: 'bg-[hsl(var(--v2-destructive))] text-[hsl(var(--v2-destructive-foreground))] shadow-[var(--v2-shadow-sm)] hover:bg-[hsl(var(--v2-destructive)/0.9)]',
-  outline: 'border border-[hsl(var(--v2-input))] bg-[hsl(var(--v2-background))] shadow-[var(--v2-shadow-sm)] hover:bg-[hsl(var(--v2-accent))] hover:text-[hsl(var(--v2-accent-foreground))]',
-  ghost: 'hover:bg-[hsl(var(--v2-accent))] hover:text-[hsl(var(--v2-accent-foreground))]',
-  link: 'text-[hsl(var(--v2-primary))] underline-offset-4 hover:underline',
+  default: 'bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] shadow-[var(--shadow-sm)] hover:bg-[hsl(var(--primary)/0.9)]',
+  secondary: 'border border-[hsl(var(--input))] bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] shadow-[var(--shadow-sm)] hover:bg-[hsl(var(--secondary)/0.8)]',
+  destructive: 'bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))] shadow-[var(--shadow-sm)] hover:bg-[hsl(var(--destructive)/0.9)]',
+  outline: 'border border-[hsl(var(--input))] bg-[hsl(var(--background))] shadow-[var(--shadow-sm)] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]',
+  ghost: 'hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]',
+  link: 'text-[hsl(var(--primary))] underline-offset-4 hover:underline',
 }
 
 const sizes = {

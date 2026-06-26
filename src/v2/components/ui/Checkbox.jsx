@@ -10,8 +10,8 @@ export function IssueCheckbox({ checked, onChange, label }) {
       aria-label={label}
       onClick={onChange}
       className={cn(
-        'grid size-4 place-items-center rounded-[4px] border border-[hsl(var(--v2-primary))] transition-colors',
-        checked && 'bg-[hsl(var(--v2-primary))] text-[hsl(var(--v2-primary-foreground))]',
+        'grid size-4 place-items-center rounded-[4px] border border-[hsl(var(--primary))] transition-colors',
+        checked && 'bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]',
         focusRing,
       )}
     >

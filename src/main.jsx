@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './theme.css'
+import './v2/tokens.css'
 import App from './App.jsx'
 
 // Path URLs like /designsystem → hash route

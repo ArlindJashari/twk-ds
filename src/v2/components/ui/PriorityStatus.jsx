@@ -2,18 +2,18 @@ import { cn } from '../../../lib/cn.js'
 import { focusRing } from './primitives.js'
 
 const statusColors = {
-  todo: 'text-[hsl(var(--v2-muted-foreground))]',
-  progress: 'text-[hsl(var(--v2-warning))]',
-  done: 'text-[hsl(var(--v2-success))]',
-  cancelled: 'text-[hsl(var(--v2-muted-foreground))]',
+  todo: 'text-[hsl(var(--muted-foreground))]',
+  progress: 'text-[hsl(var(--warning))]',
+  done: 'text-[hsl(var(--success))]',
+  cancelled: 'text-[hsl(var(--muted-foreground))]',
 }
 
 const priorityColors = {
-  urgent: 'text-[hsl(var(--v2-warning))]',
-  high: 'text-[hsl(var(--v2-warning))]',
-  medium: 'text-[hsl(var(--v2-info))]',
-  low: 'text-[hsl(var(--v2-muted-foreground))]',
-  none: 'text-[hsl(var(--v2-muted-foreground))]',
+  urgent: 'text-[hsl(var(--warning))]',
+  high: 'text-[hsl(var(--warning))]',
+  medium: 'text-[hsl(var(--info))]',
+  low: 'text-[hsl(var(--muted-foreground))]',
+  none: 'text-[hsl(var(--muted-foreground))]',
 }
 
 export function StatusIcon({ status = 'todo' }) {

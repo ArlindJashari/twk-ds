@@ -12,7 +12,7 @@ export default function Avatar({ initials, size = 'md', className }) {
   return (
     <span
       className={cn(
-        'inline-grid shrink-0 place-items-center rounded-full bg-[hsl(var(--v2-primary)/0.15)] font-medium text-[hsl(var(--v2-primary))]',
+        'inline-grid shrink-0 place-items-center rounded-full bg-[hsl(var(--primary)/0.15)] font-medium text-[hsl(var(--primary))]',
         sizes[size],
         className,
       )}

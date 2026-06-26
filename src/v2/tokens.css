@@ -1,0 +1,151 @@
+/* V2 design tokens — COMPONENTS.md green-primary shadcn re-skin.
+   Scoped strictly under .v2-root so nothing leaks into v1.
+   Token values mirror src/v2/design-system.css (the reference doc). */
+
+.v2-root {
+  --brand-green: #1aaa5b;
+  --brand-teal: #114b47;
+  --brand-mist: #f0f1f2;
+  --brand-green-mid: #1b7a5f;
+  --green-50: #e9f9f0;
+  --green-100: #c9f1da;
+  --green-200: #97e3bc;
+  --green-300: #5fce98;
+  --green-400: #2eb877;
+  --green-500: #14a564;
+  --green-600: #0e8b4d;
+  --green-700: #0c6f43;
+  --green-800: #0d5639;
+  --green-900: #0d4434;
+  --green-950: #06231c;
+
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --primary: 150 82% 30%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 14% 96%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 9% 46%;
+  --accent: 220 14% 96%;
+  --accent-foreground: 222 47% 11%;
+  --destructive: 0 72.2% 50.6%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 150 82% 30%;
+  --success-foreground: 0 0% 100%;
+  --warning: 32.1 94.6% 43.7%;
+  --warning-foreground: 0 0% 100%;
+  --info: 174 70% 30%;
+  --info-foreground: 0 0% 100%;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 150 82% 30%;
+  --radius: 0.5rem;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", "Fira Code", Menlo, Monaco, Consolas, monospace;
+
+  --shadow-sm: 0 1px 2px 0 hsl(var(--foreground) / 0.05);
+  --shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.1), 0 1px 2px -1px hsl(var(--foreground) / 0.1);
+  --shadow-md: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -2px hsl(var(--foreground) / 0.1);
+  --shadow-lg: 0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -4px hsl(var(--foreground) / 0.1);
+
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* v1 sets Tailwind --spacing to 1px globally; restore the standard 4px
+     grid (COMPONENTS.md §3) for the entire v2 subtree so spacing utilities
+     (gap-*, p-*, size-*, h-*) render at their normal scale. */
+  --spacing: 0.25rem;
+
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  color-scheme: light;
+}
+
+.v2-root.dark {
+  --background: 222 47% 8%;
+  --foreground: 210 20% 96%;
+  --card: 222 40% 11%;
+  --card-foreground: 210 20% 96%;
+  --popover: 222 40% 11%;
+  --popover-foreground: 210 20% 96%;
+  --primary: 150 64% 46%;
+  --primary-foreground: 222 47% 8%;
+  --secondary: 222 33% 18%;
+  --secondary-foreground: 210 20% 96%;
+  --muted: 222 30% 15%;
+  --muted-foreground: 220 14% 66%;
+  --accent: 222 33% 18%;
+  --accent-foreground: 210 20% 96%;
+  --destructive: 0 62.8% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 150 64% 46%;
+  --success-foreground: 222 47% 8%;
+  --warning: 38 92% 55%;
+  --warning-foreground: 222 47% 8%;
+  --info: 174 62% 50%;
+  --info-foreground: 222 47% 8%;
+  --border: 222 28% 20%;
+  --input: 222 28% 20%;
+  --ring: 150 64% 46%;
+  color-scheme: dark;
+}
+
+.v2-root ::selection {
+  background: hsl(var(--primary) / 0.2);
+}
+
+.v2-ds-scroll {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* Brand-green focus ring (COMPONENTS.md §9) */
+.v2-focus-ring {
+  outline: none;
+}
+
+.v2-focus-ring:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Slider track fill (scoped, used by v2 Slider if present) */
+.v2-root .slider-input {
+  height: 14px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.v2-root .slider-input::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary)) var(--slider-fill, 0%),
+    hsl(var(--muted)) var(--slider-fill, 0%),
+    hsl(var(--muted)) 100%
+  );
+}
+
+.v2-root .slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -4px;
+  border: 2px solid hsl(var(--primary));
+  border-radius: 9999px;
+  background: hsl(var(--background));
+  cursor: pointer;
+}

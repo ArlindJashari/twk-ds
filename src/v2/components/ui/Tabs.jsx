@@ -8,13 +8,13 @@ export function Tab({ active = false, muted = false, className, children, ...pro
       type={Tag === 'button' ? 'button' : undefined}
       aria-current={active ? 'page' : undefined}
       className={cn(
-        'inline-flex h-8 shrink-0 items-center justify-center rounded-[calc(var(--v2-radius)-2px)] px-3 text-sm font-medium transition-colors',
+        'inline-flex h-8 shrink-0 items-center justify-center rounded-[calc(var(--radius)-2px)] px-3 text-sm font-medium transition-colors',
         focusRing,
         active
-          ? 'bg-[hsl(var(--v2-background))] text-[hsl(var(--v2-foreground))] shadow-[var(--v2-shadow-sm)]'
+          ? 'bg-[hsl(var(--background))] text-[hsl(var(--foreground))] shadow-[var(--shadow-sm)]'
           : muted
-            ? 'text-[hsl(var(--v2-muted-foreground))] hover:bg-[hsl(var(--v2-accent))] hover:text-[hsl(var(--v2-accent-foreground))]'
-            : 'text-[hsl(var(--v2-muted-foreground))] hover:bg-[hsl(var(--v2-accent))] hover:text-[hsl(var(--v2-accent-foreground))]',
+            ? 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]'
+            : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]',
         className,
       )}
       {...props}

@@ -4,7 +4,7 @@ export function Card({ className, children, ...props }) {
   return (
     <article
       className={cn(
-        'rounded-[var(--v2-radius)] border border-[hsl(var(--v2-border))] bg-[hsl(var(--v2-card))] text-[hsl(var(--v2-card-foreground))] shadow-[var(--v2-shadow-sm)]',
+        'rounded-[var(--radius)] border border-[hsl(var(--border))] bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))] shadow-[var(--shadow-sm)]',
         className,
       )}
       {...props}
@@ -23,7 +23,7 @@ export function CardTitle({ className, children }) {
 }
 
 export function CardDescription({ className, children }) {
-  return <p className={cn('text-sm text-[hsl(var(--v2-muted-foreground))]', className)}>{children}</p>
+  return <p className={cn('text-sm text-[hsl(var(--muted-foreground))]', className)}>{children}</p>
 }
 
 export function CardContent({ className, children }) {
