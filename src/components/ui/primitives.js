@@ -25,7 +25,7 @@ export const toolbar = 'flex h-[44px] shrink-0 items-center justify-between px-8
 export const toolbarBordered = 'border-b border-line'
 
 export const listRow =
-  'group relative flex h-[44px] items-center rounded-lg pl-[16px] pr-[2px] text-ink transition-colors hover:bg-hover data-[selected=true]:z-0 data-[selected=true]:before:pointer-events-none data-[selected=true]:before:absolute data-[selected=true]:before:inset-0 data-[selected=true]:before:z-0 data-[selected=true]:before:rounded-lg data-[selected=true]:before:bg-row-selected data-[selected=true]:before:content-[""] [&>*]:relative [&>*]:z-[1]'
+  'group relative mx-8 flex h-[44px] items-center rounded-lg pl-[16px] pr-[2px] text-ink transition-colors before:pointer-events-none before:absolute before:inset-0 before:z-0 before:rounded-lg before:opacity-0 before:transition-opacity before:content-[""] hover:before:bg-hover hover:before:opacity-100 data-[selected=true]:before:bg-row-selected data-[selected=true]:before:opacity-100 [&>*]:relative [&>*]:z-[1]'
 
 export const issueRowLead = 'flex min-w-0 flex-1 items-center gap-8'
 export const issueRowSlotCheckbox = 'flex w-[18px] shrink-0 items-center justify-center'
@@ -33,6 +33,7 @@ export const issueRowSlotIcon = 'flex w-[16px] shrink-0 items-center justify-cen
 export const issueRowId = 'shrink-0 whitespace-nowrap text-[13px] font-[450] leading-none text-issue-meta'
 export const issueRowTitle = 'min-w-0 flex-1 truncate text-[13px] font-medium leading-none text-ink'
 export const issueRowMeta = 'flex shrink-0 items-center gap-8 pl-8'
+export const issueRowDate = 'shrink-0 whitespace-nowrap text-[12px] font-[450] leading-none tabular-nums text-issue-meta'
 
 export const groupHeader =
   'flex h-[36px] items-center gap-8 rounded-lg bg-well pr-8'

@@ -42,6 +42,7 @@ export default function Issues() {
             {todoIssues.map((issue) => (
               <IssueRow
                 key={issue.id}
+                className="mx-0"
                 id={issue.id}
                 title={issue.title}
                 date={issue.date}

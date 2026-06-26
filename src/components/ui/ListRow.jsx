@@ -2,6 +2,7 @@ import { cn } from '../../lib/cn.js'
 import {
   focusRing,
   groupHeader,
+  issueRowDate,
   issueRowId,
   issueRowLead,
   issueRowMeta,
@@ -27,11 +28,11 @@ export function ListRow({ href, className, selected, children, ...props }) {
 }
 
 export function IssueRow({
-  id, title, date, href, priority, status, assignee, checked, onCheck, selected,
+  id, title, date, href, priority, status, assignee, checked, onCheck, selected, className,
 }) {
   const isSelected = selected ?? checked
   return (
-    <ListRow href={href} selected={isSelected} className="pr-8">
+    <ListRow href={href} selected={isSelected} className={cn('pr-8', className)}>
       <div className={issueRowLead}>
         <span className={issueRowSlotCheckbox}>
           <IssueCheckbox
@@ -54,9 +55,7 @@ export function IssueRow({
       <div className={issueRowMeta}>
         {assignee}
         {date ? (
-          <span className="w-[32px] shrink-0 text-right text-[12px] font-[450] leading-none tabular-nums text-issue-meta">
-            {date}
-          </span>
+          <span className={issueRowDate}>{date}</span>
         ) : null}
       </div>
     </ListRow>
