@@ -8,6 +8,7 @@ import {
   CaretDown, HomeIcon, LinkIcon, PersonasIcon, LibraryIcon, TemplatesIcon,
   StoriesIcon, FeaturesIcon, FirebaseIcon, ProjectsIcon,
   TawakkalnaToolbarDisplayIcon, TawakkalnaToolbarFilterIcon, PlusIcon, SearchIcon, SparkleIcon, StudiesIcon,
+  CalendarIcon, ProfileIcon,
 } from '../components/icons.jsx'
 import { quickLinks } from '../lib/dashboard.js'
 import {
@@ -20,6 +21,7 @@ import {
   TabPanel, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tag, Text, Textarea, ToggleGroup,
   Toast, ToastProvider, TokenGrid, Toolbar, Tooltip, TypingIndicator, useToast, ViewPage,
   DisplayToolbarMenu, FilterToolbarMenu,
+  DetailLayout, DetailsSidebar, InlinePropertyBar, ProjectPropertiesPanel,
 } from '../components/ui/index.js'
 import { StandardPageToolbar } from '../components/ViewToolbar.jsx'
 
@@ -40,7 +42,7 @@ const GREEN_RAMP = [
 const NAV_IDS = [
   'quick-links', 'colors', 'typography', 'spacing', 'buttons', 'icon-buttons', 'forms', 'selection',
   'badges', 'avatars', 'cards', 'tables', 'list-rows', 'priority', 'tabs', 'search',
-  'nav', 'menus', 'issues', 'views', 'modals', 'toasts', 'panels', 'alerts', 'empty', 'loading', 'progress',
+  'nav', 'menus', 'issues', 'views', 'details', 'modals', 'toasts', 'panels', 'alerts', 'empty', 'loading', 'progress',
   'links', 'slider', 'toggle', 'overlays', 'breadcrumb', 'accordion', 'command', 'stats', 'chat', 'dividers',
 ]
 
@@ -627,7 +629,7 @@ function DesignSystemContent({
             <ShowcaseSection id="issues" title={s.issues.title} description={s.issues.description}>
               <ShowcaseRow>
                 <Button variant="secondary" onClick={() => openCreate('issue', getCreateComposerCopy('issue', locale))}>{s.issues.openComposer}</Button>
-                <FilterMenu label={s.issues.openFilter} copy={s.issues} />
+                <FilterMenu label={s.issues.openFilter} copy={s.issues} align="start" />
               </ShowcaseRow>
               <ShowcaseRow label={s.issues.propertyPills}>
                 <PropertyPill icon={StatusIcon} label={s.issues.todo} />
@@ -651,16 +653,43 @@ function DesignSystemContent({
                 </div>
               </ShowcaseRow>
               <ShowcaseRow label={s.viewPatterns.displaySimple}>
-                <DisplayToolbarMenu variant="simple" label={s.viewPatterns.displayLabel} copy={s.viewPatterns} />
-                <DisplayToolbarMenu variant="issues" label={s.viewPatterns.displayIssues} copy={s.viewPatterns} />
-                <DisplayToolbarMenu variant="projects" label={s.viewPatterns.displayProjects} copy={s.viewPatterns} />
-                <FilterToolbarMenu label={s.viewPatterns.filterLabel} issueCopy={s.issues} />
+                <div className="flex w-full justify-end gap-6 rounded-lg border border-line-subtle bg-content px-12 py-10">
+                  <FilterToolbarMenu label={s.viewPatterns.filterLabel} issueCopy={s.issues} />
+                  <DisplayToolbarMenu variant="simple" label={s.viewPatterns.displayLabel} copy={s.viewPatterns} />
+                  <DisplayToolbarMenu variant="issues" label={s.viewPatterns.displayIssues} copy={s.viewPatterns} />
+                  <DisplayToolbarMenu variant="projects" label={s.viewPatterns.displayProjects} copy={s.viewPatterns} />
+                </div>
               </ShowcaseRow>
               <ShowcaseRow label={s.viewPatterns.displayProperties}>
                 <PropertyChip active>Status</PropertyChip>
                 <PropertyChip>Owner</PropertyChip>
                 <PropertyChip active>Sessions</PropertyChip>
               </ShowcaseRow>
+            </ShowcaseSection>
+
+            <ShowcaseSection id="details" title={s.details.title} description={s.details.description}>
+              <div className="overflow-hidden rounded-lg border border-line-subtle bg-content">
+                <DetailLayout
+                  main={(
+                    <div className="space-y-16">
+                      <h3 className="text-[20px] font-ui text-ink">n</h3>
+                      <p className="text-[13px] text-faint">{s.details.addSummary ?? 'Add a short summary…'}</p>
+                      <InlinePropertyBar label={s.details.properties}>
+                        <PropertyPill icon={StatusIcon} label={s.details.completed} />
+                        <PropertyPill icon={PriorityIcon} label={s.details.noPriority} />
+                        <PropertyPill icon={ProfileIcon} label={s.details.lead} />
+                        <PropertyPill icon={CalendarIcon} label={s.details.targetDate} />
+                        <PropertyPill icon={ProjectsIcon} label={s.details.teamName} />
+                      </InlinePropertyBar>
+                    </div>
+                  )}
+                  sidebar={(
+                    <DetailsSidebar className="!flex w-full border-s-0 lg:w-[280px] lg:border-s">
+                      <ProjectPropertiesPanel copy={s.details} />
+                    </DetailsSidebar>
+                  )}
+                />
+              </div>
             </ShowcaseSection>
 
             <ShowcaseSection id="modals" title={s.modals.title}>

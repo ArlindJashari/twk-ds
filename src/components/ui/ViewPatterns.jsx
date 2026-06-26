@@ -274,6 +274,7 @@ export function FilterToolbarMenu({ label = 'Add filter', copy, issueCopy }) {
   return (
     <FilterMenu
       label={label}
+      align="end"
       copy={issueCopy ?? copy}
       trigger={(
         <IconButton variant="filled" label={label}>

@@ -6,6 +6,8 @@ import { menuItemInset, menuItemInner } from './ui/primitives.js'
 
 const MENU_GAP = 4.5
 
+const triggerOpenRing = 'ring-2 ring-accent ring-offset-1 ring-offset-content'
+
 const panelVariants = {
   default: 'min-w-[210px] rounded-lg p-0 pb-[6px] pt-[6px] shadow-pop',
   workspace:
@@ -81,7 +83,7 @@ export default function Menu({
     'aria-controls': open ? id : undefined,
     className: [
       trigger.props.className,
-      open && variant === 'workspace' ? 'ring-2 ring-accent' : '',
+      open && (variant === 'workspace' || variant === 'filter' || variant === 'display') ? triggerOpenRing : '',
     ].filter(Boolean).join(' '),
     onClick: (event) => {
       trigger.props.onClick?.(event)

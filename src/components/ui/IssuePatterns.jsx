@@ -60,7 +60,7 @@ function LayoutTemplateIcon(props) {
   )
 }
 
-export function FilterMenu({ label, copy, trigger }) {
+export function FilterMenu({ label, copy, trigger, align = 'end' }) {
   const groups = [
     [
       { icon: SparkleIcon, label: copy.aiFilter },
@@ -70,6 +70,7 @@ export function FilterMenu({ label, copy, trigger }) {
       { icon: StatusIcon, label: copy.status, submenu: true },
       { icon: ProfileIcon, label: copy.assignee, submenu: true },
       { icon: ProfileIcon, label: copy.agent, submenu: true },
+      { icon: ProfileIcon, label: copy.agentSession, submenu: true },
       { icon: ProfileIcon, label: copy.creator, submenu: true },
       { icon: PriorityIcon, label: copy.priority, submenu: true },
       { icon: LabelsIcon, label: copy.labels, submenu: true },
@@ -95,7 +96,7 @@ export function FilterMenu({ label, copy, trigger }) {
     <DropdownMenu
       label={label}
       variant="filter"
-      align="start"
+      align={align}
       trigger={trigger ?? <Button variant="secondary">{copy.openFilter}</Button>}
     >
       <MenuSearch placeholder={copy.addFilter} shortcut="F" />

@@ -246,7 +246,7 @@ Use existing `Menu` from `src/components/Menu.jsx`. Variants: `default`, `worksp
 
 | Piece | Component |
 |-------|-----------|
-| Toolbar filter | `FilterToolbarMenu` → 260px filter menu + search |
+| Toolbar filter | `FilterToolbarMenu` → 260px filter menu, `align="end"`, open ring on trigger |
 | Toolbar display | `DisplayToolbarMenu` / `DisplayOptionsMenu` → 300px panel |
 | Display variants | `issues`, `projects`, `simple` (studies) |
 | Property toggles | `PropertyChip` — 24px pills, active = `bg-ink` |
@@ -256,14 +256,23 @@ Use existing `Menu` from `src/components/Menu.jsx`. Variants: `default`, `worksp
 
 Use `StandardPageToolbar` from `ViewToolbar.jsx` — wires icon buttons to live menus.
 
+### Details panels
+
+Right sidebar for project/entity detail views.
+
+| Piece | Component |
+|-------|-----------|
+| Layout | `DetailLayout` — main + `DetailsSidebar` (280px) |
+| Sections | `DetailsSection` — collapsible, 36px header, `+` action |
+| Property rows | `DetailPropertyRow` — label left, icon+value right, 32px |
+| Date row | `DetailDateRow` — Start → Target |
+| Inline bar | `InlinePropertyBar` + `PropertyPill` under title |
+| Preset | `ProjectPropertiesPanel` — Properties / Milestones / Activity |
+
 ```jsx
-<ViewPage
-  variant="empty"
-  toolbar={<StandardPageToolbar displayVariant="simple" />}
-  emptyTitle="No studies yet"
-  emptyDescription="…"
-  emptyActionLabel="Create study"
-  onEmptyAction={openCreate}
+<DetailLayout
+  main={<ProjectHeader />}
+  sidebar={<DetailsSidebar><ProjectPropertiesPanel copy={copy} /></DetailsSidebar>}
 />
 ```
 

@@ -12,6 +12,10 @@ export {
   DisplayOptionsMenu, DisplayToolbarMenu, FilterToolbarMenu, PropertyChip, ViewPage,
 } from './ViewPatterns.jsx'
 export {
+  DetailDateRow, DetailLayout, DetailPropertyRow, DetailsSection, DetailsSidebar,
+  InlinePropertyBar, ProjectPropertiesPanel,
+} from './DetailPatterns.jsx'
+export {
   Card, CardBody, CardDescription, CardFooter, CardMedia, CardTitle,
 } from './Card.jsx'
 export { default as Checkbox, IssueCheckbox } from './Checkbox.jsx'
